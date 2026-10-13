@@ -95,11 +95,12 @@ if level==3:
     fog=bpy.data.materials.new('Illustrative cinematic haze');fog.use_nodes=True;n=fog.node_tree.nodes;n.clear();v=n.new('ShaderNodeVolumePrincipled');v.inputs['Density'].default_value=.000065;v.inputs['Color'].default_value=(.52,.64,.74,1);o=n.new('ShaderNodeOutputMaterial');fog.node_tree.links.new(v.outputs['Volume'],o.inputs['Volume'])
     cube('Cinematic haze',(0,0,1300),(18000,18000,3000),fog)
 bpy.ops.object.camera_add();cam=bpy.context.object;s.camera=cam;cam.data.type='ORTHO';cam.data.ortho_scale=9200;cam.data.clip_end=40000;cam.data.clip_start=10
-contact=[];metrics=[];N=3 if mode=='bench' else 750
+contact=[];metrics=[];N=3 if mode=='bench' else 750;epoch_started=time.time()
 timeline=[]
 if mode=='pilot':
     timeline=json.loads((ROOT/'data'/'timeline.json').read_text(encoding='utf8'));N=round(timeline[-1]['end']*30)
-for frame in range(N):
+range_start=int(args[2]) if len(args)>2 else 0;range_end=min(N,int(args[3])) if len(args)>3 else N
+for frame in range(range_start,range_end):
     t=frame/max(1,N-1);angle=-math.pi/2+.13*math.sin(t*math.pi*2)
     # Identical path for all levels, cinematic quality affects lighting/haze only.
     cam.location=(7600*math.cos(angle),7600*math.sin(angle),7000);target=Vector((-450,250,160));cam.rotation_euler=(target-Vector(cam.location)).to_track_quat('-Z','Y').to_euler()
@@ -133,7 +134,8 @@ for frame in range(N):
     now=time.perf_counter();s.render.filepath=str(out/f'{frame:04}.jpg' if mode=='pilot' else out/f'{frame:04}.png');bpy.ops.render.render(write_still=True)
     metrics.append({'frame':frame,'render_seconds':time.perf_counter()-now,'labels':projections,'camera':list(cam.location),'target':list(target),'chapter':scene_id,'ortho_scale':cam.data.ortho_scale})
     if frame%25==0:
-        (out/'progress.json').write_text(json.dumps({'completed':frame+1,'total':N,'mean_s':float(np.mean([m['render_seconds'] for m in metrics]))}),encoding='utf8')
+        (out/(f'progress_{range_start}_{range_end}.json' if len(args)>2 else 'progress.json')).write_text(json.dumps({'completed':len(metrics),'total':range_end-range_start,'global_frame':frame,'mean_s':float(np.mean([m['render_seconds'] for m in metrics]))}),encoding='utf8')
 result={'level':level,'mode':mode,'native_resolution':[s.render.resolution_x*s.render.resolution_percentage//100,s.render.resolution_y*s.render.resolution_percentage//100],'frames':metrics,'max_foot_contact_error_m':max(contact,default=0),'total_render_seconds':sum(m['render_seconds'] for m in metrics),'temporal_samples_per_second':30,'camera_path_identical':True,'troop_model_dimensions_m':[13,10,42],'note':'Symbols intentionally oversized; body footprint edges on slopes not verified, center contact checked.'}
-(out/'render_report.json').write_text(json.dumps(result,indent=2),encoding='utf8')
-bpy.ops.wm.save_as_mainfile(filepath=str(out/'scene.blend'))
+result.update(worker_range=[range_start,range_end],epoch_started=epoch_started,epoch_finished=time.time())
+(out/(f'render_report_{range_start}_{range_end}.json' if len(args)>2 else 'render_report.json')).write_text(json.dumps(result,indent=2),encoding='utf8')
+if range_start==0:bpy.ops.wm.save_as_mainfile(filepath=str(out/'scene.blend'))

@@ -57,6 +57,7 @@ def main(mode,level):
                 tip=project((xx,yy,zz),fr);ahead=project((xx+(b['x_m']-a['x_m'])*.01,yy+(b['y_m']-a['y_m'])*.01,zz),fr);direction=ahead-tip;direction/=np.linalg.norm(direction);normal=np.array([-direction[1],direction[0]])
                 draw.polygon([tuple(tip+direction*15),tuple(tip-direction*12+normal*10),tuple(tip-direction*12-normal*10)],fill='#f3c66b',outline='#795b20')
             used=[(0,0,1920,149),(0,1028,1920,1080),(1575,170,1875,424),(100,885,1820,1005)]
+            if mode=='pilot' and scene_id==11:used.append((70,245,1310,640))
             if mode=='pilot' and scene_id in [7,8]:drawchart(draw,analysis,scene_id,used)
             labels=[]
             for p in fr['labels']:

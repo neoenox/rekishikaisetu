@@ -28,11 +28,12 @@ try {
         if (!$SkipRender) { Invoke-Checked $blender @('-b','-t','8','--python','scripts/render_blender.py','--',"$level",'comparison') }
         Invoke-Checked $python @('scripts/compose.py','comparison',"$level")
     }
-    if (!$SkipRender) { Invoke-Checked $blender @('-b','-t','8','--python','scripts/render_blender.py','--','2','pilot') }
+    if (!$SkipRender) { Invoke-Checked $python @('scripts/render_pilot_parallel.py') }
     Invoke-Checked $python @('scripts/compose.py','pilot','2')
     Invoke-Checked $python @('scripts/export_sources.py')
     Invoke-Checked $python @('-m','pytest','scripts','-q')
     Invoke-Checked $python @('scripts/verify.py')
+    Invoke-Checked $python @('scripts/write_report.py')
 } finally {
     if ($engineProcess -and !$engineProcess.HasExited) { Stop-Process -Id $engineProcess.Id }
 }

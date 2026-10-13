@@ -13,6 +13,7 @@ Windows / RTX 4060上でローカル実行する試作システム。実デー�
 | `out/comparison.png` | 同じ時刻の3品質と実測処理コスト |
 | `out/subtitles.srt` | 全ナレーション対応、日本語字幕 |
 | `out/quality_report.json` | 技術・地理・音声・字幕・レイアウト検証と残余リスク |
+| `out/REPORT.md` | 動画リンク・処理コスト・検証結果をまとめた日本語報告 |
 | `out/performance_report.json` | 品質別実測秒数、観測RAM/VRAM、採用理由 |
 | `out/sources.md`, `out/assets.json` | 出典・参照箇所・権利・加工・クレジット |
 | `out/assumptions.json`, `out/analysis.json` | 仮定と地形解析結果 |
@@ -58,11 +59,12 @@ npm run test:layout
 tools\blender-4.5.3-windows-x64\blender.exe -b -t 8 --python scripts/render_blender.py -- 1 comparison
 .venv\Scripts\python.exe scripts/compose.py comparison 1
 # 同じコマンドの1を2、3にして比較動画を生成
-tools\blender-4.5.3-windows-x64\blender.exe -b -t 8 --python scripts/render_blender.py -- 2 pilot
+.venv\Scripts\python.exe scripts/render_pilot_parallel.py
 .venv\Scripts\python.exe scripts/compose.py pilot 2
 .venv\Scripts\python.exe scripts/export_sources.py
 .venv\Scripts\python.exe -m pytest scripts -q
 .venv\Scripts\python.exe scripts/verify.py
+.venv\Scripts\python.exe scripts/write_report.py
 ```
 
 任意の性能監視は `.venv\Scripts\python.exe scripts/doctor.py --monitor`。`out/monitor.stop` が存在すると終了します。ログは `logs/resources.jsonl`。再測定時はその停止ファイルを除いて起動してください。5秒ごとの観測であり、瞬間ピークを保証するものではありません。
