@@ -1,5 +1,7 @@
 # 関ヶ原：実DEMを使う3D戦略解析動画PoC
 
+制作・再生成・引き継ぎのノウハウは [動画制作手順書](docs/VIDEO_PRODUCTION_RUNBOOK.md) にまとめています。背景取得、位置合わせ、肖像の追従、字幕、検証、トラブル対処、別の戦いへの応用時の注意を記録しています。
+
 ## Google Earth・肖像版（2026-10-13更新）
 
 最新の映像は `out/sekigahara_google_earth_portraits.mp4`（3分44秒）。
