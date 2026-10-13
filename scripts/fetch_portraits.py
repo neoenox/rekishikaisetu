@@ -6,5 +6,3 @@ def get(a):
  r=requests.get(a['url'],headers={'User-Agent':'SekigaharaEducationalPoC/1.0'},timeout=60);r.raise_for_status();p=root/(a['id']+'.jpg');p.write_bytes(r.content);a.update(file=str(p),sha256=hashlib.sha256(r.content).hexdigest());print(a['id'],len(r.content),flush=True);return a
 with concurrent.futures.ThreadPoolExecutor(3) as pool:items=list(pool.map(get,items))
 Path('data/portraits.json').write_text(json.dumps(items,ensure_ascii=False,indent=2),encoding='utf8')
-
-
