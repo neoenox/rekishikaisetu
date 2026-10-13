@@ -3,6 +3,7 @@ from pathlib import Path
 import json,subprocess,sys,time,math,textwrap,wave
 import numpy as np
 from PIL import Image,ImageDraw,ImageFont
+from scipy.interpolate import RegularGridInterpolator
 ROOT=Path(__file__).resolve().parents[1]
 FONT='C:/Windows/Fonts/YuGothM.ttc';BOLD='C:/Windows/Fonts/YuGothB.ttc'
 F={n:ImageFont.truetype(FONT,n) for n in [18,21,24,28,32,34]};FB=ImageFont.truetype(BOLD,28)
@@ -30,10 +31,14 @@ def drawchart(draw,analysis,scene_id,used):
         draw.text((1450,755),'直線経路。道路・戦闘を考慮せず',font=F[18],fill='#b8c8cb')
 def main(mode,level):
     folder=ROOT/'cache'/f'render_l{level}_{mode}';report=load(str(folder.relative_to(ROOT)/'render_report.json'));frames=report['frames'];units=load('data/units.json');names={u['id']:u['name']+'（推定）' for u in units};analysis=load('out/analysis.json');audio=load('out/audio_report.json');timeline=load('data/timeline.json');cards={}
+    grid=np.load(ROOT/'data'/'terrain.npz');interp=RegularGridInterpolator((grid['ys'],grid['xs']),grid['h']);a=next(u for u in units if u['id']=='kobaya');b=next(u for u in units if u['id']=='otani')
+    def project(point,fr):
+        camera=np.array(fr['camera']);forward=np.array(fr['target'])-camera;forward/=np.linalg.norm(forward);right=np.cross(forward,[0,0,1]);right/=np.linalg.norm(right);up=np.cross(right,forward);delta=np.array(point)-camera;scale=fr.get('ortho_scale',9200)
+        return np.array([960+np.dot(delta,right)*1920/scale,540-np.dot(delta,up)*1920/scale])
     if mode=='comparison':
         card=Image.open(ROOT/'cache'/'cards'/f'level_{level}.png').convert('RGBA');pcm=[]
         from audio import readwav,writewav
-        a,rate=readwav(ROOT/'cache'/'audio'/'scene_06.wav');a=np.pad(a,(0,25*rate-len(a)));audiofile=ROOT/'cache'/'audio'/'comparison.wav';writewav(audiofile,a,rate)
+        pcm,rate=readwav(ROOT/'cache'/'audio'/'scene_06.wav');pcm=np.pad(pcm,(0,25*rate-len(pcm)));audiofile=ROOT/'cache'/'audio'/'comparison.wav';writewav(audiofile,pcm,rate)
         segments=[{**x,'start':x['start']-timeline[6]['start'],'end':x['end']-timeline[6]['start']} for x in audio['segments'] if x['scene']==6]
         filename=['','level1_terrain_markers.mp4','level2_terrain_troops.mp4','level3_cinematic.mp4'][level]
     else:
@@ -46,6 +51,11 @@ def main(mode,level):
         for i,fr in enumerate(frames):
             t=i/30;scene_id=fr.get('chapter') if mode=='pilot' else 6
             image=Image.open(folder/f'{i:04}.jpg' if mode=='pilot' else folder/f'{i:04}.png').convert('RGBA');image.alpha_composite(cards[scene_id] if mode=='pilot' else card);draw=ImageDraw.Draw(image)
+            if mode=='comparison' or scene_id in [4,6,7,8]:
+                p=i/(len(frames)-1) if mode=='comparison' else ((t-timeline[6]['start'])/timeline[6]['duration'] if scene_id==6 else (.5 if scene_id in [7,8] else 0))
+                xx=a['x_m']*(1-p)+b['x_m']*p;yy=a['y_m']*(1-p)+b['y_m']*p;zz=float(interp([[yy,xx]])[0])+19
+                tip=project((xx,yy,zz),fr);ahead=project((xx+(b['x_m']-a['x_m'])*.01,yy+(b['y_m']-a['y_m'])*.01,zz),fr);direction=ahead-tip;direction/=np.linalg.norm(direction);normal=np.array([-direction[1],direction[0]])
+                draw.polygon([tuple(tip+direction*15),tuple(tip-direction*12+normal*10),tuple(tip-direction*12-normal*10)],fill='#f3c66b',outline='#795b20')
             used=[(0,0,1920,149),(0,1028,1920,1080),(1575,170,1875,424),(100,885,1820,1005)]
             if mode=='pilot' and scene_id in [7,8]:drawchart(draw,analysis,scene_id,used)
             labels=[]

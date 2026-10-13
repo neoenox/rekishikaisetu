@@ -1,0 +1,12 @@
+from pathlib import Path
+import json,hashlib
+ROOT=Path(__file__).resolve().parents[1]
+def main():
+    sources=json.loads((ROOT/'data'/'sources.json').read_text(encoding='utf8'));lines=['# 出典・権利・加工記録','', '取得日：2026-10-13。URLの公開情報を参照し、外部画像・Googleタイルは使用していません。','', '公式記念館の解説は出典付きの紹介として使用し、一次史料の直接校訂済み史実とは区別します。','']
+    for s in sources:lines.extend([f'## {s["id"]} / {s["title"]}',f'- 著者・提供者：{s["author"]}',f'- URL：{s["url"]}',f'- 参照箇所：{s["section"]}',f'- 利用・加工：{s["rights"]}',f'- キャッシュSHA256：{s.get("sha256","local")}', ''])
+    lines.extend(['## 使用素材','', '- 標高：国土地理院地理院タイル（標高）を加工して作成。取得した12枚以下の最小矩形タイルのURL・SHA256はdata/terrain_manifest.json。','- 位置：株式会社CCL 大垣支社「関ヶ原位置情報リスト2013年度」、CC BY 3.0。緯度経度から局所メートル座標へ変換。位置誤差の仮定を追加。画像と歴史説明は転載しない。','- 兵士・軍旗・森林・材質・矢印・図表：本PoCの手続き生成。旗は無地。既存の家紋・武具画像・商用アセットなし。','- 音声：VOICEVOX:四国めたん（ノーマル）。動画内常時クレジットと終章クレジットを表示。 https://zunko.jp/con_ongen_kiyaku.html を確認。','- フォント：Windows搭載游ゴシックをこのPCでラスタライズ。フォントファイルは再配布しない。','- Blender 4.5.3 LTS：GPL。制作動画はBlender自体のGPLでは拘束されない。バイナリはtools内のローカル利用。','- VOICEVOX ENGINE 0.25.2 CPU版：公式配布。内包ライセンスはtools/voicevox/windows-cpu/licenses.json、音声規約のAPI応答はcache/audio/speaker_policy.json。','- Remotion 4.0.377：個人ローカルPoCとして無料枠を使用。有料契約なし。','- FFmpeg：ローカル既存実行環境でH.264 NVENC/AACを生成。外部配信なし。','', '## 史実とモデルの境界','', '- 日付は慶長5年（1600年）の年のみ。旧暦とグレゴリオ暦の月日の混同を避け、詳細日付は断定しない。','- 歴史的部隊配置は現存する陣跡の紹介。全軍の陣形や陣域・兵力の復元ではない。','- 移動は模式。経路は陣跡二点の直線、進軍1時間を比較25秒に圧縮した試験。戦闘経過・移動速度の史実再現ではない。','- 位置誤差150m、拡大兵士、隊列、植生、霧は著者仮定または演出。','- 威嚇射撃は一説として紹介し、確定した射撃として動画化しない。','- 勝率・戦闘結果モデル・史実の見通し解析は実装しない。'])
+    text='\n'.join(lines).replace('取得した12枚以下の最小矩形タイル','取得した16枚の最小矩形タイル')+'\n';(ROOT/'out'/'sources.md').write_text(text,encoding='utf8')
+    for name in ['assumptions.json','pronunciations.json']:(ROOT/'out'/name).write_bytes((ROOT/'data'/name).read_bytes())
+    assets={'assets':[{'name':'GSI DEM','source_ids':['GSI_DEM','GSI_TERMS'],'credit':'地理院タイル（標高）を加工'},{'name':'Coordinates','source_ids':['LOC'],'license':'CC BY 3.0','credit':'株式会社CCL 大垣支社 関ヶ原位置情報リスト2013年度'},{'name':'Procedural models/materials/charts','source':'scripts/render_blender.py and scripts/compose.py','external_assets':False},{'name':'Narration','source_ids':['VOICE'],'credit':'VOICEVOX:四国めたん','terms':'https://zunko.jp/con_ongen_kiyaku.html'},{'name':'Rasterized typography','font':'Windows Yu Gothic','redistribute_font_file':False}],'paid_contracts':False,'external_publication':False}
+    (ROOT/'out'/'assets.json').write_text(json.dumps(assets,ensure_ascii=False,indent=2),encoding='utf8')
+if __name__=='__main__':main()
