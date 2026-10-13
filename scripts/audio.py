@@ -10,7 +10,7 @@ def readwav(p):
         return np.frombuffer(w.readframes(w.getnframes()),np.int16),w.getframerate()
 def writewav(p,a,rate):
     with wave.open(str(p),'wb') as w:w.setnchannels(1);w.setsampwidth(2);w.setframerate(rate);w.writeframes(a.astype(np.int16).tobytes())
-def main(variant=''):
+def main(variant='',minimum_seconds=180):
     prefix=variant+'_' if variant else ''
     folder=ROOT/'cache'/(prefix+'audio');folder.mkdir(exist_ok=True)
     speakers=requests.get(BASE+'/speakers',timeout=60);speakers.raise_for_status();(folder/'speakers.json').write_text(speakers.text,encoding='utf8')
@@ -36,10 +36,10 @@ def main(variant=''):
         joined=np.concatenate(local);joined=np.pad(joined,(0,round(scene_duration*rate)-len(joined)));writewav(folder/f'scene_{scene["id"]:02}.wav',joined,rate);allpcm.append(joined)
         timeline.append({**scene,'start':cursor,'duration':scene_duration,'end':cursor+scene_duration,'audio':str((folder/f'scene_{scene["id"]:02}.wav').relative_to(ROOT))});cursor+=scene_duration
         print('scene',scene['id'],'seconds',scene_duration,flush=True)
-    if cursor<180:
+    if cursor<minimum_seconds:
         # Explicit final credit hold, no repeated speech.
-        extra=180-cursor;allpcm.append(np.zeros(round(extra*rate),dtype=np.int16));timeline[-1]['duration']+=extra;timeline[-1]['end']+=extra;cursor=180
-    assert 180<=cursor<=300,f'Pilot length {cursor} outside range'
+        extra=minimum_seconds-cursor;allpcm.append(np.zeros(round(extra*rate),dtype=np.int16));timeline[-1]['duration']+=extra;timeline[-1]['end']+=extra;cursor=minimum_seconds
+    assert minimum_seconds<=cursor<=300,f'Pilot length {cursor} outside range'
     writewav(ROOT/'out'/(prefix+'narration.wav'),np.concatenate(allpcm),rate)
     def stamp(t):
         ms=round(t*1000);return f'{ms//3600000:02}:{ms//60000%60:02}:{ms//1000%60:02},{ms%1000:03}'
@@ -51,4 +51,4 @@ def mathceil(value,fps):
     return math.ceil(value*fps)/fps
 if __name__=='__main__':
     import sys
-    main(sys.argv[1] if len(sys.argv)>1 else '')
+    main(sys.argv[1] if len(sys.argv)>1 else '',float(sys.argv[2]) if len(sys.argv)>2 else 180)

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 0,
+    "title": "松尾山と大谷隊、どれほど近い？",
+    "category": "位置関係を先に見る／動きは模式表現",
+    "narration": "松尾山の小早川隊と、大谷隊。二つの位置は、どれほど近かったのでしょうか。現代の景観に陣跡を重ね、山から盆地へ向かう地形を見てみましょう。",
+    "source_ids": [
+      "GOOGLE_EARTH",
+      "KOBAYA",
+      "LOC",
+      "GSI_DEM",
+      "METHOD",
+      "PORTRAIT_KOBAYA"
+    ],
+    "start": 0,
+    "duration": 12.333333333333334,
+    "end": 12.333333333333334,
+    "audio": "cache\\trial_audio\\scene_00.wav"
+  },
+  {
+    "id": 1,
+    "title": "小早川秀秋と、松尾山",
+    "category": "現代の陣跡座標／当時の陣域とは区別",
+    "narration": "小早川秀秋の陣跡として紹介される松尾山は、戦場の南側にあります。向かい合う青い印は、大谷隊の陣跡です。顔の付いた黄色い印が小早川隊。まず、この二つの場所を覚えてください。",
+    "source_ids": [
+      "GOOGLE_EARTH",
+      "KOBAYA",
+      "LOC",
+      "GSI_DEM",
+      "METHOD",
+      "PORTRAIT_KOBAYA"
+    ],
+    "start": 12.333333333333334,
+    "duration": 15.833333333333334,
+    "end": 28.166666666666668,
+    "audio": "cache\\trial_audio\\scene_01.wav"
+  },
+  {
+    "id": 2,
+    "title": "山から盆地へ",
+    "category": "現代の地形／道路・建物は当時と異なる",
+    "narration": "斜めから見ると、松尾山のある丘陵と、町や田畑が広がる低い場所の関係が見えてきます。背景の道路や建物は現代のものです。ここでは、当時の道筋を決めつけず、地形の骨格に注目します。",
+    "source_ids": [
+      "GOOGLE_EARTH",
+      "KOBAYA",
+      "LOC",
+      "GSI_DEM",
+      "METHOD",
+      "PORTRAIT_KOBAYA"
+    ],
+    "start": 28.166666666666668,
+    "duration": 15.866666666666667,
+    "end": 44.03333333333333,
+    "audio": "cache\\trial_audio\\scene_02.wav"
+  },
+  {
+    "id": 3,
+    "title": "小早川隊と大谷隊の位置関係",
+    "category": "二地点を結ぶ試験経路／史実の道筋ではない",
+    "narration": "黄色い小早川隊を、青い大谷隊の陣跡に向けて動かします。記念館は、小早川隊による大谷隊への攻撃を紹介しています。ただし、この線は二つの陣跡を結んだ説明用の経路です。実際に通った道や、攻撃開始の時刻を示すものではありません。",
+    "source_ids": [
+      "GOOGLE_EARTH",
+      "KOBAYA",
+      "LOC",
+      "GSI_DEM",
+      "METHOD",
+      "PORTRAIT_KOBAYA"
+    ],
+    "start": 44.03333333333333,
+    "duration": 19.8,
+    "end": 63.83333333333333,
+    "audio": "cache\\trial_audio\\scene_03.wav"
+  },
+  {
+    "id": 4,
+    "title": "約1.45km。その間にも起伏がある",
+    "category": "現代DEMで計測／道路・戦闘は計算に含めない",
+    "narration": "現代の標高データで、この試験経路を測ると、水平距離は約一点四五キロメートル。途中の上りは合計約九十一メートル、下りは約二百十一メートルです。地図では短い線でも、途中に上り下りがあることがわかります。",
+    "source_ids": [
+      "GOOGLE_EARTH",
+      "KOBAYA",
+      "LOC",
+      "GSI_DEM",
+      "METHOD",
+      "PORTRAIT_KOBAYA"
+    ],
+    "start": 63.83333333333333,
+    "duration": 17.966666666666665,
+    "end": 81.8,
+    "audio": "cache\\trial_audio\\scene_04.wav"
+  },
+  {
+    "id": 5,
+    "title": "地図の線を、地形で読み直す",
+    "category": "距離と起伏は測れる／実際の経路・時刻は未確定",
+    "narration": "今回見たのは、松尾山と大谷隊の陣跡が、近い距離にありながら、起伏を挟んでいるという位置関係です。この線が実際の進軍路だったとは言えません。場所、距離、地形を分けて見ると、関ヶ原を考える手がかりになります。",
+    "source_ids": [
+      "GOOGLE_EARTH",
+      "KOBAYA",
+      "LOC",
+      "GSI_DEM",
+      "METHOD",
+      "PORTRAIT_KOBAYA"
+    ],
+    "start": 81.8,
+    "duration": 17.466666666666665,
+    "end": 99.26666666666667,
+    "audio": "cache\\trial_audio\\scene_05.wav"
+  }
+]
