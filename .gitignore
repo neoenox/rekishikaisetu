@@ -7,3 +7,4 @@ node_modules/
 __pycache__/
 .pytest_cache/
 *.blend1
+assets/earth/cal_*.png

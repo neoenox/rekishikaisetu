@@ -1,0 +1,183 @@
+[
+  {
+    "id": 0,
+    "title": "関ヶ原へ ── 現代の景観から戦場を読む",
+    "category": "Google Earthの現代画像＋史跡の位置＋模式的な軍勢",
+    "source_ids": [
+      "MUSEUM",
+      "GSI_DEM",
+      "GOOGLE_EARTH",
+      "PORTRAIT_KOBAYA",
+      "PORTRAIT_ISHIDA",
+      "PORTRAIT_IEYASU"
+    ],
+    "narration": "慶長五年、千六百年。関ヶ原の戦いを、現代の景観から読み解きます。背景はグーグルアースに表示される関ヶ原です。道路や建物は現代のもので、合戦当日の景観ではありません。人物の肖像と軍勢の印を重ね、陣跡の位置と動きの関係を見ていきましょう。",
+    "visual_phase": 0.0
+  },
+  {
+    "id": 1,
+    "title": "01 / 山と盆地を、実景でつかむ",
+    "category": "現代の衛星・航空画像｜当時の景観とは区別",
+    "source_ids": [
+      "GSI_DEM",
+      "METHOD",
+      "GOOGLE_EARTH",
+      "PORTRAIT_KOBAYA",
+      "PORTRAIT_ISHIDA",
+      "PORTRAIT_IEYASU"
+    ],
+    "narration": "森林に覆われた山と、その間に広がる町や田畑。この画像から、関ヶ原を取り巻く山並みと盆地の位置関係をつかみます。道や市街地は現代の姿です。後半の距離や高低差の計算には、別に取得した国土地理院の標高データを使います。",
+    "visual_phase": 0.09090909090909091
+  },
+  {
+    "id": 2,
+    "title": "02 / 陣跡と陣域を分ける",
+    "category": "位置推定｜誤差半径150mは仮定",
+    "source_ids": [
+      "REKIMIN",
+      "LOC",
+      "GOOGLE_EARTH",
+      "PORTRAIT_KOBAYA",
+      "PORTRAIT_ISHIDA",
+      "PORTRAIT_IEYASU"
+    ],
+    "narration": "次に、陣跡の位置を重ねます。座標は公開された位置情報を参照しました。陣跡の記念地点は、当時の軍勢が占めた範囲そのものではありません。ここでは百五十メートルの誤差範囲を仮置きします。旗の大きさも、見やすくした象徴表現です。",
+    "visual_phase": 0.18181818181818182
+  },
+  {
+    "id": 3,
+    "title": "03 / 笹尾山の石田三成",
+    "category": "石田三成像（模本）＋笹尾山の陣跡｜肖像は識別用",
+    "source_ids": [
+      "ISHIDA",
+      "LOC",
+      "GOOGLE_EARTH",
+      "PORTRAIT_KOBAYA",
+      "PORTRAIT_ISHIDA",
+      "PORTRAIT_IEYASU"
+    ],
+    "narration": "記念館の史跡案内では、石田三成の陣は笹尾山に置かれたと説明されています。高い地点から周辺を見渡す、という地形上の特徴を確認できます。ただし、木々や天候が視界に与えた影響は不明です。高さだけで、指揮の優劣を決めることはできません。",
+    "visual_phase": 0.2727272727272727
+  },
+  {
+    "id": 4,
+    "title": "04 / 小早川秀秋 ── 松尾山から大谷隊へ",
+    "category": "高台寺所蔵の肖像＋陣跡｜移動経路は模式",
+    "source_ids": [
+      "KOBAYA",
+      "ISHIDA",
+      "GOOGLE_EARTH",
+      "PORTRAIT_KOBAYA",
+      "PORTRAIT_ISHIDA",
+      "PORTRAIT_IEYASU"
+    ],
+    "narration": "南側の松尾山は、小早川秀秋の陣跡として紹介されています。記念館は、小早川隊の行動と大谷隊への攻撃を説明しています。ここで動く矢印は、その関係を示す模式表現です。実際に歩いた道筋や、隊列の幅を復元したものではありません。",
+    "visual_phase": 0.36363636363636365
+  },
+  {
+    "id": 5,
+    "title": "05 / 本陣の移動",
+    "category": "徳川家康像＋桃配山の最初陣跡｜前進先の座標は未描画",
+    "source_ids": [
+      "IEYASU",
+      "GOOGLE_EARTH",
+      "PORTRAIT_KOBAYA",
+      "PORTRAIT_ISHIDA",
+      "PORTRAIT_IEYASU"
+    ],
+    "narration": "徳川家康については、桃配山の最初の陣地から、前方の最後の陣地へ移ったと、記念館が紹介しています。本編では、詳しい時刻の断定を避けます。移動には、観察場所が変わる効果と、移動時間が必要になる側面があります。両方を分けて考えます。",
+    "visual_phase": 0.45454545454545453
+  },
+  {
+    "id": 6,
+    "title": "06 / 肖像と軍勢で、動きを追う",
+    "category": "説明用アニメーション｜史実の経路・兵数・時刻ではない",
+    "source_ids": [
+      "GSI_DEM",
+      "METHOD",
+      "GOOGLE_EARTH",
+      "PORTRAIT_KOBAYA",
+      "PORTRAIT_ISHIDA",
+      "PORTRAIT_IEYASU"
+    ],
+    "narration": "ここからは、位置関係を説明するアニメーションです。小早川秀秋の肖像と軍勢の印が、松尾山の陣跡から大谷隊の陣跡へ向かいます。顔の印が動くので、誰の部隊かを追いやすくなります。二点を結ぶ試験経路であり、実際の道筋や兵数、攻撃開始の時刻を再現したものではありません。",
+    "visual_phase": 0.5454545454545454
+  },
+  {
+    "id": 7,
+    "title": "07 / 距離と勾配を測る",
+    "category": "解析｜現代DEM・仮定経路",
+    "source_ids": [
+      "GSI_DEM",
+      "METHOD",
+      "GOOGLE_EARTH",
+      "PORTRAIT_KOBAYA",
+      "PORTRAIT_ISHIDA",
+      "PORTRAIT_IEYASU"
+    ],
+    "narration": "経路に沿って、水平距離、登りの量、下りの量を測ります。水平距離が同じでも、起伏があれば移動の条件は変わります。ここでの計算は、地面の形を調べるためのものです。道の有無やぬかるみ、敵との接触を計算に入れていない点に注意が必要です。",
+    "visual_phase": 0.6363636363636364
+  },
+  {
+    "id": 8,
+    "title": "08 / 速度を変えたら",
+    "category": "反実仮想｜移動時間のみ",
+    "source_ids": [
+      "METHOD",
+      "GOOGLE_EARTH",
+      "PORTRAIT_KOBAYA",
+      "PORTRAIT_ISHIDA",
+      "PORTRAIT_IEYASU"
+    ],
+    "narration": "次は、速度を変える感度分析です。毎秒〇点五メートル、一メートル、一点五メートルという三つの仮定で、同じ距離を割ります。これは移動時間だけの比較です。どの速度が当日の軍勢に正しかったかは判断できず、この数字から勝率を出すこともできません。",
+    "visual_phase": 0.7272727272727273
+  },
+  {
+    "id": 9,
+    "title": "09 / わからないことを残す",
+    "category": "論争・不明｜確定的演出を避ける",
+    "source_ids": [
+      "IEYASU",
+      "REKIMIN",
+      "GOOGLE_EARTH",
+      "PORTRAIT_KOBAYA",
+      "PORTRAIT_ISHIDA",
+      "PORTRAIT_IEYASU"
+    ],
+    "narration": "家康による小早川への威嚇射撃は、記念館でも一説として説明されています。本編では、その射撃を確定した出来事として再現しません。兵数、攻撃開始の正確な時刻、詳しい陣域も省略しました。わからない部分を残すことが、解析の信頼性を守ります。",
+    "visual_phase": 0.8181818181818182
+  },
+  {
+    "id": 10,
+    "title": "10 / 地形は条件、結果は別",
+    "category": "解析の限界｜勝敗モデルなし",
+    "source_ids": [
+      "METHOD",
+      "GOOGLE_EARTH",
+      "PORTRAIT_KOBAYA",
+      "PORTRAIT_ISHIDA",
+      "PORTRAIT_IEYASU"
+    ],
+    "narration": "地形の起伏と距離は、戦略を考える条件の一つです。しかし、指揮、情報、忠誠、士気といった要素は、この地形モデルだけでは測れません。三次元で見えることと、歴史的に証明されたことは別です。この試作は、問いを整理する道具として使います。",
+    "visual_phase": 0.9090909090909091
+  },
+  {
+    "id": 11,
+    "title": "出典・制作クレジット",
+    "category": "背景：Google Earth｜肖像：所蔵先・提供元を明記｜VOICEVOX:四国めたん",
+    "source_ids": [
+      "GSI_DEM",
+      "ISHIDA",
+      "KOBAYA",
+      "IEYASU",
+      "LOC",
+      "VOICE",
+      "GOOGLE_EARTH",
+      "PORTRAIT_KOBAYA",
+      "PORTRAIT_ISHIDA",
+      "PORTRAIT_IEYASU"
+    ],
+    "narration": "背景画像はグーグルアース。画面に表示された画像提供元も併記しています。肖像は、高台寺所蔵の小早川秀秋像、東京大学史料編纂所所蔵の石田三成像の模本、大阪城天守閣の徳川家康像を、ウィキメディアコモンズから取得しました。歴史の説明は古戦場記念館などの公開解説、音声はボイスボックス、四国めたんです。",
+    "visual_phase": 1.0
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "kobaya",
+    "name": "小早川秀秋",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Kobayakawa_Hideaki_1.jpg/500px-Kobayakawa_Hideaki_1.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Kobayakawa_Hideaki_1.jpg",
+    "credit": "小早川秀秋像（一部）／高台寺蔵／作者不詳・17世紀前半／Wikimedia Commons",
+    "license": "Public Domain / PD-Art",
+    "crop": [
+      0,
+      0,
+      1,
+      0.64
+    ],
+    "file": "assets\\portraits\\kobaya.jpg",
+    "sha256": "ce4dc425c627bddb1c137f874400ad35f4a97c392c6f945a9f19b7005df51ad6"
+  },
+  {
+    "id": "ishida",
+    "name": "石田三成",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Ishida_Mitsunari.jpg",
+    "page": "https://commons.wikimedia.org/wiki/File:Ishida_Mitsunari.jpg",
+    "credit": "石田三成像（模本）／東京大学史料編纂所蔵／作者不詳／Wikimedia Commons",
+    "license": "Public Domain / PD-Art",
+    "crop": [
+      0,
+      0,
+      1,
+      0.68
+    ],
+    "file": "assets\\portraits\\ishida.jpg",
+    "sha256": "f7e616d359de9589474db71d4f65654e0d76eaf50ca59a92a32bf63ea7a19c25"
+  },
+  {
+    "id": "ieyasu",
+    "name": "徳川家康",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/11/Tokugawa_Ieyasu2.JPG",
+    "page": "https://commons.wikimedia.org/wiki/File:Tokugawa_Ieyasu2.JPG",
+    "credit": "徳川家康像／大阪城天守閣／狩野探幽／Wikimedia Commons",
+    "license": "Public Domain / PD-Japan",
+    "crop": [
+      0,
+      0,
+      1,
+      0.7
+    ],
+    "file": "assets\\portraits\\ieyasu.jpg",
+    "sha256": "746cc89ace031aeda2f7940b33fbf4ae119d1bb8f3ffd6112084ad6d54fe09ef"
+  }
+]

@@ -6,29 +6,29 @@ from PIL import Image,ImageDraw,ImageFont
 from scipy.interpolate import RegularGridInterpolator
 ROOT=Path(__file__).resolve().parents[1]
 FONT='C:/Windows/Fonts/YuGothM.ttc';BOLD='C:/Windows/Fonts/YuGothB.ttc'
-F={n:ImageFont.truetype(FONT,n) for n in [18,21,24,28,32,34]};FB=ImageFont.truetype(BOLD,28)
+F={n:ImageFont.truetype(FONT,n) for n in [18,21,24,28,32,34,40,46]};FB=ImageFont.truetype(BOLD,28)
 def load(p):return json.loads((ROOT/p).read_text(encoding='utf8'))
 def overlap(a,b):return a[0]<b[2] and a[2]>b[0] and a[1]<b[3] and a[3]>b[1]
 def label(draw,text,x,y,used,color):
-    width=math.ceil(draw.textlength(text,font=F[24]))+24;height=42
-    for dx,dy in [(0,-38),(0,12),(0,-90),(-width/2,12),(width/2,-38),(0,65)]:
+    width=math.ceil(draw.textlength(text,font=F[40]))+32;height=64
+    for dx,dy in [(0,-70),(0,16),(0,-145),(-width/2,16),(width/2,-70),(0,90),(0,-215)]:
         xx=max(35,min(1885-width,x-width/2+dx));yy=y+dy
         box=(int(xx),int(yy),int(xx+width),int(yy+height))
-        if yy<153 or yy+height>875 or any(overlap(box,b) for b in used):continue
-        draw.line([(x,y),(xx+width/2,yy+height/2)],fill=color,width=2);draw.rounded_rectangle(box,radius=5,fill=(7,24,36,238),outline=color,width=2);draw.text((xx+12,yy+4),text,font=F[24],fill=(245,245,235));used.append(box);return box
+        if yy<205 or yy+height>855 or any(overlap(box,b) for b in used):continue
+        draw.line([(x,y),(xx+width/2,yy+height/2)],fill=color,width=2);draw.rounded_rectangle(box,radius=5,fill=(7,24,36,238),outline=color,width=2);draw.text((xx+16,yy+5),text,font=F[40],fill=(245,245,235));used.append(box);return box
     return None
 def drawchart(draw,analysis,scene_id,used):
-    box=(1430,475,1875,805);used.append(box);draw.rounded_rectangle(box,12,fill=(7,24,36,235),outline=(176,153,100),width=2)
-    draw.text((1450,490),'仮説経路 / 現代DEM解析',font=FB,fill='#efc976')
+    box=(1000,475,1445,805);used.append(box);draw.rounded_rectangle(box,12,fill=(7,24,36,235),outline=(176,153,100),width=2)
+    draw.text((1020,490),'仮説経路 / 現代DEM解析',font=FB,fill='#efc976')
     d=analysis['horizontal_distance_m'];up=analysis['ascent_m'];down=analysis['descent_m']
-    draw.text((1450,540),f'水平距離 {d/1000:.2f} km',font=F[24],fill='white')
+    draw.text((1020,540),f'水平距離 {d/1000:.2f} km',font=F[24],fill='white')
     if scene_id==8:
         for i,v in enumerate(analysis['sensitivity']):
-            y=590+i*53;draw.text((1450,y),f'{v["assumed_speed_m_s"]:.1f} m/s',font=F[21],fill='white');length=v['minutes']/50*205;draw.rectangle((1550,y+6,1550+length,y+25),fill='#bba56e');draw.text((1550+length+7,y),f'{v["minutes"]:.1f}分',font=F[18],fill='white')
+            y=590+i*53;draw.text((1020,y),f'{v["assumed_speed_m_s"]:.1f} m/s',font=F[21],fill='white');length=v['minutes']/50*205;draw.rectangle((1120,y+6,1120+length,y+25),fill='#bba56e');draw.text((1120+length+7,y),f'{v["minutes"]:.1f}分',font=F[18],fill='white')
     else:
-        draw.text((1450,577),f'累積上り {up:.0f}m / 下り {down:.0f}m',font=F[21],fill='white');profile=analysis['profile'];e=profile['elevation_m'];mi,ma=min(e),max(e)
-        pts=[(1450+v/d*395,745-(z-mi)/max(1,ma-mi)*100) for v,z in zip(profile['distance_m'],e)];draw.line(pts,fill='#efc976',width=4)
-        draw.text((1450,755),'直線経路。道路・戦闘を考慮せず',font=F[18],fill='#b8c8cb')
+        draw.text((1020,577),f'累積上り {up:.0f}m / 下り {down:.0f}m',font=F[21],fill='white');profile=analysis['profile'];e=profile['elevation_m'];mi,ma=min(e),max(e)
+        pts=[(1020+v/d*395,745-(z-mi)/max(1,ma-mi)*100) for v,z in zip(profile['distance_m'],e)];draw.line(pts,fill='#efc976',width=4)
+        draw.text((1020,755),'直線経路。道路・戦闘を考慮せず',font=F[18],fill='#b8c8cb')
 def main(mode,level,range_start=None,range_end=None):
     folder=ROOT/'cache'/f'render_l{level}_{mode}';report=load(str(folder.relative_to(ROOT)/'render_report.json'));frames=report['frames'];units=load('data/units.json');names={u['id']:u['name']+'（推定）' for u in units};analysis=load('out/analysis.json');audio=load('out/audio_report.json');timeline=load('data/timeline.json');cards={}
     grid=np.load(ROOT/'data'/'terrain.npz');interp=RegularGridInterpolator((grid['ys'],grid['xs']),grid['h']);a=next(u for u in units if u['id']=='kobaya');b=next(u for u in units if u['id']=='otani')
@@ -62,7 +62,7 @@ def main(mode,level,range_start=None,range_end=None):
                 xx=a['x_m']*(1-p)+b['x_m']*p;yy=a['y_m']*(1-p)+b['y_m']*p;zz=float(interp([[yy,xx]])[0])+19
                 tip=project((xx,yy,zz),fr);ahead=project((xx+(b['x_m']-a['x_m'])*.01,yy+(b['y_m']-a['y_m'])*.01,zz),fr);direction=ahead-tip;direction/=np.linalg.norm(direction);normal=np.array([-direction[1],direction[0]])
                 draw.polygon([tuple(tip+direction*15),tuple(tip-direction*12+normal*10),tuple(tip-direction*12-normal*10)],fill='#f3c66b',outline='#795b20')
-            used=[(0,0,1920,149),(0,1028,1920,1080),(1575,170,1875,424),(100,885,1820,1005)]
+            used=[(0,0,1920,200),(0,1015,1920,1080),(1485,220,1875,530),(60,860,1860,1008)]
             if mode=='pilot' and scene_id==11:used.append((70,245,1310,640))
             if mode=='pilot' and scene_id in [7,8]:drawchart(draw,analysis,scene_id,used)
             labels=[]
@@ -75,15 +75,15 @@ def main(mode,level,range_start=None,range_end=None):
             active=next((x for x in segments if x['start']<=t<x['end']),None)
             subbox=None
             if active:
-                lines=textwrap.wrap(active['text'],width=43);assert len(lines)<=2,(active['text'],lines)
-                subbox=(100,892,1820,1003);draw.rounded_rectangle(subbox,12,fill=(5,18,29,240))
+                lines=textwrap.wrap(active['text'],width=36);assert len(lines)<=2,(active['text'],lines)
+                subbox=(60,860,1860,1008);draw.rounded_rectangle(subbox,12,fill=(5,18,29,240))
                 for j,text in enumerate(lines):
-                    w=draw.textlength(text,font=F[34]);assert w<1660
-                    draw.text(((1920-w)/2,899+j*47),text,font=F[34],fill='#fffcef')
+                    w=draw.textlength(text,font=F[46]);assert w<1760
+                    draw.text(((1920-w)/2,871+j*62),text,font=F[46],fill='#fffcef')
             # Model clock is explicitly separate from historical time.
             if mode=='comparison' or scene_id==6:
                 val=(i/len(frames) if mode=='comparison' else (t-timeline[6]['start'])/timeline[6]['duration'])*60
-                draw.rounded_rectangle((48,164,615,208),7,fill=(7,24,36,238));draw.text((62,171),f'模式モデル時刻 {val:04.1f} / 60分（史実時刻ではない）',font=F[21],fill='#efc976')
+                draw.rounded_rectangle((48,211,870,265),7,fill=(7,24,36,238));draw.text((62,219),f'模式モデル時刻 {val:04.1f} / 60分（史実時刻ではない）',font=F[28],fill='#efc976')
             if mode=='pilot' and scene_id==11:
                 box=(70,245,1310,640);draw.rounded_rectangle(box,12,fill=(7,24,36,235))
                 credit=['地形：国土地理院 地理院タイル（標高）を加工','歴史参照：岐阜関ケ原古戦場記念館 / 関ケ原町歴史民俗学習館','位置：株式会社CCL 大垣支社 / 関ヶ原位置情報リスト2013年度','CC BY 3.0 / 座標変換・説明用配置に加工','音声：VOICEVOX:四国めたん','モデル・材質・図表：本PoC自作 / Blender + Remotion + FFmpeg','出典URL・取得日・仮定・検証結果は同梱ファイルに記録']

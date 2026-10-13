@@ -10,12 +10,13 @@ def readwav(p):
         return np.frombuffer(w.readframes(w.getnframes()),np.int16),w.getframerate()
 def writewav(p,a,rate):
     with wave.open(str(p),'wb') as w:w.setnchannels(1);w.setsampwidth(2);w.setframerate(rate);w.writeframes(a.astype(np.int16).tobytes())
-def main():
-    folder=ROOT/'cache'/'audio';folder.mkdir(exist_ok=True)
+def main(variant=''):
+    prefix=variant+'_' if variant else ''
+    folder=ROOT/'cache'/(prefix+'audio');folder.mkdir(exist_ok=True)
     speakers=requests.get(BASE+'/speakers',timeout=60);speakers.raise_for_status();(folder/'speakers.json').write_text(speakers.text,encoding='utf8')
     speaker=next(x for x in speakers.json() if x['name']=='四国めたん');style=next(x['id'] for x in speaker['styles'] if x['name']=='ノーマル')
     info=requests.get(BASE+'/speaker_info',params={'speaker_uuid':speaker['speaker_uuid']},timeout=60);info.raise_for_status();(folder/'speaker_policy.json').write_text(info.text,encoding='utf8')
-    dictionary=load('pronunciations.json');scenes=load('scenes.json');segments=[];timeline=[];cursor=0;allpcm=[];rate=24000;started=time.time()
+    dictionary=load('pronunciations.json');scenes=load(prefix+'scenes.json');segments=[];timeline=[];cursor=0;allpcm=[];rate=24000;started=time.time()
     for scene in scenes:
         local=[];sub=[];scene_cursor=0
         sentences=[x.strip()+'。' for x in scene['narration'].split('。') if x.strip()]
@@ -39,13 +40,15 @@ def main():
         # Explicit final credit hold, no repeated speech.
         extra=180-cursor;allpcm.append(np.zeros(round(extra*rate),dtype=np.int16));timeline[-1]['duration']+=extra;timeline[-1]['end']+=extra;cursor=180
     assert 180<=cursor<=300,f'Pilot length {cursor} outside range'
-    writewav(ROOT/'out'/'narration.wav',np.concatenate(allpcm),rate)
+    writewav(ROOT/'out'/(prefix+'narration.wav'),np.concatenate(allpcm),rate)
     def stamp(t):
         ms=round(t*1000);return f'{ms//3600000:02}:{ms//60000%60:02}:{ms//1000%60:02},{ms%1000:03}'
-    (ROOT/'out'/'subtitles.srt').write_text('\n\n'.join(f'{i+1}\n{stamp(x["start"])} --> {stamp(x["end"])}\n{x["text"]}' for i,x in enumerate(segments))+'\n',encoding='utf8')
+    (ROOT/'out'/(prefix+'subtitles.srt')).write_text('\n\n'.join(f'{i+1}\n{stamp(x["start"])} --> {stamp(x["end"])}\n{x["text"]}' for i,x in enumerate(segments))+'\n',encoding='utf8')
     report={'engine':requests.get(BASE+'/version').json(),'speaker':'VOICEVOX:四国めたん','style':style,'segments':segments,'total_seconds':cursor,'generation_seconds':time.time()-started,'all_lines_voiced':len(segments)==sum(len([s for s in x['narration'].split('。') if s.strip()]) for x in scenes),'pronunciation_method':'longest-match replacement with checked katakana dictionary before audio_query; original text retained for subtitles','semantic_asr_verified':False}
-    (ROOT/'data'/'timeline.json').write_text(json.dumps(timeline,ensure_ascii=False,indent=2),encoding='utf8');(ROOT/'out'/'audio_report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf8');print('total',cursor)
+    (ROOT/'data'/(prefix+'timeline.json')).write_text(json.dumps(timeline,ensure_ascii=False,indent=2),encoding='utf8');(ROOT/'out'/(prefix+'audio_report.json')).write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf8');print('total',cursor)
 def mathceil(value,fps):
     import math
     return math.ceil(value*fps)/fps
-if __name__=='__main__':main()
+if __name__=='__main__':
+    import sys
+    main(sys.argv[1] if len(sys.argv)>1 else '')

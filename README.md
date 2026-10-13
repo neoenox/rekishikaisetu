@@ -1,5 +1,28 @@
 # 関ヶ原：実DEMを使う3D戦略解析動画PoC
 
+## Google Earth・肖像版（2026-10-13更新）
+
+最新の映像は `out/sekigahara_google_earth_portraits.mp4`（4分10.2秒）。
+進軍だけの映像は `out/earth_portrait_march_preview.mp4`（22.87秒）。
+検証・出典は `out/EARTH_REPORT.md`、`out/earth_quality_report.json`、`out/earth_sources.md` に保存しています。
+
+Google Earthの実際のブラウザー表示を3視点で取得し、その静止背景に座標を合わせた軍勢記号と肖像を30fpsで合成しています。地形説明にはGoogle Earthの3D斜め視点を使用。軍勢が動く部分は俯瞰画像への2D合成です。Googleの3Dモデルや画像タイルを抽出する処理はありません。Googleと画像提供元は常時表示します。
+
+小早川・石田・徳川の肖像を説明パネルと部隊札に使用し、小早川の肖像が部隊に追従します。大谷は出典を確認できた肖像を採用しておらず、名前の札で表示。字幕46px・部隊名38px・見出し50pxです。
+
+元の作品を歴史解析の完成品とする判定は撤回しています。この更新は依頼された実景・肖像の視覚変更への対応であり、一次史料の照合、歴史の進行、諸説比較の完成を意味しません。
+
+```powershell
+# 保存済みの実景画像を使って、音声・軍勢・映像・検証を再実行
+pwsh -File scripts/run_earth.ps1 -ReuseCaptures
+# Google Earthの実際の画面取得から実行（UIや通信状態に依存）
+pwsh -File scripts/run_earth.ps1
+```
+
+`data/earth_scenes.json` が更新版の台本、`data/earth_registration.json` が9地点の位置合わせ検証、`data/portraits.json` が肖像の出典とハッシュです。`assets/earth` に元の画面、表示帰属、取得URL、UIから読んだ座標を保存しています。
+
+## 従来のDEM版
+
 Windows / RTX 4060上でローカル実行する試作システム。実データ・Blender描画・VOICEVOX音声・Remotion表示素材・FFmpeg合成を使用します。外部公開、有料契約、人間による動画編集を必要としません。
 
 ## 成果物
