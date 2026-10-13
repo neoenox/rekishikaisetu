@@ -1,0 +1,9 @@
+.venv/
+tools/
+cache/
+out/
+logs/
+node_modules/
+__pycache__/
+.pytest_cache/
+*.blend1
