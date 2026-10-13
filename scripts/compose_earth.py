@@ -23,6 +23,8 @@ class EarthFilm:
         self.scenes=load('data/earth_timeline.json');self.audio=load('out/earth_audio_report.json')
         self.units={u['id']:u for u in load('data/units.json')};self.portraits={p['id']:p for p in load('data/portraits.json')}
         self.maps={k:Image.open(ROOT/'assets'/'earth'/f'{k}.png').convert('RGBA') for k in ['overview','regional','oblique']}
+        self.view_scale=1080/888
+        self.maps={k:im.transform((1920,1080),Image.Transform.AFFINE,(1/self.view_scale,0,960-960/self.view_scale,0,1/self.view_scale,84),resample=Image.Resampling.BICUBIC) for k,im in self.maps.items()}
         self.sprites={k:[Image.open(ROOT/'assets'/'army'/f'{k}_{i:02}.png').convert('RGBA').resize((210,168),Image.Resampling.LANCZOS) for i in range(12)] for k in ['west','east','kobaya']}
         self.r=load('data/earth_registration.json');self.tf=Transformer.from_crs(4979,4978,always_xy=True)
         self.xy_to_ll=Transformer.from_crs('+proj=aeqd +lat_0=35.355 +lon_0=136.472 +datum=WGS84 +units=m',4326,always_xy=True)
@@ -36,18 +38,17 @@ class EarthFilm:
         for k,p in self.portraits.items():
             im=Image.open(ROOT/p['file']).convert('RGBA');w,h=im.size;box=tuple(round(v*(w if i%2==0 else h)) for i,v in enumerate(crops[k]));face=ImageOps.fit(im.crop(box),(136,136),method=Image.Resampling.LANCZOS)
             icon=Image.new('RGBA',(148,148));d=ImageDraw.Draw(icon);d.ellipse((1,1,146,146),fill=COLORS[k]);mask=Image.new('L',(136,136));ImageDraw.Draw(mask).ellipse((0,0,135,135),fill=255);icon.paste(face,(6,6),mask);self.icons[k]=icon
-            panel=Image.new('RGBA',(380,646));d=ImageDraw.Draw(panel);d.rounded_rectangle((0,0,379,645),18,fill=(7,19,30,247),outline=COLORS[k],width=3)
+            panel=Image.new('RGBA',(380,535));d=ImageDraw.Draw(panel);d.rounded_rectangle((0,0,379,534),18,fill=(7,19,30,247),outline=COLORS[k],width=3)
             d.text((22,16),self.units[k]['name'],font=B[46],fill='white')
             portrait=ImageOps.contain(im,(332,420),Image.Resampling.LANCZOS);panel.alpha_composite(portrait,((380-portrait.width)//2,86))
             lines={'kobaya':['小早川秀秋像（一部）','高台寺蔵／17世紀前半','作者不詳'],'ishida':['石田三成像（模本）','東京大学史料編纂所蔵','作者不詳'],'ieyasu':['徳川家康像','大阪城天守閣','狩野探幽']}[k]
-            for j,line in enumerate(lines):d.text((20,520+j*31),line,font=F[24],fill='#e9e1ce')
-            d.text((20,615),'Wikimedia Commons / 肖像は識別用',font=F[20],fill='#c5d0d6')
             self.panels[k]=panel
         self.route=[self.route_point(p) for p in np.linspace(0,1,100)]
 
     def at(self,x,y):
         lon,lat=self.xy_to_ll.transform(x,y);h=float(self.heights([[y,x]])[0]);p=np.array(self.tf.transform(lon,lat,h))-self.origin
-        cx,cy,f,alt=self.r['parameters'];return np.array([cx+f*(p@self.east)/(alt-p@self.up),cy-f*(p@self.north)/(alt-p@self.up)])
+        cx,cy,f,alt=self.r['parameters'];native=np.array([cx+f*(p@self.east)/(alt-p@self.up),cy-f*(p@self.north)/(alt-p@self.up)])
+        return np.array([(native[0]-960)*self.view_scale+960,(native[1]-84)*self.view_scale])
 
     def route_point(self,p):
         a,b=self.units['kobaya'],self.units['otani'];return self.at(a['x_m']*(1-p)+b['x_m']*p,a['y_m']*(1-p)+b['y_m']*p)
@@ -66,18 +67,16 @@ class EarthFilm:
         # Actual Earth oblique footage is used for the terrain explanation.
         view='regional' if sid==0 and local<4 else ('oblique' if sid==1 else 'overview')
         image=self.maps[view].copy();draw=ImageDraw.Draw(image);rects=[]
-        draw.rectangle((0,0,1920,161),fill='#081b29');draw.text((44,13),scene['title'],font=B[50],fill='#fff9e9');draw.text((46,84),scene['category'],font=F[28],fill='#ffd16d')
-        draw.text((46,124),'現代の景観に、陣跡の記念地点と説明用の軍勢を重ねています',font=F[24],fill='#bed0dc')
-        # Credit line is retyped legibly; the native Google attribution strip at
-        # y=1050..1079 is also left untouched, pixel for pixel.
+        draw.text((44,15),scene['title'],font=B[50],fill='#fff9e9',stroke_width=4,stroke_fill='#06131f')
+        draw.text((46,84),scene['category'],font=F[28],fill='#ffd16d',stroke_width=3,stroke_fill='#06131f')
+        # Only the mapping provider's required on-screen attribution remains.
         source='Google Earth / Airbus' if view!='regional' else 'Google Earth / Landsat / Copernicus / Data SIO, NOAA, U.S. Navy, NGA, GEBCO'
-        draw.rectangle((0,1008,1920,1049),fill='#081b29');draw.text((25,1015),source,font=F[22],fill='white');draw.text((1510,1015),'VOICEVOX:四国めたん',font=F[22],fill='white')
         active_key={3:'ishida',4:'kobaya',5:'ieyasu',9:'kobaya'}.get(sid)
         if active_key:image.alpha_composite(self.panels[active_key],(30,187))
         if view=='regional':
             draw=ImageDraw.Draw(image);draw.ellipse((946,526,974,554),outline='#ffd16d',width=5);draw.rounded_rectangle((1000,487,1310,555),12,fill='#071925');draw.text((1025,495),'関ヶ原',font=B[46],fill='#ffd16d')
         elif view=='oblique':
-            draw=ImageDraw.Draw(image);draw.rounded_rectangle((48,220,665,380),15,fill=(7,25,37,240));draw.text((73,240),'Google Earthの3D表示',font=B[38],fill='white');draw.text((73,303),'山並みと盆地の位置関係を見る',font=F[30],fill='#ffd16d')
+            draw=ImageDraw.Draw(image);draw.text((48,220),'山並みと盆地の位置関係を見る',font=B[38],fill='white',stroke_width=4,stroke_fill='#06131f')
         else:
             progress=min(.92,max(0,(phase-.07)/.86)) if sid==6 else (0.92 if sid in [7,8] else 0)
             pos={k:self.at(u['x_m'],u['y_m']) for k,u in self.units.items()};pos['kobaya']=self.route_point(progress)
@@ -104,15 +103,9 @@ class EarthFilm:
                     draw.text((1270,716),f'水平距離 {a["horizontal_distance_m"]/1000:.2f} km',font=F[34],fill='white');draw.text((1270,771),f'上り {a["ascent_m"]:.0f}m ／ 下り {a["descent_m"]:.0f}m',font=F[30],fill='white')
                 else:
                     draw.text((1270,717),'仮定 0.5 / 1.0 / 1.5 m/s',font=F[34],fill='white');draw.text((1270,772),'所要時間 48.2 / 24.1 / 16.1分',font=F[30],fill='white')
-            if sid==11:
-                image.alpha_composite(self.maps['overview'].crop((0,162,1920,865)),(0,162));rects=[]
-                for key,x in [('kobaya',620),('ishida',1020),('ieyasu',1420)]:image.alpha_composite(self.panels[key],(x,187))
-                draw=ImageDraw.Draw(image)
-                draw.rounded_rectangle((35,184,590,835),15,fill='#071925');lines=['背景：Google Earth','画像提供元：Airbus ほか','肖像：Wikimedia Commons','小早川秀秋像：高台寺蔵','石田三成像（模本）：','東京大学史料編纂所蔵','徳川家康像：大阪城天守閣','地形解析：国土地理院DEM','陣跡座標：株式会社CCL','音声：VOICEVOX:四国めたん','軍勢：自作3D記号（実数でない）']
-                for j,line in enumerate(lines):draw.text((55,205+j*53),line,font=F[26],fill='white')
         draw=ImageDraw.Draw(image)
         for record in rects:
-            x0,y0,x1,y1=record['box'];assert 0<=x0<x1<=1920 and 162<=y0<y1<=865,record
+            x0,y0,x1,y1=record['box'];assert 0<=x0<x1<=1920 and 130<=y0<y1<=865,record
         for a in range(len(rects)):
             for b in range(a+1,len(rects)):
                 p,q=rects[a]['box'],rects[b]['box']
@@ -120,10 +113,11 @@ class EarthFilm:
         active=next((s for s in self.audio['segments'] if s['start']<=t<s['end']),None)
         subtitle_box=None
         if active:
-            lines=textwrap.wrap(active['text'],width=36);assert len(lines)<=2,active['text'];subtitle_box=(50,865,1870,1000);draw.rounded_rectangle(subtitle_box,13,fill='#06131f')
+            lines=textwrap.wrap(active['text'],width=36);assert len(lines)<=2,active['text'];subtitle_box=(50,890,1870,1030)
             for j,line in enumerate(lines):
-                w=draw.textlength(line,font=B[46]);assert w<=1770,(line,w);draw.text(((1920-w)/2,873+j*60),line,font=B[46],fill='#fffcef')
-        if i%30==0:self.layout.append({'frame':i,'scene':sid,'view':view,'cards':rects,'subtitle_box':subtitle_box,'native_credit_strip_preserved':True,'source_text':source})
+                w=draw.textlength(line,font=B[46]);assert w<=1770,(line,w);draw.text(((1920-w)/2,958-(len(lines)-1)*60+j*60),line,font=B[46],fill='#fffcef',stroke_width=4,stroke_fill='#06131f')
+        source_width=draw.textlength(source,font=F[20]);draw.text((1892-source_width,1046),source,font=F[20],fill='white',stroke_width=2,stroke_fill='#06131f')
+        if i%30==0:self.layout.append({'frame':i,'scene':sid,'view':view,'cards':rects,'subtitle_box':subtitle_box,'on_screen_attribution_present':True,'source_text':source,'full_width_bands':False,'production_credits_in_description':True})
         if sid==6 and i%30==0:self.layout[-1]['moving_anchor']=pos['kobaya'].tolist();self.layout[-1]['portrait_center']=centers['kobaya'].tolist()
         return image
 

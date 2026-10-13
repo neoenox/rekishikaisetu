@@ -2,11 +2,11 @@
 
 ## Google Earth・肖像版（2026-10-13更新）
 
-最新の映像は `out/sekigahara_google_earth_portraits.mp4`（4分10.2秒）。
+最新の映像は `out/sekigahara_google_earth_portraits.mp4`（3分44秒）。
 進軍だけの映像は `out/earth_portrait_march_preview.mp4`（22.87秒）。
 検証・出典は `out/EARTH_REPORT.md`、`out/earth_quality_report.json`、`out/earth_sources.md` に保存しています。
 
-Google Earthの実際のブラウザー表示を3視点で取得し、その静止背景に座標を合わせた軍勢記号と肖像を30fpsで合成しています。地形説明にはGoogle Earthの3D斜め視点を使用。軍勢が動く部分は俯瞰画像への2D合成です。Googleの3Dモデルや画像タイルを抽出する処理はありません。Googleと画像提供元は常時表示します。
+Google Earthの実際のブラウザー表示を3視点で取得し、その静止背景に座標を合わせた軍勢記号と肖像を30fpsで合成しています。地形説明にはGoogle Earthの3D斜め視点を使用。軍勢が動く部分は俯瞰画像への2D合成です。Googleの3Dモデルや画像タイルを抽出する処理はありません。Googleと画像提供元の必須出典だけを右下に小さく常時表示します。上下の大きな帯は削除し、見出し・字幕は縁取り付きで地図へ直接重ねます。VOICEVOX・肖像の所蔵先などは `out/video_description.txt` の概要欄用テキストへ移動しました。
 
 小早川・石田・徳川の肖像を説明パネルと部隊札に使用し、小早川の肖像が部隊に追従します。大谷は出典を確認できた肖像を採用しておらず、名前の札で表示。字幕46px・部隊名38px・見出し50pxです。
 
