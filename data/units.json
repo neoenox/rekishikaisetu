@@ -1,0 +1,78 @@
+[
+  {
+    "id": "ishida",
+    "name": "石田三成",
+    "side": "west",
+    "lat": 35.371796,
+    "lon": 136.458746,
+    "x_m": -1204.4351092195254,
+    "y_m": 1863.5505345591105,
+    "position_error_m": 150,
+    "position_type": "inferred",
+    "coordinate_basis": "LOC row 19 笹尾山・石田三成 陣跡（国史跡）; present-day monument, not verified 1600 occupied footprint",
+    "source_ids": [
+      "ISHIDA",
+      "LOC"
+    ],
+    "troop_count_range": null,
+    "alternatives": "陣域・人数・正確な時刻は復元しない",
+    "symbol_scale": "旗100m・兵士24mの説明用拡大。実数・実寸ではない"
+  },
+  {
+    "id": "kobaya",
+    "name": "小早川秀秋",
+    "side": "conditional",
+    "lat": 35.347274,
+    "lon": 136.454304,
+    "x_m": -1608.5806922058764,
+    "y_m": -857.0329364928242,
+    "position_error_m": 150,
+    "position_type": "inferred",
+    "coordinate_basis": "LOC row 31 松尾山・小早川秀秋 陣跡(町史跡); present-day monument, not verified 1600 occupied footprint",
+    "source_ids": [
+      "KOBAYA",
+      "LOC"
+    ],
+    "troop_count_range": null,
+    "alternatives": "陣域・人数・正確な時刻は復元しない",
+    "symbol_scale": "旗100m・兵士24mの説明用拡大。実数・実寸ではない"
+  },
+  {
+    "id": "otani",
+    "name": "大谷吉継",
+    "side": "west",
+    "lat": 35.359936,
+    "lon": 136.450496,
+    "x_m": -1954.425882702953,
+    "y_m": 547.8472917795763,
+    "position_error_m": 150,
+    "position_type": "inferred",
+    "coordinate_basis": "LOC row 33 大谷吉継 陣跡(国史跡); present-day monument, not verified 1600 occupied footprint",
+    "source_ids": [
+      "ISHIDA",
+      "LOC"
+    ],
+    "troop_count_range": null,
+    "alternatives": "陣域・人数・正確な時刻は復元しない",
+    "symbol_scale": "旗100m・兵士24mの説明用拡大。実数・実寸ではない"
+  },
+  {
+    "id": "ieyasu",
+    "name": "徳川家康",
+    "side": "east",
+    "lat": 35.365395,
+    "lon": 136.488411,
+    "x_m": 1491.439936958935,
+    "y_m": 1153.419596094293,
+    "position_error_m": 150,
+    "position_type": "inferred",
+    "coordinate_basis": "LOC row 20 桃配山・徳川家康 最初陣跡（国史跡）; present-day monument, not verified 1600 occupied footprint",
+    "source_ids": [
+      "IEYASU",
+      "LOC"
+    ],
+    "troop_count_range": null,
+    "alternatives": "陣域・人数・正確な時刻は復元しない",
+    "symbol_scale": "旗100m・兵士24mの説明用拡大。実数・実寸ではない"
+  }
+]

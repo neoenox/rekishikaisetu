@@ -1,0 +1,15 @@
+[
+  {
+    "id": "symbolic_march",
+    "unit_id": "kobaya",
+    "type": "illustrative",
+    "time_historical": null,
+    "from_unit": "kobaya",
+    "to_unit": "otani",
+    "source_ids": [
+      "ISHIDA",
+      "METHOD"
+    ],
+    "note": "Relations based on museum narrative; straight interpolated route is invented for terrain conformance test; video compresses 3600s model time into 25s"
+  }
+]

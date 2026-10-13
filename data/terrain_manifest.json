@@ -1,0 +1,107 @@
+{
+  "source": "GSI_DEM",
+  "layer": "dem_png",
+  "zoom": 14,
+  "tiles": [
+    {
+      "url": "https://cyberjapandata.gsi.go.jp/xyz/dem_png/14/14401/6468.png",
+      "sha256": "5b1ec7efdefa08e6a0ca963f58f7fe6af72f51e2f6ddcf5a7adc5ae19f0e6a67",
+      "nodata": 0
+    },
+    {
+      "url": "https://cyberjapandata.gsi.go.jp/xyz/dem_png/14/14402/6468.png",
+      "sha256": "140b0c77f60544c5553d4f6366d972ef174ecfa62d715278ce4be4b17bf0cc4f",
+      "nodata": 0
+    },
+    {
+      "url": "https://cyberjapandata.gsi.go.jp/xyz/dem_png/14/14403/6468.png",
+      "sha256": "55545f54cbd57e12c70e1cc6a024b46037c0ade465693fdbc51cc1c69ed2f44f",
+      "nodata": 0
+    },
+    {
+      "url": "https://cyberjapandata.gsi.go.jp/xyz/dem_png/14/14404/6468.png",
+      "sha256": "8710467d9e352a796fd6f33c13533d3b49cde945d5766ef88563dcd1ebb251c4",
+      "nodata": 0
+    },
+    {
+      "url": "https://cyberjapandata.gsi.go.jp/xyz/dem_png/14/14401/6469.png",
+      "sha256": "89ec972ec80397618ec9bb72d5eedeb85cdbdb542f947b7caae92c86c12d33ea",
+      "nodata": 0
+    },
+    {
+      "url": "https://cyberjapandata.gsi.go.jp/xyz/dem_png/14/14402/6469.png",
+      "sha256": "e64576ee43cc3e8412f554c1038bebfd1a42c2c4d477680c6d1054cd300a4d40",
+      "nodata": 0
+    },
+    {
+      "url": "https://cyberjapandata.gsi.go.jp/xyz/dem_png/14/14403/6469.png",
+      "sha256": "bd247c01d9e686c6034dd57ff3172d8de2f6aa10f92b81bae755c0d961ee4ca3",
+      "nodata": 0
+    },
+    {
+      "url": "https://cyberjapandata.gsi.go.jp/xyz/dem_png/14/14404/6469.png",
+      "sha256": "6174f721ecba81795c238755b40275215eb27041c4f6a0077d637f5b671f0a98",
+      "nodata": 0
+    },
+    {
+      "url": "https://cyberjapandata.gsi.go.jp/xyz/dem_png/14/14401/6470.png",
+      "sha256": "3987bce987ff842164967553249990ca82e55030aa3fc98fb1360d6789331d1b",
+      "nodata": 0
+    },
+    {
+      "url": "https://cyberjapandata.gsi.go.jp/xyz/dem_png/14/14402/6470.png",
+      "sha256": "b0b810b88caf0aa600695316d113fd6c7af82407d359afb7bfe7b557d60a034f",
+      "nodata": 0
+    },
+    {
+      "url": "https://cyberjapandata.gsi.go.jp/xyz/dem_png/14/14403/6470.png",
+      "sha256": "9dbc2e05e1270be5a827248bcb0a6b1f6550bb039e6e99c466859d930456c236",
+      "nodata": 0
+    },
+    {
+      "url": "https://cyberjapandata.gsi.go.jp/xyz/dem_png/14/14404/6470.png",
+      "sha256": "2a1a91cb137d828cfb58588e39a3cc91cea97e0fe9222123b5578314c24e0aae",
+      "nodata": 0
+    },
+    {
+      "url": "https://cyberjapandata.gsi.go.jp/xyz/dem_png/14/14401/6471.png",
+      "sha256": "17c782cd2f012b352301a226d52bccf8410fcdff40fd2b2ea12e73d2d31efaac",
+      "nodata": 0
+    },
+    {
+      "url": "https://cyberjapandata.gsi.go.jp/xyz/dem_png/14/14402/6471.png",
+      "sha256": "ad1103cdc591270b77e9151312c3432d5b595e4ed2232bb25912afa517251258",
+      "nodata": 0
+    },
+    {
+      "url": "https://cyberjapandata.gsi.go.jp/xyz/dem_png/14/14403/6471.png",
+      "sha256": "313648116e66922e1f133536b9b6f14b090a096768620c5941e7d8e11f48ba7a",
+      "nodata": 0
+    },
+    {
+      "url": "https://cyberjapandata.gsi.go.jp/xyz/dem_png/14/14404/6471.png",
+      "sha256": "f71490f5ba99a05ea51a1553ec5dee4695bc0a613d2d9014567063157f96bc0d",
+      "nodata": 0
+    }
+  ],
+  "crs": "+proj=aeqd +lat_0=35.355 +lon_0=136.472 +datum=WGS84 +units=m +type=crs",
+  "origin": [
+    136.472,
+    35.355
+  ],
+  "step_m": 25,
+  "vertical_scale": 1,
+  "nodata": 0,
+  "height_min_m": 41.4,
+  "height_max_m": 741.7247344264563,
+  "resampling": "bilinear from native z14 pixel centers; 25m metric mesh; no hole filling",
+  "bounds_wgs84": [
+    136.43787961515602,
+    35.326152544547426,
+    136.506120384844,
+    35.388349137673835
+  ],
+  "acquired": "2026-10-13",
+  "native_pixel_m_approx": 7.79,
+  "notice": "Modern DEM; 1600 terrain changes unmodeled"
+}

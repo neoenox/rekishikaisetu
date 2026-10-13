@@ -1,0 +1,111 @@
+[
+  {
+    "id": "GSI_DEM",
+    "author": "国土地理院",
+    "title": "標高タイル仕様",
+    "url": "https://cyberjapandata.gsi.go.jp/development/demtile.html",
+    "section": "PNG復号式・無効値",
+    "rights": "国土地理院コンテンツ利用規約・出典表示。標高を加工。",
+    "acquired": "2026-10-13",
+    "sha256": "910d8d176cd77ce98e89cbc73b5414c78ab5cc074fecd5872299481bddec7a95"
+  },
+  {
+    "id": "GSI_TERMS",
+    "author": "国土地理院",
+    "title": "地理院タイル利用",
+    "url": "https://maps.gsi.go.jp/help/use.html",
+    "section": "利用規約",
+    "rights": "地理院タイル（標高）を加工して作成",
+    "acquired": "2026-10-13",
+    "sha256": "b71eaa8d210b91618dc9789afb00989bdaecf8b5368a345d742cd3b917204bb1"
+  },
+  {
+    "id": "MUSEUM",
+    "author": "岐阜関ケ原古戦場記念館",
+    "title": "記念館紹介",
+    "url": "https://sekigahara.pref.gifu.lg.jp/",
+    "section": "記念館とは：慶長五年（1600年）",
+    "rights": "事実参照と自作要約のみ。写真・地図・文章の転載なし。",
+    "acquired": "2026-10-13",
+    "sha256": "561b24ffdf5d82fa5518f92734345b87cd260dc2259730464a4716adfb293ce2"
+  },
+  {
+    "id": "ISHIDA",
+    "author": "岐阜関ケ原古戦場記念館",
+    "title": "石田三成コース",
+    "url": "https://sekigahara.pref.gifu.lg.jp/ishida-mitsunari/",
+    "section": "石田三成陣跡・大谷吉継陣跡",
+    "rights": "事実参照・自作要約。一次史料の直接校訂は未実施。",
+    "acquired": "2026-10-13",
+    "sha256": "6f2147fb57b2980d3cc25e1f0f226c590c132ed1a3905586148b268bb4b92965"
+  },
+  {
+    "id": "KOBAYA",
+    "author": "岐阜関ケ原古戦場記念館",
+    "title": "小早川秀秋コース",
+    "url": "https://sekigahara.pref.gifu.lg.jp/kobayakawa-hideaki/",
+    "section": "小早川秀秋陣跡",
+    "rights": "事実参照・自作要約。",
+    "acquired": "2026-10-13",
+    "sha256": "b58f10c280bf5401d343e9b3ba1692a90d5aae0423b89e2fe770f99506c2f56e"
+  },
+  {
+    "id": "IEYASU",
+    "author": "岐阜関ケ原古戦場記念館",
+    "title": "徳川家康コース",
+    "url": "https://sekigahara.pref.gifu.lg.jp/tokugawa-ieyasu/",
+    "section": "最初陣地・最後陣地",
+    "rights": "事実参照・自作要約。時刻と威嚇射撃は確定扱いしない。",
+    "acquired": "2026-10-13",
+    "sha256": "f888a444893a81adc502298f9d21aea4101f639e7d6847a1604882f2c164883a"
+  },
+  {
+    "id": "REKIMIN",
+    "author": "関ケ原町歴史民俗学習館",
+    "title": "文化財・陣跡マップ",
+    "url": "https://rekimin-sekigahara.jp/main/map/",
+    "section": "陣跡マップ説明",
+    "rights": "地図画像は不使用。曖昧な位置が省略されるとの説明を参照。",
+    "acquired": "2026-10-13",
+    "sha256": "14a97a43776b6e9dcaa6dd34f5c0018e1652e03a2ed6650192d8820abeca6397"
+  },
+  {
+    "id": "LOC",
+    "author": "株式会社CCL 大垣支社",
+    "title": "関ヶ原位置情報リスト2013年度",
+    "url": "https://linkdata.org/work/rdf1s884i/SekigaharaLocationData.html",
+    "section": "名称・緯度経度の列のみ",
+    "rights": "CC BY 3.0 https://creativecommons.org/licenses/by/3.0/deed.ja 位置を局所座標へ変換。歴史記述・画像は不使用。",
+    "acquired": "2026-10-13",
+    "sha256": "d9a1108b0dbf33550fd1f6e22c617e8d3d8ef7fdec19a5416c903098e3a0af94"
+  },
+  {
+    "id": "VOICE",
+    "author": "VOICEVOX",
+    "title": "利用規約",
+    "url": "https://voicevox.hiroshiba.jp/term/",
+    "section": "クレジット表記",
+    "rights": "VOICEVOX:四国めたん。音声規約はengine speaker_infoのpolicyを保存。",
+    "acquired": "2026-10-13",
+    "sha256": "10dbc1bafcbe612378b998e96882809970f1591194ab2851669e11805feff40b"
+  },
+  {
+    "id": "REMOTION",
+    "author": "Remotion AG",
+    "title": "License & Pricing",
+    "url": "https://www.remotion.dev/docs/license/pricing",
+    "section": "個人・3人以下無料枠",
+    "rights": "個人ローカルPoC。外部サービス化・公開なし。",
+    "acquired": "2026-10-13",
+    "sha256": "9664ac2335b163f56045895f406cf9b3e76c39fa2b12932cb000447af905e5a2"
+  },
+  {
+    "id": "METHOD",
+    "author": "本PoC",
+    "title": "解析仕様",
+    "url": "local:README.md",
+    "section": "経路距離・勾配・速度感度分析",
+    "rights": "独自実装。歴史資料ではない。",
+    "acquired": "2026-10-13"
+  }
+]

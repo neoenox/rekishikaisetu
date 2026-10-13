@@ -1,0 +1,19 @@
+{
+  "historical_certification": "Official museum summaries are attributed accounts, not primary-document proof. No contested narrative promoted to confirmed.",
+  "coordinate_uncertainty_m": 150,
+  "coordinate_uncertainty_basis": "author assumption, not measured error",
+  "route": "straight endpoint interpolation; not historic road",
+  "model_seconds": 3600,
+  "screen_seconds": 25,
+  "troop_count": "not represented; identical 30 symbols per formation",
+  "vegetation": "procedural illustration; not historic reconstruction",
+  "weather": "cinematic fog only; not historic weather claim",
+  "visibility": "not computed; canopy/weather unknown",
+  "vertical_scale": 1,
+  "terrain": "modern DEM, not a 1600 survey",
+  "speed_sensitivity_m_s": [
+    0.5,
+    1,
+    1.5
+  ]
+}
