@@ -27,7 +27,7 @@ Windows / RTX 4060上でローカル実行する試作システム。実デー�
 
 ```powershell
 cd E:\rekishikaisetu
-pwsh -File scripts/run.ps1
+pwsh -File scripts/run.ps1 -Theme '関ヶ原の戦い'
 ```
 
 既存のBlender描画フレームを使って字幕・合成・検証だけ再実行：

@@ -29,7 +29,7 @@ def drawchart(draw,analysis,scene_id,used):
         draw.text((1450,577),f'累積上り {up:.0f}m / 下り {down:.0f}m',font=F[21],fill='white');profile=analysis['profile'];e=profile['elevation_m'];mi,ma=min(e),max(e)
         pts=[(1450+v/d*395,745-(z-mi)/max(1,ma-mi)*100) for v,z in zip(profile['distance_m'],e)];draw.line(pts,fill='#efc976',width=4)
         draw.text((1450,755),'直線経路。道路・戦闘を考慮せず',font=F[18],fill='#b8c8cb')
-def main(mode,level):
+def main(mode,level,range_start=None,range_end=None):
     folder=ROOT/'cache'/f'render_l{level}_{mode}';report=load(str(folder.relative_to(ROOT)/'render_report.json'));frames=report['frames'];units=load('data/units.json');names={u['id']:u['name']+'（推定）' for u in units};analysis=load('out/analysis.json');audio=load('out/audio_report.json');timeline=load('data/timeline.json');cards={}
     grid=np.load(ROOT/'data'/'terrain.npz');interp=RegularGridInterpolator((grid['ys'],grid['xs']),grid['h']);a=next(u for u in units if u['id']=='kobaya');b=next(u for u in units if u['id']=='otani')
     def project(point,fr):
@@ -44,11 +44,17 @@ def main(mode,level):
     else:
         audiofile=ROOT/'out'/'narration.wav';segments=audio['segments'];filename='pilot_3to5min.mp4'
         cards={c['id']:Image.open(ROOT/'cache'/'cards'/f'scene_{c["id"]:02}.png').convert('RGBA') for c in timeline}
-    output=ROOT/'out'/filename;started=time.perf_counter();log=(ROOT/'logs'/f'encode_{mode}_{level}.log').open('wb')
+    is_chunk=range_start is not None
+    if is_chunk:
+        assert mode=='pilot';frames=frames[range_start:range_end];filename=f'pilot_part_{range_start}_{range_end}.mp4'
+    output=(ROOT/'cache'/filename) if is_chunk else ROOT/'out'/filename;started=time.perf_counter();log=(ROOT/'logs'/f'encode_{mode}_{level}_{range_start}.log').open('wb')
     cmd=['ffmpeg','-y','-v','warning','-f','rawvideo','-pix_fmt','rgb24','-s','1920x1080','-r','30','-i','pipe:0','-i',str(audiofile),'-map','0:v:0','-map','1:a:0','-c:v','h264_nvenc','-preset','p4','-cq','20','-b:v','0','-pix_fmt','yuv420p','-c:a','aac','-b:a','192k','-ar','48000','-movflags','+faststart','-shortest',str(output)]
+    if is_chunk:
+        cmd=['ffmpeg','-y','-v','warning','-f','rawvideo','-pix_fmt','rgb24','-s','1920x1080','-r','30','-i','pipe:0','-an','-c:v','h264_nvenc','-preset','p4','-cq','20','-b:v','0','-pix_fmt','yuv420p','-movflags','+faststart',str(output)]
     proc=subprocess.Popen(cmd,stdin=subprocess.PIPE,stderr=log);layout=[];missing=0
     try:
-        for i,fr in enumerate(frames):
+        for fr in frames:
+            i=fr['frame']
             t=i/30;scene_id=fr.get('chapter') if mode=='pilot' else 6
             image=Image.open(folder/f'{i:04}.jpg' if mode=='pilot' else folder/f'{i:04}.png').convert('RGBA');image.alpha_composite(cards[scene_id] if mode=='pilot' else card);draw=ImageDraw.Draw(image)
             if mode=='comparison' or scene_id in [4,6,7,8]:
@@ -83,7 +89,7 @@ def main(mode,level):
                 credit=['地形：国土地理院 地理院タイル（標高）を加工','歴史参照：岐阜関ケ原古戦場記念館 / 関ケ原町歴史民俗学習館','位置：株式会社CCL 大垣支社 / 関ヶ原位置情報リスト2013年度','CC BY 3.0 / 座標変換・説明用配置に加工','音声：VOICEVOX:四国めたん','モデル・材質・図表：本PoC自作 / Blender + Remotion + FFmpeg','出典URL・取得日・仮定・検証結果は同梱ファイルに記録']
                 for j,text in enumerate(credit):draw.text((95,265+j*48),text,font=F[24],fill='white')
             # Exact scene/clip progress.
-            draw.rectangle((48,1015,48+1824*(i+1)/len(frames),1020),fill='#c9ad70')
+            draw.rectangle((48,1015,48+1824*(i+1)/len(report['frames']),1020),fill='#c9ad70')
             proc.stdin.write(image.convert('RGB').tobytes())
             if i%30==0:layout.append({'frame':i,'labels':labels,'subtitle_box':subbox,'category_visible':True})
             if i%300==0:print(filename,i,'/',len(frames),flush=True)
@@ -91,5 +97,11 @@ def main(mode,level):
         proc.stdin.close();proc.wait();log.close()
     assert proc.returncode==0,'FFmpeg encoding failed; inspect encode log'
     result={'file':filename,'frame_count':len(frames),'duration':len(frames)/30,'encode_composite_seconds':time.perf_counter()-started,'renderer':'Blender 4.5.3 Eevee','compositor':'Remotion real rendered RGBA cards + Pillow per-frame label/subtitle/charts + FFmpeg NVENC','layout_samples':layout,'omitted_label_instances':missing,'all_visible_claim_categories':True,'native_resolution':[1920,1080],'native_fps':30}
-    (ROOT/'out'/f'composition_{mode}_{level}.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf8');print('DONE',filename,result['encode_composite_seconds'])
-if __name__=='__main__':main(sys.argv[1],int(sys.argv[2]))
+    result.update(range_start=range_start,range_end=range_end)
+    path=(ROOT/'cache'/f'composition_{mode}_{level}_{range_start}_{range_end}.json') if is_chunk else (ROOT/'out'/f'composition_{mode}_{level}.json')
+    path.write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf8');print('DONE',filename,result['encode_composite_seconds'])
+if __name__=='__main__':
+    if sys.argv[1]=='pilot' and len(sys.argv)==3:
+        from compose_pilot_parallel import main as parallel_main
+        parallel_main()
+    else:main(sys.argv[1],int(sys.argv[2]),int(sys.argv[3]) if len(sys.argv)>3 else None,int(sys.argv[4]) if len(sys.argv)>4 else None)

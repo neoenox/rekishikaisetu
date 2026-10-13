@@ -1,5 +1,6 @@
-param([switch]$SkipRender)
+param([string]$Theme = '関ヶ原の戦い', [switch]$SkipRender)
 $ErrorActionPreference = 'Stop'
+if ($Theme -notmatch '関[ヶケ]原') { throw 'This PoC supports Sekigahara only. Add verified sources, coordinates and scenes before using another theme.' }
 Set-Location (Split-Path $PSScriptRoot -Parent)
 $python = Join-Path $PWD '.venv\Scripts\python.exe'
 $blender = Join-Path $PWD 'tools\blender-4.5.3-windows-x64\blender.exe'
