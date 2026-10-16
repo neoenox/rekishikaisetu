@@ -1,0 +1,123 @@
+[
+ {
+  "file": "hokusai_black_ninja.jpg",
+  "pid": "851651",
+  "page": 31,
+  "title": "北斎漫画 黒装束の忍者",
+  "source_url": "https://dl.ndl.go.jp/pid/851651/1/31",
+  "iiif": "https://dl.ndl.go.jp/api/iiif/851651/R0000031/full/1600,/0/default.jpg",
+  "bytes": 738259,
+  "rights": "pdm (NDL: インターネット公開)",
+  "fetched": "2026-10-16"
+ },
+ {
+  "file": "hokusai_bar_shuriken.jpg",
+  "pid": "851651",
+  "page": 26,
+  "title": "北斎漫画 棒状の手裏剣",
+  "source_url": "https://dl.ndl.go.jp/pid/851651/1/26",
+  "iiif": "https://dl.ndl.go.jp/api/iiif/851651/R0000026/full/1600,/0/default.jpg",
+  "bytes": 710260,
+  "rights": "pdm (NDL: インターネット公開)",
+  "fetched": "2026-10-16"
+ },
+ {
+  "file": "ehon_taikoki_kimura.jpg",
+  "pid": "877948",
+  "page": 224,
+  "title": "絵本太閤記 黒装束の木村常陸介",
+  "source_url": "https://dl.ndl.go.jp/pid/877948/1/224",
+  "iiif": "https://dl.ndl.go.jp/api/iiif/877948/R0000224/full/1600,/0/default.jpg",
+  "bytes": 988921,
+  "rights": "pdm (NDL: インターネット公開)",
+  "fetched": "2026-10-16"
+ },
+ {
+  "file": "honcho_nijushiko_yamamoto.jpg",
+  "pid": "884180",
+  "page": 5,
+  "title": "本朝廿四孝 黒装束の山本勘助",
+  "source_url": "https://dl.ndl.go.jp/pid/884180/1/5",
+  "iiif": "https://dl.ndl.go.jp/api/iiif/884180/R0000005/full/1600,/0/default.jpg",
+  "bytes": 881239,
+  "rights": "pdm (NDL: インターネット公開)",
+  "fetched": "2026-10-16"
+ },
+ {
+  "file": "toyokuni_goemon_hisayoshi.jpg",
+  "pid": "1312598",
+  "page": 1,
+  "title": "豊国 石川五右衛門・大願久吉（手裏剣の場面）",
+  "source_url": "https://dl.ndl.go.jp/pid/1312598/1/1",
+  "iiif": "https://dl.ndl.go.jp/api/iiif/1312598/R0000001/full/1600,/0/default.jpg",
+  "bytes": 1291302,
+  "rights": "pdm (NDL: インターネット公開)",
+  "fetched": "2026-10-16"
+ },
+ {
+  "file": "toyokuni_nikki_danjo.jpg",
+  "pid": "1301414",
+  "page": 1,
+  "title": "豊国 松ケ枝的之助・仁木弾正",
+  "source_url": "https://dl.ndl.go.jp/pid/1301414/1/1",
+  "iiif": "https://dl.ndl.go.jp/api/iiif/1301414/R0000001/full/1600,/0/default.jpg",
+  "bytes": 1233305,
+  "rights": "pdm (NDL: インターネット公開)",
+  "fetched": "2026-10-16"
+ },
+ {
+  "file": "shoninki_ten_p1.jpg",
+  "pid": "12865777",
+  "page": 1,
+  "title": "正忍記 天（1コマ）",
+  "source_url": "https://dl.ndl.go.jp/pid/12865777/1/1",
+  "iiif": "https://dl.ndl.go.jp/api/iiif/12865777/R0000001/full/1600,/0/default.jpg",
+  "bytes": 561496,
+  "rights": "pdm (NDL: インターネット公開)",
+  "fetched": "2026-10-16"
+ },
+ {
+  "file": "shoninki_chi_p12.jpg",
+  "pid": "12865778",
+  "page": 12,
+  "title": "正忍記 地（敵防ぎ）",
+  "source_url": "https://dl.ndl.go.jp/pid/12865778/1/12",
+  "iiif": "https://dl.ndl.go.jp/api/iiif/12865778/R0000012/full/1600,/0/default.jpg",
+  "bytes": 520341,
+  "rights": "pdm (NDL: インターネット公開)",
+  "fetched": "2026-10-16"
+ },
+ {
+  "file": "shoninki_chi_p13.jpg",
+  "pid": "12865778",
+  "page": 13,
+  "title": "正忍記 地（名前の書き方）",
+  "source_url": "https://dl.ndl.go.jp/pid/12865778/1/13",
+  "iiif": "https://dl.ndl.go.jp/api/iiif/12865778/R0000013/full/1600,/0/default.jpg",
+  "bytes": 516186,
+  "rights": "pdm (NDL: インターネット公開)",
+  "fetched": "2026-10-16"
+ },
+ {
+  "file": "shoninki_jin_p21.jpg",
+  "pid": "12865779",
+  "page": 21,
+  "title": "正忍記 人（奥書）",
+  "source_url": "https://dl.ndl.go.jp/pid/12865779/1/21",
+  "iiif": "https://dl.ndl.go.jp/api/iiif/12865779/R0000021/full/1600,/0/default.jpg",
+  "bytes": 463296,
+  "rights": "pdm (NDL: インターネット公開)",
+  "fetched": "2026-10-16"
+ },
+ {
+  "file": "fujita_flat_shuriken.jpg",
+  "pid": "1125955",
+  "page": 135,
+  "title": "忍術からスパイ戦へ 平らな手裏剣（1942）",
+  "source_url": "https://dl.ndl.go.jp/pid/1125955/1/135",
+  "iiif": "https://dl.ndl.go.jp/api/iiif/1125955/R0000135/full/1600,/0/default.jpg",
+  "bytes": 420914,
+  "rights": "pdm (NDL: インターネット公開)",
+  "fetched": "2026-10-16"
+ }
+]

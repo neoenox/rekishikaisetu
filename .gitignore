@@ -23,3 +23,6 @@ assets/naturalearth/
 *.mp3
 *.webm
 data/hn_terrain.npz
+
+# アップロード用に組み立てたコピー（out/ から scripts/make_upload_pack.py で再生成できる）
+upload/

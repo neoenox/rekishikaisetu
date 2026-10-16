@@ -29,7 +29,7 @@ def display(t):
     def conv(m):
         s=m.group(0);nxt=t_[m.end():m.end()+4]
         if s=='万':return s   # bare 万 inside a word (万能, 数万人) is not a quantity
-        if '万' in s or re.match(r'(年|月|日|人|歳|分|メートル|キロ|時間|時|度|倍)',nxt):return big(s)
+        if '万' in s or re.match(r'(年|月|日|人|歳|分|メートル|キロ|時間|時|度|倍|巻|世紀)',nxt):return big(s)
         return s
     t_=t
     t=re.sub('[%s万]+'%NUM,conv,t)
