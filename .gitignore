@@ -8,3 +8,18 @@ __pycache__/
 .pytest_cache/
 *.blend1
 assets/earth/cal_*.png
+
+# 再配布しない／再生成できる素材（権利の確認が済むまで、リポジトリに入れない）
+assets/bgm_maou/
+assets/imagen/
+assets/portraits/
+assets/army_hn/
+assets/fx_hn/
+assets/naturalearth/
+# 生成物・バックアップ・大きなメディア
+*.bak
+*.mp4
+*.wav
+*.mp3
+*.webm
+data/hn_terrain.npz
