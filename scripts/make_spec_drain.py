@@ -1,0 +1,53 @@
+"""Writes data/drain_spec.json."""
+import json
+from pathlib import Path
+R=Path(__file__).resolve().parents[1]
+spec=dict(slug='drain',theme_dir='20261017_drain',pack='06_drain_vortex',header_sub='排水の渦と地球の自転を確かめる',images={},
+ bgm=[['intro','typhoon','piano36'],['compare','what','piano12'],['exp','end','piano40']],
+ chapters=[
+ dict(key='intro',title='南半球では、排水の渦は逆回転？',chapter_title='導入：排水の渦は、半球で逆回転する？',opener='お風呂の水を抜くと、渦が回る',opener_until=1,opener_y=790,scene=[
+   dict(t='swirl',c=[520,430],r=170,dir='ccw',label='北半球：反時計回り？',at=0,col='blue'),
+   dict(t='swirl',c=[1400,430],r=170,dir='cw',label='南半球：時計回り？',at=1,col='org'),
+   dict(t='panel',box=[120,730,1800,810],text='原因は、地球の自転？　　（上から見た、概念図）',at=3,size=38,hi=True)]),
+ dict(key='typhoon',title='熱帯低気圧は、回る向きが決まっている',chapter_title='熱帯低気圧は、回る向きが決まっている',scene=[
+   dict(t='swirl',c=[500,420],r=190,dir='ccw',label='熱帯低気圧（北半球）：反時計回り',at=1,col='blue',lsize=36,lw=700),
+   dict(t='swirl',c=[1420,420],r=190,dir='cw',label='熱帯低気圧（南半球）：時計回り',at=1,col='org',lsize=36,lw=700),
+   dict(t='panel',box=[60,740,1860,820],text='原因：地球の自転による「見かけの力」＝コリオリ力（NOAA）。台風・ハリケーンなどの総称',at=2,size=36)]),
+ dict(key='compare',title='排水の渦と、比べてみる',chapter_title='排水の渦と、比べてみる',scene=[
+   dict(t='panel',box=[60,170,1860,290],title='NOAA',text='コリオリ力は、排水の渦の向きに影響するには小さすぎる',at=1,until=4,size=42),
+   dict(t='panel',box=[60,320,1860,460],title='物理FAQ',text='効果は実在するが、ふつうの浴槽の排水の向きを左右するには小さすぎる',at=2,until=4,size=42),
+   dict(t='panel',box=[60,490,1860,600],text='どれくらい小さいのか？　理想化した計算例で考える（自作）',at=3,until=4,size=42,col='gold'),
+   dict(t='panel',box=[60,160,1860,300],title='理想化した計算例（自作・北緯35度）',text='水平の圧力差や摩擦などを除き、コリオリ力だけで水の進む向きが変わると仮定',at=4,until=10,size=36,hi=True),
+   dict(t='bars',box=[60,330,1860,600],title='時間の規模の比較（分）',unit='分',max=1300,lab_w=760,data=[
+     dict(at=5,label='向きが1周する時間（約21時間）',value=1252,vlabel='約1,250分',col='blue',until=10),dict(at=6,label='排水にかかる時間（仮に2分）',value=2,vlabel='2分',col='org',until=10)]),
+   dict(t='panel',box=[60,630,1860,730],text='2分は、21時間の約630分の1',at=7,until=10,size=48,col='gold'),
+   dict(t='panel',box=[60,750,1860,840],text='実際の渦が何度回るかを表す数字ではない（時間の規模の違いを見る計算）',at=8,until=10,size=34),
+   dict(t='panel',box=[60,160,1860,320],title='物理FAQの見積もり（仮定：浴槽ほどの渦、長さ0.1 mなど）',text='コリオリ力が無視できなくなる流れの速さ：秒速約2マイクロメートル未満',at=10,size=40,hi=True),
+   dict(t='panel',box=[60,350,1860,450],text='非常にゆっくりした動き',at=11,size=46,col='gold'),
+   dict(t='panel',box=[60,480,1860,650],title='物理FAQ',text='調べるには、もともとの水の動き・温度差による流れ・振動などを、慎重に抑える必要がある',at=12,size=40)]),
+ dict(key='what',title='では、何が向きを決めるのか',chapter_title='では、何が向きを決めるのか',scene=[
+   dict(t='panel',box=[60,170,1860,290],title='NOAA',text='排水の渦の向きは、容器の形と、水の初めの動きで決まる',at=0,size=44,hi=True),
+   dict(t='panel',box=[60,320,1860,440],text='同じ半球でも、時計回りも反時計回りも見られる',at=1,size=44),
+   dict(t='panel',box=[60,470,1860,620],title='物理FAQ（トイレの場合）',text='タンクから便器へ水を送る、配管の形が向きを決める',at=2,size=44,col='gold')]),
+ dict(key='exp',title='実験では、どうだったのか',chapter_title='実験では、どうだったのか',scene=[
+   dict(t='panel',box=[60,170,1860,320],title='物理FAQが参考文献に挙げる論文',text='Trefethen ら、"Bath-tub vortex in the Southern Hemisphere"、Nature 207（1965年）',at=0,size=38),
+   dict(t='panel',box=[60,350,1860,450],text='南半球での、浴槽の渦を扱った実験',at=1,size=42),
+   dict(t='panel',box=[60,480,1860,630],text='解説によると、極めて厳密に条件を整えた場合に限って、北半球と南半球で逆向きの排水が確認された',at=2,size=40,hi=True),
+   dict(t='panel',box=[60,660,1860,780],text='ふつうの家庭では、そうした条件は整わない',at=3,size=42,col='gold')]),
+ dict(key='end',title='分かること、決められないこと',chapter_title='結論：分かること、決められないこと',scene=[
+   dict(t='cols2',size=36,xm=940,xm2=980,left=dict(title='分かること',title_at=0,items=[
+      dict(at=1,text='熱帯低気圧の回る向きは、コリオリ力で半球ごとに決まる'),dict(at=2,text='排水の向きは、容器の形や水の初めの動きなどで決まる'),dict(at=3,text='理想化した例（北緯35度・2分）：時間の規模は約630分の1')]),
+     right=dict(title='決められないこと',title_at=4,items=[
+      dict(at=5,text='洗面台やトイレで、実際に何が向きを決めたか'),dict(at=6,text='実験の細かい条件と結果（原論文は未確認）')]))])
+ ],
+ desc=dict(title_main='南半球では、排水の渦は逆回転するのか',title_no=1,
+  titles=['南半球では、排水の渦は逆回転する？ NOAAと物理学の解説で確かめる','お風呂の水を抜くと、渦の向きは半球で逆？ コリオリ力の大きさを確かめる','台風は反時計回りなのに、洗面台は違う？ コリオリ力のスケールの話'],
+  intro='「北半球では、排水の渦が反時計回りに回り、南半球では時計回りに回る」。地球の自転が原因だと説明されることがありますが、本当でしょうか。この動画では、NOAA(アメリカ海洋大気庁)の解説と、物理学のよくある質問(物理FAQ)から、台風とのスケールの違い、何が排水の渦の向きを決めるのか、実験では何が確かめられているのかを紹介します。コリオリ力で熱帯低気圧の向きが決まること、洗面台や浴槽の排水の向きは容器の形や水の初めの動きなどで決まることなど、分かることと決められないことを分けて見ていきます。',
+  points=['台風・ハリケーンなどの熱帯低気圧の回る向きは、地球の自転によるコリオリ力で、北半球では反時計回り、南半球では時計回りに決まります(NOAA)。','洗面台や浴槽の排水の渦の向きは、容器の形と水の初めの動きで決まり、コリオリ力は影響するには小さすぎる、とNOAAは説明しています。物理FAQも、効果は実在するが、ふつうの浴槽では小さすぎるとしています。','動画内の「約21時間」「約630分の1」は、水平の圧力差や摩擦などを除き、コリオリ力だけで水の進む向きが変わると仮定した、北緯35度での理想化した自作の計算例で、実際の排水の渦の回転を表す数字ではありません。','物理FAQは、1965年のNatureの論文を参考文献に挙げ、極めて厳密に条件を整えた場合に限って、北半球と南半球で逆向きの排水が確認されたとしています(原論文は未確認です)。','トイレの渦の向きは、タンクから便器へ水を送る配管の形で決まると、物理FAQは述べています。'],
+  refs=['NOAA/AOML 熱帯低気圧FAQ D3(Chris Landsea):https://www.aoml.noaa.gov/hrd/tcfaq/D3.html','NOAA/AOML Hurricane FAQ:https://www.aoml.noaa.gov/hrd-faq/','Physics Frequently Asked Questions "Which way does the water drain?"(Matthew R. Feinstein):https://math.ucr.edu/home/baez/physics/General/bathtub.html','同(Southampton大学版の転載):https://www.southampton.ac.uk/~stefano/courses/PHYS2006/bathtub.html','物理FAQが参考文献に挙げる論文:Trefethen, Bilger, Fink, Luxton, Tanner, "Bath-tub vortex in the Southern Hemisphere", Nature 207, 1084-1085 (1965)'],
+  credit_lines=['・図・計算:自作(コリオリ・パラメータ f=2Ωsinφ による、北緯35度の理想化した計算例。渦の図は上から見た概念図です)','・サムネイルの背景:Codex(OpenAI)による生成イラスト(洗面台の排水の渦のイメージ。実際の現象の再現ではありません)'],
+  notes=['動画内の計算は、水平の圧力差や摩擦などを除いた理想化した例で、実際の排水の渦の回転角を表すものではありません。','実験の細かい条件・結果は、原論文を確認していないため、述べていません。','誤りがあればコメントでお知らせください。確認のうえ、訂正します。'],
+  tags='コリオリ力, 排水, 渦, 南半球, 北半球, 地球の自転, 台風, 科学, 雑学, 検証, NOAA',
+  checks=['計算例(北緯35度、約21時間(約1,250分)、約630分の1)を、もう一度検算する(`docs/themes/20261017_drain/08_fact_check.md` D7)','Trefethen et al. 1965(Nature 207)の原論文の確認(任意。台本は物理FAQの帰属で述べている)']),
+ thumb=dict(bg='assets/drain/thumb_art.png',lines=[['南半球は',90,'white'],['排水の渦が',90,'white'],['逆回転？',150,'gold']],sub='NOAAの解説で確かめる',y0=14,bar_y=520,bar_w=620,sub_size=44,shade_x=700,shade_w=520))
+(R/'data'/'drain_spec.json').write_text(json.dumps(spec,ensure_ascii=False,indent=1),encoding='utf8');print('spec written')

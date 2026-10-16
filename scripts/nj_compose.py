@@ -94,7 +94,7 @@ def tl_node(d,x,y,label,sub,col,a,w=380):
 def sc_shinobi(im,d,cx):
     if cx.on(1):panel(d,(60,160,1860,260));line_text(d,(90,184),'間諜（スパイ）の記述は、古くから世界中の文献にある',F[40],WHITE,cx.a(1))
     d.line([(160,430),(1760,430)],fill=EDGE+(255,),width=5)
-    nodes=[(2,260,'『太平記』の執筆時期','14世紀後半ごろ。忍びの具体的な活動の、国内最古の記録（石清水八幡宮への放火が書かれている）',C_AFR_),(4,700,'戦国時代','「草」：情報収集や夜道の案内など',C_AFR_),(7,1140,'1856年刊','『武用弁略』に「忍者」の語（読みは「しのびのもの」）',C_AFR_),(6,1580,'昭和30年代','「忍者」の呼び名が定着（研究者の山田雄司さんの説明）',C_AFR_)]
+    nodes=[(2,260,'『太平記』の執筆時期','14世紀後半ごろ。忍びの具体的な活動の、国内最古の記録（石清水八幡宮への放火が書かれている）',C_AFR_),(4,700,'戦国時代','「草」：情報収集や夜道の案内など',C_AFR_),(7,1140,'1856年刊','『武用弁略』（原本の自序は1684年）に「忍者」の語。読みは「しのびのもの」',C_AFR_),(6,1580,'昭和30年代','「忍者」の呼び名が定着（研究者の山田雄司さんの説明）',C_AFR_)]
     for at,x,lab,sub,col in nodes:
         if cx.on(at):tl_node(d,x,430,lab,sub,col,cx.a(at),w=400)
     if cx.on(5):
@@ -145,14 +145,13 @@ def sc_shuriken(im,d,cx):
             ls=wrap(d,t_,F[34],820);h=len(ls)*44+40;d.rounded_rectangle((60,y,930,y+h),14,fill=BG,outline=(GOLD if col==GOLD else EDGE)+(255,),width=2)
             for j,l in enumerate(ls):line_text(d,(86,y+18+j*44),l,F[34],col,cx.a(at))
             y+=h+14
-    if cx.on(5) and not cx.on(6):show_img(im,d,'toyokuni_goemon_hisayoshi',(960,170,1860,850),'歌舞伎『楼門五三桐』の一場面（手裏剣を投げる石川五右衛門）',cx.a(5))
+    if cx.on(5) and not cx.on(6):show_img(im,d,'toyokuni_goemon_hisayoshi',(960,170,1860,850),'『楼門五三桐』手裏剣を投げる五右衛門',cx.a(5))
     if cx.on(6):
-        show_img(im,d,'hokusai_bar_shuriken',(960,170,1400,850),'『北斎漫画』の、棒状のものを使う人物（1878年刊）',cx.a(6))
-        show_img(im,d,'fujita_flat_shuriken',(1420,170,1860,850),'（対比）平たい形の図／『忍術からスパイ戦へ』（1942年）',cx.a(6))
+        show_img(im,d,'hokusai_bar_shuriken',(960,170,1860,850),'『北斎漫画』棒状の手裏剣（1878年刊）',cx.a(6))
     if cx.on(7):panel(d,(60,700,930,840));ptext(d,90,716,'手裏剣を使う忍者の姿は、歌舞伎など娯楽の世界から定着したと考えられる',F[34],820,GOLD,cx.a(7))
 def sc_image(im,d,cx):
     d.line([(160,420),(1760,420)],fill=EDGE+(255,),width=5)
-    if cx.on(0):tl_node(d,520,420,'江戸時代','演劇で、黒装束・覆面・手裏剣の忍者の姿が生まれた',C_AFR_,cx.a(0),w=560)
+    if cx.on(0):tl_node(d,520,420,'江戸時代','演劇で広まったとされる、黒装束・覆面・手裏剣の忍者の姿',C_AFR_,cx.a(0),w=560)
     if cx.on(1):tl_node(d,1400,420,'昭和30年代','「忍者」という呼び名が定着（研究者の説明）',C_AFR_,cx.a(1),w=560)
     if cx.on(1):panel(d,(260,640,1660,760));ptext(d,300,662,'呼び名が定着した時期と、姿が作られた時期は、同じではない',F[44],1340,GOLD,cx.a(1))
     if cx.on(2):line_text(d,(380,790),'いまの忍者像は、長い時間をかけて重ねられてきた像',F[40],WHITE,cx.a(2))

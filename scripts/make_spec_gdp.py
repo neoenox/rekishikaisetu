@@ -1,0 +1,72 @@
+"""Writes data/gdp_spec.json."""
+import json
+from pathlib import Path
+R=Path(__file__).resolve().parents[1]
+SRC='内閣府『無償労働の貨幣評価』（令和5年7月）を基に作成'
+spec=dict(slug='gdp',theme_dir='20261017_gdp',pack='05_housework_gdp',header_sub='家事とGDPの関係を確かめる',images={},
+ bgm=[['intro','two','piano36'],['why','calc','piano12'],['y2021','sat','piano40'],['end','end','piano36']],
+ chapters=[
+ dict(key='intro',title='家事の外注で、GDPは増える？',chapter_title='導入：家事の外注で、GDPは増える？',opener='自分で掃除する？　頼む？',opener_until=1,scene=[
+   dict(t='chips',y=250,w=560,h=150,gap=160,size=56,items=[dict(at=1,text='自分で掃除する'),dict(at=1,text='お金を払って頼む')]),
+   dict(t='big',text='国の経済の数字（GDP）は、変わる？',y=470,at=2,size=56,col='gold'),
+   dict(t='panel',box=[120,610,1800,700],text='家事を外注すると、GDPが増える、は本当か',at=3,size=44,hi=True),
+   dict(t='panel',box=[120,730,1800,800],text='資料：内閣府経済社会総合研究所「無償労働の貨幣評価」（令和5年7月）',at=4,size=32)]),
+ dict(key='two',title='同じ掃除、二つの場合',chapter_title='同じ掃除、二つの場合',scene=[
+   dict(t='panel',box=[60,160,1860,240],text='同じ部屋を、同じ1時間で掃除する',at=0,size=40,hi=True),
+   dict(t='panel',box=[60,270,930,520],title='① 自分で掃除する',text='お金は動かない',at=1,size=40),
+   dict(t='panel',box=[990,270,1860,520],title='② 業者に有料で頼む',text='料金を払う → 業者の売上',at=3,size=40),
+   dict(t='panel',box=[60,550,930,700],title='国民経済計算での記録',text='市場を介さない家事は、中心の勘定には記録されない',at=6,size=34),
+   dict(t='panel',box=[990,550,1860,700],title='国民経済計算での記録',text='有償の家事サービスは、生産として記録される',at=5,size=34),
+   dict(t='panel',box=[60,730,1860,850],text='これは「記録の範囲の違い」。外注で国全体のGDPがいくら増えるかは、この比較だけでは決められない',at=8,size=36,col='gold')]),
+ dict(key='why',title='なぜ、記録しないのか',chapter_title='なぜ、記録しないのか',scene=[
+   dict(t='panel',box=[60,160,1860,260],text='国際基準：家計が自分のために行うサービスの生産は、原則として、生産の範囲の外',at=0,size=40),
+   dict(t='panel',box=[60,280,1860,370],text='例外：持ち家のサービス、有償の家事サービスなど',at=1,size=40,col='gold'),
+   dict(t='panel',box=[60,400,1860,670],title='国際基準（2008SNA）の仮訳の要旨',text='無償の家事を金額に直した流れは、物価や経済の不均衡の分析とは、ほとんど関係がない。貨幣のやり取りと一緒に記録すると、市場で起きていることを曖昧にしかねない',at=3,size=36),
+   dict(t='panel',box=[60,700,1860,830],text='内閣府：「これなどが理由として考えられる」と記述（理由の全てが示されているわけではない）',at=6,size=36,col='dim')]),
+ dict(key='calc',title='無償労働の値段を、推計する',chapter_title='無償労働の値段を、推計する',opener='記録されない家事の大きさは？',opener_until=1,scene=[
+   dict(t='panel',box=[60,160,1860,300],title='「無償労働」の対象（内閣府）',text='家事（炊事・掃除・洗濯・縫物・家庭雑事）、介護・看護、育児、買物、ボランティア活動など',at=1,size=36),
+   dict(t='panel',box=[60,320,1860,440],text='推計式：一人当たりの年間活動時間 × 時間当たり賃金 × 人口（時間は総務省「社会生活基本調査」）',at=2,size=36,hi=True),
+   dict(t='table',box=[60,470,1860,760],cols=['賃金の取り方','内容'],colw=[760,1040],size=34,rows=[
+     dict(at=5,cells=['機会費用法（OC法）','その人が外で働いたら得られた賃金']),
+     dict(at=6,cells=['代替費用法・専門職（RC-S法）','同じ仕事の専門職の賃金']),
+     dict(at=7,cells=['代替費用法・家事使用人（RC-G法）','家事使用人の賃金'])]),
+   dict(t='panel',box=[60,780,1860,850],text='どの賃金を使うかで、評価額は変わる',at=8,size=36,col='gold')]),
+ dict(key='y2021',title='二〇二一年の推計',chapter_title='2021年の推計',scene=[
+   dict(t='bars',box=[60,160,930,470],title='評価額（2021年、兆円）',unit='兆円',max=160,lab_w=330,data=[
+     dict(at=0,label='機会費用法',value=146,vlabel='約146',col='org',until=9),dict(at=2,label='専門職の賃金',value=122,vlabel='約122',col='blue',until=9),dict(at=3,label='家事使用人の賃金',value=105,vlabel='約105',col='vio',until=9)]),
+   dict(t='panel',box=[60,490,930,600],text='機会費用法の内訳：家事活動 約144兆円＋ボランティア 約2兆円',at=1,until=9,size=32),
+   dict(t='bars',box=[990,160,1860,470],title='同じ年の名目GDPとの比較（％）',unit='％',max=30,lab_w=330,data=[
+     dict(at=5,label='機会費用法',value=26.6,vlabel='26.6％',col='org',until=9),dict(at=6,label='専門職の賃金',value=22.1,vlabel='22.1％',col='blue',until=9),dict(at=7,label='家事使用人の賃金',value=19.2,vlabel='19.2％',col='vio',until=9)]),
+   dict(t='panel',box=[990,490,1860,600],text='評価の方法で、名目GDPの約19〜27％と幅がある',at=8,until=9,size=34,col='gold'),
+   dict(t='line',box=[60,170,1860,700],title='機会費用法の評価額の、名目GDP比（％）：主な3時点。横軸は年に比例。GDPの内訳ではない',ymin=0,ymax=30,unit='％',at=9,series=[
+     dict(at=9,label='1981年',year=1981,value=19.4,col='org'),dict(at=9,label='2011年',year=2011,value=27.8,col='org'),dict(at=9,label='2021年',year=2021,value=26.6,col='org')]),
+   dict(t='panel',box=[60,720,1860,850],title='注意（内閣府）',text='2021年の調査はコロナ禍の2021年10月に行われ、家事時間の増加などに影響が現れていると考えられる',at=10,size=36,col='dim')]),
+ dict(key='sat',title='推計額は、GDPに足せるのか',chapter_title='推計額は、GDPに足せるのか',scene=[
+   dict(t='panel',box=[60,160,1860,280],text='この金額は、GDPに足して「経済が大きくなった」と言える数字ではない',at=1,size=44,hi=True),
+   dict(t='flow',y=330,h=150,size=34,nodes=[dict(at=2,text='中心の勘定（GDPなど）'),dict(at=2,text='別の勘定（サテライト勘定）で推計'),dict(at=3,text='市場の経済活動と比べられる形にして、GDPと比較')]),
+   dict(t='panel',box=[60,540,1860,650],text='評価額は賃金の取り方で変わる → 家事の本当の価値を、一つの金額で言い切ることはできない',at=4,size=36),
+   dict(t='panel',box=[60,670,1860,830],title='内閣府の注記（専門職の賃金で評価する場合）',text='家計と専門職では、規模の経済性や資本装備率の違いがあるため、生産性に差が生じうる',at=6,size=34,col='dim')]),
+ dict(key='end',title='分かること、決められないこと',chapter_title='結論：分かること、決められないこと',scene=[
+   dict(t='cols2',size=36,xm=940,xm2=980,left=dict(title='分かること',title_at=0,items=[
+      dict(at=1,text='有償の家事サービスは記録され、市場を介さない自分の家事は、中心の勘定には記録されない'),dict(at=3,text='内閣府は、別の勘定で推計。2021年は、方法により名目GDPの約19〜27％'),dict(at=4,text='この推計額を、GDPに足して「経済が大きくなった」とは言えない')]),
+     right=dict(title='決められないこと',title_at=5,items=[
+      dict(at=6,text='家事の本当の価値は、一つの金額では決まらない'),dict(at=7,text='評価額は、賃金の取り方で変わる'),dict(at=8,text='外注で、国全体でいくら増えるかは、この比較だけでは決まらない')])),
+   dict(t='panel',box=[60,640,930,790],title='有料の掃除（業者）',text='GDPの計算に入る',at=9,size=38,col='gold'),
+   dict(t='panel',box=[990,640,1860,790],title='自分の家庭の無償の掃除',text='中心の勘定には入らない',at=10,size=38,col='gold'),
+   dict(t='panel',box=[60,800,1860,850],text='制度上の取り扱いの違い。価値の大小を決めるものではない',at=11,size=30,col='dim')])
+ ],
+ desc=dict(title_main='家事を外注すると、GDPが増える、は本当か',title_no=1,
+  titles=['家事を外注すると、GDPは増える？ 内閣府の資料で、数字を確かめる','同じ掃除でも、頼むとGDPに入る？ 無償労働の貨幣評価を読む','家事の値段は、GDPの何％？ 内閣府の推計と、その注意点'],
+  intro='同じ掃除でも、自分でするのと、お金を払って頼むのとでは、国の経済の数字(GDP)が変わる。そんな話を聞いたことはありませんか。この動画では、内閣府経済社会総合研究所「無償労働の貨幣評価」(令和5年7月)を読み、国民経済計算での家事の扱い、無償労働の評価方法(機会費用法・代替費用法)、2021年の推計額と名目GDPとの比較を確かめます。推計額はGDPに足せる数字ではないこと、評価額が賃金の取り方で変わることなど、分かることと決められないことを分けて紹介します。',
+  points=['国民経済計算では、有償の家事サービスは生産として記録され、市場を介さない自分の家事は、中心の勘定には記録されません。ただし、これは記録の範囲の違いで、家事を外注したときに国全体のGDPがいくら増えるかまでは、この資料だけでは決められません。',
+   '内閣府は、国際基準(2008SNA)の仮訳を引き、記録しない理由として「こうしたフローはインフレーションやデフレーションの分析、あるいは当該経済の不均衡の分析にはほとんど関連性がない」ことなどが考えられるとしています。',
+   '2021年の無償労働の評価額は、機会費用法で約146兆円(家事活動約144兆円、ボランティア活動約2兆円)、専門職の賃金で約122兆円、家事使用人の賃金で約105兆円。名目GDP比は、順に26.6％、22.1％、19.2％です。',
+   'この推計額はGDPに足せる数字ではありません。評価額は賃金の取り方で変わり、家事の本当の価値を一つの金額で言い切ることはできません。',
+   '2021年の調査は、コロナ禍の2021年10月に行われ、家事時間の増加などに影響が現れていると考えられると、内閣府は留意を求めています。'],
+  refs=['内閣府経済社会総合研究所「無償労働の貨幣評価の公表について」(令和5年7月21日):https://www.esri.cao.go.jp/jp/sna/sonota/satellite/roudou/contents/musyouroudou_230721.html','同「無償労働の貨幣評価」概要版(PDF):https://www.esri.cao.go.jp/jp/sna/sonota/satellite/roudou/contents/pdf/2021musyou00.pdf','内閣府経済社会総合研究所「国民経済計算」(概要資料):https://www.esri.cao.go.jp/jp/esri/about/pdf/gaiyo_2.pdf'],
+  credit_lines=['・図・グラフ:内閣府『無償労働の貨幣評価』(令和5年7月)の公表値を基に自作(図表2-1・2-2)','・サムネイルの背景:Codex(OpenAI)による生成イラスト(家事のイメージ。史実・実在の再現ではありません)'],
+  notes=['金額・比率は内閣府の推計値で、推計の方法(賃金の取り方)によって変わります。名目GDP比は、同じ年の名目GDPとの比較であり、GDPの内訳ではありません。','この推計額を、GDPに足して経済が大きくなったと解釈することはできません。','誤りがあればコメントでお知らせください。確認のうえ、訂正します。'],
+  tags='GDP, 家事, 無償労働, 国民経済計算, 内閣府, 経済, 統計, 家事代行, 家事の値段, 雑学, 検証',
+  checks=['数値(図表2-1・2-2)の転記を、もう一度見る(`docs/themes/20261017_gdp/08_fact_check.md` G6・G7)']),
+ thumb=dict(bg='assets/gdp/thumb_art.png',lines=[['家事を',80,'white'],['外注すると',110,'gold'],['GDPは',80,'white'],['増える？',130,'gold']],sub='内閣府の資料で確かめる',y0=12,bar_y=560,bar_w=560,sub_size=44,shade_x=700,shade_w=520))
+(R/'data'/'gdp_spec.json').write_text(json.dumps(spec,ensure_ascii=False,indent=1),encoding='utf8');print('spec written')
