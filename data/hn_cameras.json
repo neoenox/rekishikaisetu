@@ -1,0 +1,312 @@
+{
+ "hook": {
+  "target": "center",
+  "dist": 17500,
+  "elev": 38,
+  "az": [
+   -25,
+   25
+  ],
+  "army": [
+   0,
+   0
+  ],
+  "marks": [
+   "kameyama",
+   "honnoji"
+  ]
+ },
+ "d_depart": {
+  "target": "kameyama",
+  "dist": 3800,
+  "elev": 26,
+  "az": [
+   -45,
+   -15
+  ],
+  "army": [
+   0,
+   0.03
+  ],
+  "marks": [
+   "kameyama"
+  ],
+  "army_on": true
+ },
+ "d_oi": {
+  "target": "army",
+  "follow": [
+   0.03,
+   0.46
+  ],
+  "dist": 3600,
+  "elev": 22,
+  "az": [
+   -30,
+   20
+  ],
+  "army": [
+   0.03,
+   0.46
+  ],
+  "marks": [
+   "kameyama",
+   "oinosaka"
+  ],
+  "army_on": true
+ },
+ "d_katsura": {
+  "target": "army",
+  "follow": [
+   0.46,
+   1.0
+  ],
+  "dist": 5200,
+  "elev": 30,
+  "az": [
+   20,
+   -15
+  ],
+  "army": [
+   0.46,
+   1.0
+  ],
+  "marks": [
+   "honnoji"
+  ],
+  "army_on": true
+ },
+ "d_temple": {
+  "target": "mid_honnoji",
+  "dist": 3600,
+  "elev": 42,
+  "az": [
+   -10,
+   30
+  ],
+  "army": [
+   1,
+   1
+  ],
+  "marks": [
+   "honnoji",
+   "honnoji_now"
+  ],
+  "compound": true
+ },
+ "d_attack": {
+  "target": "honnoji",
+  "dist": 1000,
+  "elev": 32,
+  "az": [
+   -20,
+   50
+  ],
+  "army": [
+   1,
+   1
+  ],
+  "marks": [
+   "honnoji"
+  ],
+  "siege": true,
+  "compound": true,
+  "dawn": true,
+  "fire": "ignite"
+ },
+ "d_nijo": {
+  "target": "mid_nijo",
+  "dist": 1900,
+  "elev": 44,
+  "az": [
+   0,
+   35
+  ],
+  "army": [
+   1,
+   1
+  ],
+  "marks": [
+   "honnoji",
+   "nijo"
+  ],
+  "compound": true,
+  "dawn": true,
+  "fire": "keep"
+ },
+ "d_time": {
+  "target": "route_mid",
+  "dist": 13500,
+  "elev": 38,
+  "az": [
+   -15,
+   15
+  ],
+  "army": [
+   0,
+   1
+  ],
+  "marks": [
+   "kameyama",
+   "honnoji"
+  ],
+  "army_on": true
+ },
+ "e_motive": {
+  "target": "center",
+  "dist": 11000,
+  "elev": 32,
+  "az": [
+   -20,
+   20
+  ],
+  "army": [
+   1,
+   1
+  ],
+  "marks": [
+   "honnoji"
+  ]
+ },
+ "e_end": {
+  "target": "center",
+  "dist": 14000,
+  "elev": 34,
+  "az": [
+   20,
+   -10
+  ],
+  "army": [
+   1,
+   1
+  ],
+  "marks": [
+   "honnoji"
+  ]
+ },
+ "credits": {
+  "target": "center",
+  "dist": 17000,
+  "elev": 36,
+  "az": [
+   -20,
+   20
+  ],
+  "army": [
+   1,
+   1
+  ],
+  "marks": []
+ },
+ "a_origin": {
+  "kind": "map"
+ },
+ "a_retainer": {
+  "kind": "map"
+ },
+ "a_tanba": {
+  "kind": "map"
+ },
+ "b_peak": {
+  "kind": "map"
+ },
+ "b_west": {
+  "kind": "map"
+ },
+ "c_ieyasu": {
+  "kind": "map"
+ },
+ "c_atago": {
+  "kind": "map"
+ },
+ "c_nobunaga": {
+  "kind": "map"
+ },
+ "tr_calendar": {
+  "kind": "trivia"
+ },
+ "tr_teki": {
+  "kind": "trivia"
+ },
+ "tr_honjo": {
+  "kind": "trivia"
+ },
+ "tr_eleven": {
+  "kind": "trivia"
+ },
+ "f_intro": {
+  "kind": "map"
+ },
+ "f_ieyasu": {
+  "kind": "map"
+ },
+ "f_hideyoshi": {
+  "kind": "map"
+ },
+ "f_north": {
+  "kind": "map"
+ },
+ "s_intro": {
+  "kind": "trivia"
+ },
+ "s_koki": {
+  "kind": "trivia"
+ },
+ "s_kanemi": {
+  "kind": "trivia"
+ },
+ "s_later": {
+  "kind": "trivia"
+ },
+ "m_intro": {
+  "kind": "trivia"
+ },
+ "m_onkon": {
+  "kind": "trivia"
+ },
+ "m_yabou": {
+  "kind": "trivia"
+ },
+ "m_totsupatsu": {
+  "kind": "trivia"
+ },
+ "m_chotei": {
+  "kind": "trivia"
+ },
+ "m_yoshiaki": {
+  "kind": "trivia"
+ },
+ "m_shikoku": {
+  "kind": "trivia"
+ },
+ "m_hido": {
+  "kind": "trivia"
+ },
+ "m_kuro": {
+  "kind": "trivia"
+ },
+ "m_compare": {
+  "kind": "trivia"
+ },
+ "tr_temple": {
+  "kind": "trivia"
+ },
+ "s_nikki": {
+  "kind": "trivia"
+ },
+ "s_frois": {
+  "kind": "trivia"
+ },
+ "s_koretou": {
+  "kind": "trivia"
+ },
+ "s_kawasumi": {
+  "kind": "trivia"
+ },
+ "s_akechi": {
+  "kind": "trivia"
+ },
+ "s_tokudai": {
+  "kind": "trivia"
+ }
+}

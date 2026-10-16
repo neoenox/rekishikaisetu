@@ -1,0 +1,194 @@
+[
+ {
+  "id": "WP_HONNOJI_HEN",
+  "author": "Wikipedia(日本語版)",
+  "title": "本能寺の変",
+  "url": "https://ja.wikipedia.org/wiki/本能寺の変",
+  "used": "1582年の経過(日付・人物)・兵力の諸説・動機の諸説",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照し自作要約。一次史料(信長公記・兼見卿記等)の直接校訂は未実施。"
+ },
+ {
+  "id": "WP_AKECHI",
+  "author": "Wikipedia(日本語版)",
+  "title": "明智光秀",
+  "url": "https://ja.wikipedia.org/wiki/明智光秀",
+  "used": "光秀の経歴(出自の諸説・義昭と信長・丹波平定・近畿管領)",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。記事自体が出典不足を指摘している箇所がある。"
+ },
+ {
+  "id": "WP_HONNOJI",
+  "author": "Wikipedia(日本語版)",
+  "title": "本能寺",
+  "url": "https://ja.wikipedia.org/wiki/本能寺",
+  "used": "現在地座標・当時の寺地・移転の経緯",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。"
+ },
+ {
+  "id": "WP_KAMEYAMA",
+  "author": "Wikipedia(日本語版)",
+  "title": "亀山城 (丹波国)",
+  "url": "https://ja.wikipedia.org/wiki/亀山城_(丹波国)",
+  "used": "城の座標・光秀との関係",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。"
+ },
+ {
+  "id": "WP_OINOSAKA",
+  "author": "Wikipedia(日本語版)",
+  "title": "老ノ坂峠",
+  "url": "https://ja.wikipedia.org/wiki/老ノ坂峠",
+  "used": "峠の標高230m・光秀が通ったとされる記述",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。"
+ },
+ {
+  "id": "GSI_DEM",
+  "author": "国土地理院",
+  "title": "標高タイル(dem_png) z14",
+  "url": "https://maps.gsi.go.jp/development/ichiran.html",
+  "used": "3D地形メッシュ・距離・標高",
+  "rights": "国土地理院コンテンツ利用規約。地理院タイル(標高)を加工して作成。"
+ },
+ {
+  "id": "GSI_ORT",
+  "author": "国土地理院",
+  "title": "オルソ画像(ort) z15・中心部z17",
+  "url": "https://maps.gsi.go.jp/development/ichiran.html",
+  "used": "3D地形の地表テクスチャ(現代の写真)",
+  "rights": "国土地理院コンテンツ利用規約。地理院タイル(オルソ画像)を加工して作成。"
+ },
+ {
+  "id": "GSI_SHADE",
+  "author": "国土地理院",
+  "title": "陰影起伏図(hillshademap)",
+  "url": "https://maps.gsi.go.jp/development/ichiran.html",
+  "used": "位置図(2D地図)の下地",
+  "rights": "国土地理院コンテンツ利用規約。地理院タイル(陰影起伏図)を加工して作成。"
+ },
+ {
+  "id": "GSI_ADDR",
+  "author": "国土地理院",
+  "title": "住所検索API",
+  "url": "https://msearch.gsi.go.jp/address-search/AddressSearch",
+  "used": "旧本能寺跡・二条付近・経由地・位置図の地名の座標取得(町丁目レベルの概略位置)",
+  "rights": "国土地理院コンテンツ利用規約。"
+ },
+ {
+  "id": "WP_IGAGOE",
+  "author": "Wikipedia(日本語版)",
+  "title": "神君伊賀越え",
+  "url": "https://ja.wikipedia.org/wiki/神君伊賀越え",
+  "used": "家康の堺滞在・帰還の経路(諸説)・同行者",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。"
+ },
+ {
+  "id": "WP_TAKAMATSU",
+  "author": "Wikipedia(日本語版)",
+  "title": "備中高松城の戦い",
+  "url": "https://ja.wikipedia.org/wiki/備中高松城の戦い",
+  "used": "秀吉・毛利方の布陣と、変報・和睦の日付",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。"
+ },
+ {
+  "id": "WP_UOZU",
+  "author": "Wikipedia(日本語版)",
+  "title": "魚津城の戦い",
+  "url": "https://ja.wikipedia.org/wiki/魚津城の戦い",
+  "used": "魚津城の落城日、上杉景勝の動き",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。"
+ },
+ {
+  "id": "WP_SHINCHOKI",
+  "author": "Wikipedia(日本語版)",
+  "title": "信長公記",
+  "url": "https://ja.wikipedia.org/wiki/信長公記",
+  "used": "著者・成立・史料としての評価",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。"
+ },
+ {
+  "id": "WP_KANEMI",
+  "author": "Wikipedia(日本語版)",
+  "title": "兼見卿記",
+  "url": "https://ja.wikipedia.org/wiki/兼見卿記",
+  "used": "著者・本能寺の変前後の記述・別本の問題",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。"
+ },
+ {
+  "id": "WP_CHOSOKABE",
+  "author": "Wikipedia(日本語版)",
+  "title": "長宗我部元親",
+  "url": "https://ja.wikipedia.org/wiki/長宗我部元親",
+  "used": "信長との関係(1581〜82年)と書状",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。"
+ },
+ {
+  "id": "WP_FROIS",
+  "author": "Wikipedia(日本語版)",
+  "title": "ルイス・フロイス",
+  "url": "https://ja.wikipedia.org/wiki/ルイス・フロイス",
+  "used": "『日本史』の執筆経緯・範囲・性格",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。"
+ },
+ {
+  "id": "WP_OMURA",
+  "author": "Wikipedia(日本語版)",
+  "title": "大村由己",
+  "url": "https://ja.wikipedia.org/wiki/大村由己",
+  "used": "『惟任退治記』『天正記』の成立と性格",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。"
+ },
+ {
+  "id": "WP_KAWASUMI",
+  "author": "Wikipedia(日本語版)",
+  "title": "川角太閤記",
+  "url": "https://ja.wikipedia.org/wiki/川角太閤記",
+  "used": "著者・成立・性格・評価",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。"
+ },
+ {
+  "id": "WP_AKECHIGUNKI",
+  "author": "Wikipedia(日本語版)",
+  "title": "明智軍記",
+  "url": "https://ja.wikipedia.org/wiki/明智軍記",
+  "used": "成立・性格・評価",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。"
+ },
+ {
+  "id": "WP_TOKUDAI",
+  "author": "Wikipedia(日本語版)",
+  "title": "当代記",
+  "url": "https://ja.wikipedia.org/wiki/当代記",
+  "used": "成立・性格・評価",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。"
+ },
+ {
+  "id": "WP_TAMONIN",
+  "author": "Wikipedia(日本語版)",
+  "title": "多聞院日記",
+  "url": "https://ja.wikipedia.org/wiki/多聞院日記",
+  "used": "著者・期間・評価",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。"
+ },
+ {
+  "id": "WP_TOKITSUNE",
+  "author": "Wikipedia(日本語版)",
+  "title": "言経卿記",
+  "url": "https://ja.wikipedia.org/wiki/言経卿記",
+  "used": "著者・期間",
+  "rights": "CC BY-SA 4.0。事実関係のみ参照。"
+ },
+ {
+  "id": "VOICE",
+  "author": "VOICEVOX",
+  "title": "VOICEVOX:四国めたん",
+  "url": "https://voicevox.hiroshiba.jp/term/",
+  "used": "ナレーション",
+  "rights": "クレジット表記「VOICEVOX:四国めたん」"
+ },
+ {
+  "id": "METHOD",
+  "author": "本制作",
+  "title": "解析方法",
+  "url": "local",
+  "used": "経路距離・勾配・所要時間の感度分析",
+  "rights": "自作。歴史資料ではない。"
+ }
+]
