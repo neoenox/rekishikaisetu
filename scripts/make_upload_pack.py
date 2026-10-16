@@ -7,6 +7,7 @@ ROOT=Path(__file__).resolve().parents[1];UP=ROOT/'upload'
 PACKS={
  '01_world_map_distortion':dict(video='out/gm_video.mp4',thumb='out/gm_thumbnail_C.jpg',srt='out/gm_subtitles.srt',desc='out/gm_description.md',title_no=2),
  '02_honnoji_incident':dict(video='out/honnoji.mp4',thumb='out/thumbnail_A.jpg',srt='out/hn_subtitles.srt',desc='out/youtube_description.md',title_no=1),
+ '03_ninja_myths':dict(video='out/nj_video.mp4',thumb='out/nj_thumbnail_A.jpg',srt='out/nj_subtitles.srt',desc='out/nj_description.md',title_no=1),
 }
 def sections(md):
     """-> (titles list, description body, tags line) from the generated description draft"""
