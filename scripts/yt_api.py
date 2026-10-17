@@ -104,11 +104,13 @@ def cmd_upload(pack, dry=False, new_version=False):
                      superseded=ids.get(pack, {}).get('superseded', []) + ([ids[pack]['video_id']] if pack in ids else []))
     IDS.parent.mkdir(exist_ok=True)
     IDS.write_text(json.dumps(ids, ensure_ascii=False, indent=1), encoding='utf8')
-    yt.thumbnails().set(videoId=vid, media_body=MediaFileUpload(str(d / 'thumbnail.jpg'))).execute()
-    print('thumbnail ok')
-    yt.captions().insert(part='snippet', body=dict(snippet=dict(videoId=vid, language='ja', name='', isDraft=False)),
+    if (d / 'thumbnail.jpg').exists():
+        yt.thumbnails().set(videoId=vid, media_body=MediaFileUpload(str(d / 'thumbnail.jpg'))).execute()
+        print('thumbnail ok')
+    if (d / 'subtitles_ja.srt').exists():
+      yt.captions().insert(part='snippet', body=dict(snippet=dict(videoId=vid, language='ja', name='', isDraft=False)),
                          media_body=MediaFileUpload(str(d / 'subtitles_ja.srt'), mimetype='application/octet-stream')).execute()
-    print('captions ok')
+      print('captions ok')
 
 
 def cmd_delete_superseded():

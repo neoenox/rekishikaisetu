@@ -54,5 +54,11 @@
   "video_id": "MtOTnnj5pF0",
   "privacy": "private",
   "via": "studio-manual"
+ },
+ "short_drain": {
+  "video_id": "60hEGrmryiY",
+  "privacy": "private",
+  "via": "api",
+  "superseded": []
  }
 }
