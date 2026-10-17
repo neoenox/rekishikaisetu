@@ -1,0 +1,51 @@
+{
+ "01_world_map_distortion": {
+  "video_id": "0gpV-8L1yvg",
+  "privacy": "private",
+  "via": "studio-manual"
+ },
+ "02_honnoji_incident": {
+  "video_id": "CGDD1uyr9Y8",
+  "privacy": "private",
+  "via": "studio-manual"
+ },
+ "03_ninja_myths": {
+  "video_id": "FmJrf-t7ro8",
+  "privacy": "private",
+  "via": "studio-manual"
+ },
+ "04_edo_ichikoku": {
+  "video_id": "SBczPs3TERU",
+  "privacy": "private",
+  "via": "api",
+  "superseded": [
+   "7zQoHDwkHxk"
+  ]
+ },
+ "05_housework_gdp": {
+  "video_id": "CDjYfkZBRIM",
+  "privacy": "private",
+  "via": "api",
+  "superseded": [
+   "mk0oaydOqvE"
+  ]
+ },
+ "06_drain_vortex": {
+  "video_id": "z4QFttJegKQ",
+  "privacy": "private",
+  "via": "studio-manual"
+ },
+ "07_scurvy_lind": {
+  "video_id": "mUrSwlKRtF0",
+  "privacy": "private",
+  "via": "api",
+  "superseded": [
+   "ui62BcJ0lSc"
+  ]
+ },
+ "08_zenzen_affirm": {
+  "video_id": "MtOTnnj5pF0",
+  "privacy": "private",
+  "via": "studio-manual"
+ }
+}

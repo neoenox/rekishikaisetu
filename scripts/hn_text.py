@@ -24,6 +24,7 @@ COUNTERS='年月日人時間分時歳メートルキロメートルキロ半'
 def display(t):
     t=t.replace('二十、三十人','20〜30人').replace('百五十、六十人','150〜160人').replace('二十人から三十人','20〜30人').replace('百五十人から百六十人','150〜160人')
     # decimal: 十七点五キロ / 一点五キロ
+    t=re.sub(r'([%s]+)・([〇一二三四五六七八九]+)(?=倍)'%NUM,lambda m:f'{big(m.group(1))}.{"".join(str(D[c]) for c in m.group(2))}',t)  # 一・四倍 -> 1.4倍
     t=re.sub(r'([%s]+)点([〇一二三四五六七八九]+)'%NUM,lambda m:f'{big(m.group(1))}.{"".join(str(D[c]) for c in m.group(2))}',t)
     # maximal numeral run -> arabic when it is a quantity (followed by a counter, or containing 万)
     def conv(m):

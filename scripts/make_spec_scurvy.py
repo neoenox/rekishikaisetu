@@ -46,8 +46,8 @@ spec=dict(slug='scurvy',theme_dir='20261017_scurvy',pack='07_scurvy_lind',header
    dict(t='panel',box=[60,350,1860,540],title='ミルンの留保',text='仮に事実でなくても、治療を公平に比べる考え方として、歴史的に興味深い',at=6,size=42,col='gold'),
    dict(t='panel',box=[60,570,1860,760],title='ロジャー（ミルンの紹介）',text='「壊血病」は、識別も治療もできない病気の総称として使われた。本当の殺し屋は熱病、という見方',at=7,size=38,col='dim')]),
  dict(key='end',title='分かること、決められないこと',chapter_title='結論：分かること、決められないこと',scene=[
-   dict(t='cols2',size=34,xm=940,xm2=980,left=dict(title='分かること',title_at=0,items=[
-      dict(at=1,text='リンドの著書に、1747年に6つの治療法を比べ、オレンジとレモンで最も顕著な効果が見られた、という記録がある'),dict(at=2,text='リンドの本では、柑橘の果汁が治療になるとは、明確に述べられていない（ミルン）'),dict(at=3,text='柑橘が効くという話は、リンド以前にも記録されている')]),
+   dict(t='cols2',size=31,xm=940,xm2=980,left=dict(title='分かること',title_at=0,items=[
+      dict(at=1,text='リンドの著書に、1747年に6つの治療法を比べ、オレンジとレモンで最も顕著な効果が見られた、という記録がある'),dict(at=2,text='リンドの本では、柑橘の果汁が治療になるとは、明確に述べられていない（ミルン）'),dict(at=3,text='柑橘が効くという話は、リンド以前にも記録されている'),dict(at=4,text='広まらなかった要因：費用・傷みやすさ、濃縮果汁のビタミンC不足、ビタミン概念の不在')]),
      right=dict(title='決められないこと',title_at=5,items=[
       dict(at=6,text='「リンドが発見し、海軍の怠慢で遅れた」という物語が、どこまで当てはまるか'),dict(at=7,text='リンドの試験記録の信頼性。当時の壊血病の重大さ（研究者の間に異論）'),dict(at=8,text='リンドの本の原文と、1795年の海軍の対応の細部（未確認）')]))])
  ],

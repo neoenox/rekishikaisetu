@@ -21,7 +21,7 @@ spec=dict(slug='gdp',theme_dir='20261017_gdp',pack='05_housework_gdp',header_sub
  dict(key='why',title='なぜ、記録しないのか',chapter_title='なぜ、記録しないのか',scene=[
    dict(t='panel',box=[60,160,1860,260],text='国際基準：家計が自分のために行うサービスの生産は、原則として、生産の範囲の外',at=0,size=40),
    dict(t='panel',box=[60,280,1860,370],text='例外：持ち家のサービス、有償の家事サービスなど',at=1,size=40,col='gold'),
-   dict(t='panel',box=[60,400,1860,670],title='国際基準（2008SNA）の仮訳の要旨',text='無償の家事を金額に直した流れは、物価や経済の不均衡の分析とは、ほとんど関係がない。貨幣のやり取りと一緒に記録すると、市場で起きていることを曖昧にしかねない',at=3,size=36),
+   dict(t='panel',box=[60,400,1860,670],title='国際基準（2008SNA）の仮訳の要旨',text='無償の家事を金額に直した流れは、物価や経済の不均衡の分析とは、ほとんど関係がない。貨幣のやり取りと一緒に記録すると、市場で起きていることを曖昧にしかねない',at=3,size=42),
    dict(t='panel',box=[60,700,1860,830],text='内閣府：「これなどが理由として考えられる」と記述（理由の全てが示されているわけではない）',at=6,size=36,col='dim')]),
  dict(key='calc',title='無償労働の値段を、推計する',chapter_title='無償労働の値段を、推計する',opener='記録されない家事の大きさは？',opener_until=1,scene=[
    dict(t='panel',box=[60,160,1860,300],title='「無償労働」の対象（内閣府）',text='家事（炊事・掃除・洗濯・縫物・家庭雑事）、介護・看護、育児、買物、ボランティア活動など',at=1,size=36),
@@ -43,7 +43,7 @@ spec=dict(slug='gdp',theme_dir='20261017_gdp',pack='05_housework_gdp',header_sub
    dict(t='panel',box=[60,720,1860,850],title='注意（内閣府）',text='2021年の調査はコロナ禍の2021年10月に行われ、家事時間の増加などに影響が現れていると考えられる',at=10,size=36,col='dim')]),
  dict(key='sat',title='推計額は、GDPに足せるのか',chapter_title='推計額は、GDPに足せるのか',scene=[
    dict(t='panel',box=[60,160,1860,280],text='この金額は、GDPに足して「経済が大きくなった」と言える数字ではない',at=1,size=44,hi=True),
-   dict(t='flow',y=330,h=150,size=34,nodes=[dict(at=2,text='中心の勘定（GDPなど）'),dict(at=2,text='別の勘定（サテライト勘定）で推計'),dict(at=3,text='市場の経済活動と比べられる形にして、GDPと比較')]),
+   dict(t='flow',y=330,h=150,size=32,nodes=[dict(at=2,text='中心の勘定（GDPなど）'),dict(at=2,text='別の勘定で推計（サテライト勘定）'),dict(at=3,text='市場の活動と比べ、GDPと比較')]),
    dict(t='panel',box=[60,540,1860,650],text='評価額は賃金の取り方で変わる → 家事の本当の価値を、一つの金額で言い切ることはできない',at=4,size=36),
    dict(t='panel',box=[60,670,1860,830],title='内閣府の注記（専門職の賃金で評価する場合）',text='家計と専門職では、規模の経済性や資本装備率の違いがあるため、生産性に差が生じうる',at=6,size=34,col='dim')]),
  dict(key='end',title='分かること、決められないこと',chapter_title='結論：分かること、決められないこと',scene=[

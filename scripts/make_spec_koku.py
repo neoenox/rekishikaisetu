@@ -13,7 +13,7 @@ spec=dict(slug='koku',theme_dir='20261017_koku',pack='04_edo_ichikoku',header_su
    dict(t='panel',box=[120,765,1800,850],text='資料：国立天文台の解説／大阪工業大学の紀要の論文／国立国会図書館の解説',at=4,size=34)]),
  dict(key='mech',title='昼と夜を、六つに分ける',chapter_title='不定時法：昼と夜を、六つに分ける',scene=[
    dict(t='panel',box=[60,170,1860,260],text='江戸時代の暮らしでは「不定時法」',at=0,size=44,hi=True),
-   dict(t='flow',y=320,h=170,size=36,nodes=[dict(at=3,text='明け六つ（日の出の36分前）',hi=True),dict(at=1,text='昼を6等分 ＝ 昼の一刻'),dict(at=3,text='暮れ六つ（日没の36分後）',hi=True),dict(at=1,text='夜を6等分 ＝ 夜の一刻')]),
+   dict(t='flow',y=320,h=170,size=36,nodes=[dict(at=2,text='明け六つ（日の出の36分前）',hi=True),dict(at=1,text='昼を6等分 ＝ 昼の一刻'),dict(at=2,text='暮れ六つ（日没の36分後）',hi=True),dict(at=1,text='夜を6等分 ＝ 夜の一刻')]),
    dict(t='panel',box=[60,505,1860,570],text='江戸時代の暦法上の定義（真貝寿明氏の論文による）。実際の鐘の運用の記録ではありません',at=3,size=32,col='dim'),
    dict(t='panel',box=[60,590,1860,680],text='昼の長さは季節で変わる → 昼の一刻も、季節で伸び縮みする',at=4,size=40),
    dict(t='panel',box=[60,700,1860,790],text='昼が長い夏は、夜の一刻が短くなる',at=7,size=40,col='gold')]),
