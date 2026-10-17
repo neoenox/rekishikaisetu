@@ -15,35 +15,39 @@
   "via": "studio-manual"
  },
  "04_edo_ichikoku": {
-  "video_id": "SBczPs3TERU",
+  "video_id": "dq-QD2ckfJc",
   "privacy": "private",
   "via": "api",
   "superseded": [],
   "deleted": [
-   "7zQoHDwkHxk"
+   "SBczPs3TERU"
   ]
  },
  "05_housework_gdp": {
-  "video_id": "CDjYfkZBRIM",
+  "video_id": "4tG90zwk3Vs",
   "privacy": "private",
   "via": "api",
   "superseded": [],
   "deleted": [
-   "mk0oaydOqvE"
+   "CDjYfkZBRIM"
   ]
  },
  "06_drain_vortex": {
-  "video_id": "z4QFttJegKQ",
-  "privacy": "private",
-  "via": "studio-manual"
- },
- "07_scurvy_lind": {
-  "video_id": "mUrSwlKRtF0",
+  "video_id": "qjXxDENAZZE",
   "privacy": "private",
   "via": "api",
   "superseded": [],
   "deleted": [
-   "ui62BcJ0lSc"
+   "z4QFttJegKQ"
+  ]
+ },
+ "07_scurvy_lind": {
+  "video_id": "CnK4vBPdszM",
+  "privacy": "private",
+  "via": "api",
+  "superseded": [],
+  "deleted": [
+   "mUrSwlKRtF0"
   ]
  },
  "08_zenzen_affirm": {
