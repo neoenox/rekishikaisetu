@@ -4,6 +4,7 @@
   python scripts/yt_api.py auth                 # 初回のみ。ブラウザで寄り道ラボのアカウントを承認
   python scripts/yt_api.py whoami               # 認証中のチャンネルを表示
   python scripts/yt_api.py upload 03_ninja_myths [--dry] [--new-version]   # 動画・サムネ・字幕を非公開で登録（作り直したときは --new-version。旧IDは superseded に残す）
+  python scripts/yt_api.py delete-superseded    # 作り直しで不要になった旧版（非公開のものだけ）を削除
   python scripts/yt_api.py list                 # チャンネルの動画と公開状態
 
 方針: このスクリプトは公開しない（privacyStatus は常に private）。公開は人が Studio で行う。
@@ -110,6 +111,24 @@ def cmd_upload(pack, dry=False, new_version=False):
     print('captions ok')
 
 
+def cmd_delete_superseded():
+    """data/youtube_ids.json の superseded に載っていて、かつ非公開の動画だけを削除する（公開済みは触らない）。"""
+    yt = service()
+    ids = load_ids()
+    for pack, rec in ids.items():
+        for vid in list(rec.get('superseded', [])):
+            v = yt.videos().list(part='status,snippet', id=vid).execute()['items']
+            if v and v[0]['status']['privacyStatus'] != 'private':
+                print('skip (not private):', vid)
+                continue
+            if v:
+                yt.videos().delete(id=vid).execute()
+                print('deleted', vid, v[0]['snippet']['title'][:24])
+            rec['superseded'].remove(vid)
+            rec.setdefault('deleted', []).append(vid)
+    IDS.write_text(json.dumps(ids, ensure_ascii=False, indent=1), encoding='utf8')
+
+
 def cmd_list():
     yt = service()
     up = yt.channels().list(part='contentDetails', mine=True).execute()['items'][0]['contentDetails']['relatedPlaylists']['uploads']
@@ -122,4 +141,4 @@ if __name__ == '__main__':
     a = sys.argv[1:]
     if not a:
         sys.exit(__doc__)
-    {'auth': cmd_auth, 'whoami': cmd_whoami, 'list': cmd_list}.get(a[0], lambda: cmd_upload(a[1], '--dry' in a, '--new-version' in a) if a[0] == 'upload' else sys.exit(__doc__))()
+    {'auth': cmd_auth, 'whoami': cmd_whoami, 'list': cmd_list, 'delete-superseded': cmd_delete_superseded}.get(a[0], lambda: cmd_upload(a[1], '--dry' in a, '--new-version' in a) if a[0] == 'upload' else sys.exit(__doc__))()
