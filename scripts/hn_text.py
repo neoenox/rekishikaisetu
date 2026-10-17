@@ -22,9 +22,11 @@ def big(s):
     return str(n)
 COUNTERS='年月日人時間分時歳メートルキロメートルキロ半'
 def display(t):
+    t=t.replace('不十分','不').replace('十分に','に').replace('十分な','な')  # 不十分・十分に・十分な は『10分』にしない
     t=t.replace('二十、三十人','20〜30人').replace('百五十、六十人','150〜160人').replace('二十人から三十人','20〜30人').replace('百五十人から百六十人','150〜160人')
+    t=t.replace('二、三年','2〜3年')
     # decimal: 十七点五キロ / 一点五キロ
-    t=re.sub(r'([%s]+)・([〇一二三四五六七八九]+)(?=倍)'%NUM,lambda m:f'{big(m.group(1))}.{"".join(str(D[c]) for c in m.group(2))}',t)  # 一・四倍 -> 1.4倍
+    t=re.sub(r'([%s]+)・([〇一二三四五六七八九]+)'%NUM,lambda m:f'{big(m.group(1))}.{"".join(str(D[c]) for c in m.group(2))}',t)  # 一・四倍 -> 1.4倍
     t=re.sub(r'([%s]+)点([〇一二三四五六七八九]+)'%NUM,lambda m:f'{big(m.group(1))}.{"".join(str(D[c]) for c in m.group(2))}',t)
     # maximal numeral run -> arabic when it is a quantity (followed by a counter, or containing 万)
     def conv(m):
@@ -34,6 +36,7 @@ def display(t):
         return s
     t_=t
     t=re.sub('[%s万]+'%NUM,conv,t)
+    t=t.replace('','十分')
     return t
 if __name__=='__main__':
     import json,sys

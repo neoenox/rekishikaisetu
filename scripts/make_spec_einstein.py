@@ -1,0 +1,71 @@
+"""Writes data/einstein_spec.json."""
+import json
+from pathlib import Path
+R=Path(__file__).resolve().parents[1]
+spec=dict(slug='einstein',theme_dir='20261018_einstein',pack='12_einstein_math',header_sub='入学試験の不合格を確かめる',images={},
+ bgm=[['intro','cond','piano36'],['result','after','piano12'],['story','end','piano40']],
+ chapters=[
+ dict(key='intro',title='数学が苦手な落第生？',chapter_title='導入：アインシュタインは、数学が苦手な落第生？',opener='数学が苦手な、落第生？',opener_until=1,scene=[
+   dict(t='chips',y=250,w=640,h=150,gap=160,size=52,items=[dict(at=2,text='入学試験に不合格'),dict(at=3,text='数学ができなかった？')]),
+   dict(t='panel',box=[60,450,1860,630],title='分けて考える',text='① 数学の科目で落第した　② 入学試験全体に、不合格だった',at=4,size=42,hi=True),
+   dict(t='panel',box=[60,670,1860,760],text='資料：ETH図書館、スイス歴史事典、TIME誌の記事',at=5,size=34)]),
+ dict(key='entry',title='入学試験を受けるまで',chapter_title='入学試験を受けるまで',scene=[
+   dict(t='panel',box=[60,170,1860,270],title='1879年',text='ドイツのウルムで生まれ、ミュンヘンで育つ',at=0,size=42),
+   dict(t='panel',box=[60,290,1860,390],text='ミュンヘンのギムナジウムをやめ、ミラノの両親のもとへ',at=1,size=42),
+   dict(t='panel',box=[60,410,1860,500],text='独学で、入学試験に備える',at=2,size=42),
+   dict(t='panel',box=[60,530,1860,650],title='受験先',text='チューリヒの連邦工科大学（ポリテクニクム）',at=3,size=44,hi=True)]),
+ dict(key='cond',title='受験の条件は、満たしていなかった',chapter_title='受験の条件は、満たしていなかった',scene=[
+   dict(t='panel',box=[60,170,1860,270],title='ETH図書館',text='この大学が求めた、入学の条件',at=0,size=40),
+   dict(t='table',box=[60,300,1860,520],cols=['入学の条件','アインシュタイン'],colw=[1000,800],size=40,rows=[
+     dict(at=1,cells=['大学入学資格の証明書','なし']),dict(at=1,cells=['18歳以上','満たしていなかった'])]),
+   dict(t='panel',box=[60,550,1860,700],title='例外の許可',text='学長が、家族の友人の推薦で、受験を認めた',at=2,size=44,hi=True,col='gold')]),
+ dict(key='result',title='試験の結果',chapter_title='試験の結果',scene=[
+   dict(t='panel',box=[60,170,1860,260],text='1895年10月初め：入学試験（ETH図書館）',at=0,size=42),
+   dict(t='table',box=[60,280,1860,520],cols=['科目','評価（ETH図書館）'],colw=[700,1100],size=34,rows=[
+     dict(at=1,cells=['数学・自然科学','優れた成績'],col='gold'),dict(at=2,cells=['語学・歴史','不十分']),dict(at=3,cells=['総合','不合格の水準'])]),
+   dict(t='panel',box=[60,540,1860,650],title='スイス歴史事典',text='外国語の成績が不十分で、不合格',at=4,size=42),
+   dict(t='panel',box=[60,670,1860,780],text='不合格の理由として挙げられているのは、数学以外の科目',at=5,size=44,hi=True,col='gold'),
+   dict(t='panel',box=[60,795,1860,850],text='※具体的な点数・成績表の数値は、確認していません',at=5,size=28,col='dim')]),
+ dict(key='after',title='その後',chapter_title='その後',scene=[
+   dict(t='timeline',y=290,x0=160,x1=1760,w=520,size=34,ymax=700,nodes=[
+     dict(at=0,x=330,label='1895年の入試後',sub='中等教育を修了するため、アールガウ州のカントン学校に入学（ETH図書館）'),
+     dict(at=1,x=960,label='1年以内',sub='アーラウのカントン学校で、大学入学資格を取得（スイス歴史事典）'),
+     dict(at=2,x=1590,label='1896〜1900年',sub='ポリテクニクムで、自然科学を学ぶ（スイス歴史事典）')])]),
+ dict(key='story',title='「数学で落第」という話を伝える記事',chapter_title='「数学で落第」という話を伝える記事',scene=[
+   dict(t='panel',box=[60,170,1860,290],title='TIME誌の記事による紹介（日本語訳・再構成）',text="コラム「Ripley's Believe It or Not!」に載ったとされる",at=0,size=40),
+   dict(t='panel',box=[60,310,1860,410],title='見出し',text='「存命の最も偉大な数学者が、数学で落第」',at=1,size=40),
+   dict(t='panel',box=[60,430,1860,520],text='1935年：プリンストンの宗教指導者が、切り抜きを本人に見せた',at=2,size=38),
+   dict(t='panel',box=[60,540,1860,680],title='本人の答え（とされる）',text='「数学で落第したことはない。15歳になる前に、微分積分を身につけていた」',at=3,size=40,hi=True,col='gold'),
+   dict(t='panel',box=[60,700,1860,810],title='同じ記事',text='小学校ではクラスで一番。数学は、学校の求める水準を、はるかに上回っていた',at=5,size=36),
+   dict(t='panel',box=[60,815,1860,860],text='※記事の紹介の再構成で、逐語の記録ではありません',at=0,size=22,col='dim')]),
+ dict(key='end',title='分かること、決められないこと',chapter_title='結論：分かること、決められないこと',scene=[
+   dict(t='cols2',size=30,xm=940,xm2=980,left=dict(title='分かること',title_at=0,items=[
+      dict(at=1,text='1895年の入学試験に、不合格だった'),dict(at=2,text='数学・自然科学は優れた成績。不十分だったのは、語学・歴史'),dict(at=3,text='不合格を、数学が苦手だった証拠とすることはできない'),dict(at=4,text='一年以内に大学入学資格を取り、1896年から学んだ')]),
+     right=dict(title='決められないこと',title_at=5,items=[
+      dict(at=6,text='一つの入試の結果だけで、全科目の成績は語れない'),dict(at=7,text='具体的な点数・成績表の数値（未確認）'),dict(at=8,text='「数学で落第」の話が、いつ生まれ、どう広まったか')]))])
+ ],
+ desc=dict(title_main='アインシュタインは、数学が苦手な落第生だったのか',title_no=1,
+  titles=['アインシュタインは、数学が苦手な落第生だった？ 入学試験の記録で確かめる','天才は数学で落第した？ 入試に落ちた本当の理由','「数学で落第」の話は本当？ ETH図書館とTIME誌で確かめる'],
+  intro='「天才アインシュタインは、数学が苦手で、落第した」。そんな話を聞いたことはありませんか。入学試験に落ちたのは本当のようです。では、それは数学ができなかった証拠なのでしょうか。この動画では、「数学の科目で落第した」という話と「入学試験全体に不合格だった」という話を分けて、ETH図書館の解説、スイス歴史事典、TIME誌の記事から、何があったのかを確かめます。分かることと決められないことを、分けて見ていきます。',
+  points=['ETH図書館によると、アインシュタインは、チューリヒの連邦工科大学(ポリテクニクム)が求めた、大学入学資格の証明書も18歳以上という条件も満たしていませんでしたが、学長の例外許可で、1895年10月初めに入学試験を受けました。','試験では、数学・自然科学の科目で優れた成績(原文はbeste Ergebnisse)、語学・歴史の科目は不十分で、総合は不合格の水準でした(ETH図書館)。スイス歴史事典は、外国語の成績が不十分で不合格になったと書いています。','その後、アールガウ州のカントン学校に入り、1年以内に大学入学資格を取り、1896年から1900年までポリテクニクムで自然科学を学びました(ETH図書館、スイス歴史事典)。',"TIME誌の記事によると、「存命の最も偉大な数学者が、数学で落第」という見出しの新聞コラム(Ripley's Believe It or Not!)の切り抜きを、1935年にプリンストンの宗教指導者がアインシュタインに見せ、本人は「数学で落第したことはない。15歳になる前に微分積分を身につけていた」と答えたとされています(記事の紹介の再構成で、逐語の記録ではありません)。",'具体的な点数や成績表の数値、「数学で落第」の話がいつ生まれどう広まったのかは、この動画では確認していません。'],
+  refs=['ETH図書館「Einstein Online:Einsteins Jugend(1879-1896)」:https://library.ethz.ch/sammlungen-und-archive/online-zugaenge/einstein-online/jugend-1879-1896.html','スイス歴史事典(Historisches Lexikon der Schweiz)「Einstein, Albert」:https://hls-dhs-dss.ch/de/articles/028814','TIME「Did Einstein flunk math?」:https://content.time.com/time/specials/packages/article/0,28804,1936731_1936743_1936758,00.html'],
+  credit_lines=['・図・表・年表:自作(外部画像・肖像は使用していません)','・サムネイルの背景:Codex(OpenAI)による生成イラスト(19世紀末の大学のイメージ。実在の人物・場所の再現ではありません)'],
+  notes=['ETH図書館のページは、ギムナジウムの在籍年(1894年まで)と年齢(16歳)を併記していますが、1879年生まれとは整合しないため、動画では年と年齢を述べていません。','「優れた成績」は原文(beste Ergebnisse)の範囲(満点か、順位か)が不明なため、この表現にしています。','誤りがあればコメントでお知らせください。確認のうえ、訂正します。'],
+  tags='アインシュタイン, 落第, 数学, 入学試験, ポリテクニクム, ETH, 人物, 科学史, 雑学, 検証, 都市伝説',
+  checks=['アーラウの卒業証書・入学試験の、各科目の点数(原本。任意。動画では点数を述べていない)','ETH図書館の入学条件・例外許可のPDFの確認(任意)']),
+ thumb=dict(bg='assets/einstein/thumb_art.png',lines=[['アインシュタインは',70,'white'],['数学で',110,'white'],['落第？',150,'gold']],sub='入試の記録で確かめる',y0=14,bar_y=520,bar_w=620,sub_size=44,shade_x=700,shade_w=520))
+
+def _fit(o):
+    if isinstance(o,dict):
+        if o.get('t')=='panel' and o.get('title'):
+            h=o['box'][3]-o['box'][1]
+            if h<112:
+                t=o['title']+'：'+o['text'];sz=min(o.get('size',40),40,int((o['box'][2]-o['box'][0]-70)/len(t)))
+                if sz>=26:o['title']=None;o['text']=t;o['size']=sz
+                else:o['size']=min(o.get('size',40),30)
+            else:o['size']=min(o.get('size',40),40 if h<125 else 46)
+        for v in o.values():_fit(v)
+    elif isinstance(o,list):
+        for v in o:_fit(v)
+_fit(spec)
+(R/'data'/'einstein_spec.json').write_text(json.dumps(spec,ensure_ascii=False,indent=1),encoding='utf8');print('spec written')
