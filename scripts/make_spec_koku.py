@@ -1,5 +1,7 @@
 """Writes data/koku_spec.json (scene definitions are data; edit here and re-run)."""
-import json
+import json,sys
+sys.path.insert(0,str(__import__('pathlib').Path(__file__).parent))
+from specart import inject
 from pathlib import Path
 R=Path(__file__).resolve().parents[1]
 spec=dict(slug='koku',theme_dir='20261017_koku',pack='04_edo_ichikoku',header_sub='江戸の時刻の仕組みを確かめる',images={},
@@ -67,4 +69,5 @@ spec=dict(slug='koku',theme_dir='20261017_koku',pack='04_edo_ichikoku',header_su
   tags='江戸時代, 一刻, 不定時法, 時刻, 暦, 時の鐘, 九つ, 時そば, 国立天文台, 日本史, 雑学, 検証, 明治の改暦',
   checks=['計算例の数値(論文の表2)の転記を、もう一度見る(`docs/themes/20261017_koku/08_fact_check.md` K3)']),
  thumb=dict(bg='assets/koku/thumb_art.png',lines=[['江戸の',80,'white'],['一刻は',130,'gold'],['いつも',80,'white'],['2時間？',130,'gold']],sub='夏と冬で、何分違う？',y0=12,bar_y=548,bar_w=560,sub_size=44,shade_x=700,shade_w=520))
+inject(spec,dict(intro='edo',mech='sundial',calc='sunrise',names='bell',cal='wadokei',meiji='meiji',end='edo'))
 (R/'data'/'koku_spec.json').write_text(json.dumps(spec,ensure_ascii=False,indent=1),encoding='utf8');print('spec written')

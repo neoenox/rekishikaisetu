@@ -1,5 +1,7 @@
 """Writes data/scurvy_spec.json."""
-import json
+import json,sys
+sys.path.insert(0,str(__import__('pathlib').Path(__file__).parent))
+from specart import inject
 from pathlib import Path
 R=Path(__file__).resolve().parents[1]
 spec=dict(slug='scurvy',theme_dir='20261017_scurvy',pack='07_scurvy_lind',header_sub='壊血病とリンドの試験を確かめる',images={},
@@ -61,4 +63,5 @@ spec=dict(slug='scurvy',theme_dir='20261017_scurvy',pack='07_scurvy_lind',header
   tags='壊血病, リンド, レモン, オレンジ, ビタミンC, 海軍, 医学史, 科学史, 臨床試験, 雑学, 検証, 航海',
   checks=['リンドの著書(1753年)の試験の記述の原文確認(ジェームズ・リンド図書館でデジタル公開。任意)','Baron 2009(Nutrition Reviews 67:315)、Hughes 1975(Medical History 19:342)の原文(任意。動画はミルン氏の紹介として帰属)']),
  thumb=dict(bg='assets/scurvy/thumb_art.png',lines=[['壊血病は',90,'white'],['レモンで',100,'white'],['解決？',150,'gold']],sub='リンドの試験を確かめる',y0=14,bar_y=520,bar_w=620,sub_size=44,shade_x=700,shade_w=520))
+inject(spec,dict(intro='deck',trial='sickbay',lind='book',before='harbor',why='barrels',myth='office',end='sea'))
 (R/'data'/'scurvy_spec.json').write_text(json.dumps(spec,ensure_ascii=False,indent=1),encoding='utf8');print('spec written')

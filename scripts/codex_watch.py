@@ -130,6 +130,17 @@ def main():
     for s in sheets:
         cmd += ['-i', str(s)]
     cmd.append('-')
+    if os.environ.get('REVIEWER') == 'opencode':  # Codex が使えないときの代替（環境変数 MODEL で指定。画像を読めるモデルが必要）
+        cmd = ['opencode.cmd', 'run', '-m', os.environ.get('MODEL', 'kilo/google/gemini-3.1-pro-preview'), '--auto']
+        for sh_ in sheets:
+            cmd += ['-f', str(sh_)]
+        cmd.append(prompt)
+        r = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=str(ROOT), timeout=1800)
+        txt = r.stdout.decode('utf8', 'replace')
+        if r.returncode == 0 and len(txt.strip()) > 200:
+            out.write_text(txt, encoding='utf8')
+        print(slug, 'sheets', len(sheets), 'opencode exit', r.returncode, '->', out if r.returncode == 0 else txt[-300:])
+        return
     log = ROOT / 'out' / 'codex' / f'{slug}{TAG}_watch.log'
     log.parent.mkdir(exist_ok=True, parents=True)
     with log.open('wb') as lf:

@@ -3,7 +3,29 @@
  "theme_dir": "20261017_scurvy",
  "pack": "07_scurvy_lind",
  "header_sub": "壊血病とリンドの試験を確かめる",
- "images": {},
+ "images": {
+  "book": {
+   "file": "assets/scurvy/art_book.png"
+  },
+  "harbor": {
+   "file": "assets/scurvy/art_harbor.png"
+  },
+  "barrels": {
+   "file": "assets/scurvy/art_barrels.png"
+  },
+  "sea": {
+   "file": "assets/scurvy/art_sea.png"
+  },
+  "sickbay": {
+   "file": "assets/scurvy/art_sickbay.png"
+  },
+  "office": {
+   "file": "assets/scurvy/art_office.png"
+  },
+  "deck": {
+   "file": "assets/scurvy/art_deck.png"
+  }
+ },
  "bgm": [
   [
    "intro",
@@ -34,6 +56,31 @@
    "opener": "昔の船乗りを苦しめた病気",
    "opener_until": 2,
    "scene": [
+    {
+     "t": "art",
+     "name": "deck",
+     "box": [
+      60,
+      170,
+      1860,
+      850
+     ],
+     "at": 0,
+     "dim": 0.8,
+     "dir": 1,
+     "note": "イメージ（生成画像）。実際の場面の再現ではありません"
+    },
+    {
+     "t": "shade",
+     "box": [
+      60,
+      170,
+      1860,
+      850
+     ],
+     "at": 0,
+     "alpha": 0.66
+    },
     {
      "t": "panel",
      "box": [
@@ -81,6 +128,31 @@
    "title": "1747年の比較試験",
    "chapter_title": "1747年の比較試験",
    "scene": [
+    {
+     "t": "art",
+     "name": "sickbay",
+     "box": [
+      60,
+      170,
+      1860,
+      850
+     ],
+     "at": 0,
+     "dim": 0.8,
+     "dir": -1,
+     "note": "イメージ（生成画像）。実際の場面の再現ではありません"
+    },
+    {
+     "t": "shade",
+     "box": [
+      60,
+      170,
+      1860,
+      850
+     ],
+     "at": 0,
+     "alpha": 0.66
+    },
     {
      "t": "panel",
      "box": [
@@ -197,6 +269,31 @@
    "chapter_title": "試験の結果と、著書の書き方のずれ",
    "scene": [
     {
+     "t": "art",
+     "name": "book",
+     "box": [
+      60,
+      170,
+      1860,
+      850
+     ],
+     "at": 0,
+     "dim": 0.8,
+     "dir": 1,
+     "note": "イメージ（生成画像）。実際の場面の再現ではありません"
+    },
+    {
+     "t": "shade",
+     "box": [
+      60,
+      170,
+      1860,
+      850
+     ],
+     "at": 0,
+     "alpha": 0.66
+    },
+    {
      "t": "panel",
      "box": [
       60,
@@ -284,6 +381,31 @@
    "chapter_title": "柑橘は、以前から知られていた",
    "scene": [
     {
+     "t": "art",
+     "name": "harbor",
+     "box": [
+      60,
+      170,
+      1860,
+      850
+     ],
+     "at": 0,
+     "dim": 0.8,
+     "dir": -1,
+     "note": "イメージ（生成画像）。実際の場面の再現ではありません"
+    },
+    {
+     "t": "shade",
+     "box": [
+      60,
+      170,
+      1860,
+      850
+     ],
+     "at": 0,
+     "alpha": 0.66
+    },
+    {
      "t": "table",
      "box": [
       60,
@@ -362,6 +484,31 @@
    "title": "普及を妨げた可能性のある要因",
    "chapter_title": "なぜ、すぐに広まらなかったのか",
    "scene": [
+    {
+     "t": "art",
+     "name": "barrels",
+     "box": [
+      60,
+      170,
+      1860,
+      850
+     ],
+     "at": 0,
+     "dim": 0.8,
+     "dir": 1,
+     "note": "イメージ（生成画像）。実際の場面の再現ではありません"
+    },
+    {
+     "t": "shade",
+     "box": [
+      60,
+      170,
+      1860,
+      850
+     ],
+     "at": 0,
+     "alpha": 0.66
+    },
     {
      "t": "panel",
      "box": [
@@ -467,6 +614,31 @@
    "opener_until": 1,
    "scene": [
     {
+     "t": "art",
+     "name": "office",
+     "box": [
+      60,
+      170,
+      1860,
+      850
+     ],
+     "at": 0,
+     "dim": 0.8,
+     "dir": -1,
+     "note": "イメージ（生成画像）。実際の場面の再現ではありません"
+    },
+    {
+     "t": "shade",
+     "box": [
+      60,
+      170,
+      1860,
+      850
+     ],
+     "at": 0,
+     "alpha": 0.66
+    },
+    {
      "t": "panel",
      "box": [
       60,
@@ -556,6 +728,31 @@
    "chapter_title": "結論：分かること、決められないこと",
    "scene": [
     {
+     "t": "art",
+     "name": "sea",
+     "box": [
+      60,
+      170,
+      1860,
+      850
+     ],
+     "at": 0,
+     "dim": 0.8,
+     "dir": 1,
+     "note": "イメージ（生成画像）。実際の場面の再現ではありません"
+    },
+    {
+     "t": "shade",
+     "box": [
+      60,
+      170,
+      1860,
+      850
+     ],
+     "at": 0,
+     "alpha": 0.66
+    },
+    {
      "t": "cols2",
      "size": 31,
      "xm": 940,
@@ -626,7 +823,8 @@
   ],
   "credit_lines": [
    "・図・表:ミルン氏の論文の記述を基に自作(外部画像は使用していません)",
-   "・サムネイルの背景:Codex(OpenAI)による生成イラスト(18世紀の帆船と柑橘のイメージ。史実の再現ではありません)"
+   "・サムネイルの背景:Codex(OpenAI)による生成イラスト(18世紀の帆船と柑橘のイメージ。史実の再現ではありません)",
+   "・場面のイラスト:Codex(OpenAI)による生成イラスト(イメージです。実際の場面・人物・資料の再現ではありません)"
   ],
   "notes": [
    "この動画は、主にミルン氏の1本の論文に基づいています。論文が紹介する他の研究(Baron 2009、Hughes 1975、Rodger 2004)や、リンドの著書の原文は、確認していません。",

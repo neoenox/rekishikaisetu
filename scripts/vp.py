@@ -245,7 +245,42 @@ def it_swirl(im,d,cx,it):
     d.ellipse((x-R-14,y-R-14,x+R+14,y+R+14),outline=EDGE+(int(120*a),),width=2)
     lab=it.get('label','');f=F[it.get('lsize',34)];yy=y+R+26
     for l in wrapn(d,lab,f,it.get('lw',520)):line_text(d,(x-tw(d,l,f)/2,yy),l,f,WHITE,a);yy+=int(it.get('lsize',34)*1.3)
-ITEMS=dict(swirl=it_swirl,line=it_line,daybar=it_daybar,stack=it_stack,panel=it_panel,image=it_image,timeline=it_timeline,chips=it_chips,big=it_big,bars=it_bars,table=it_table,cols2=it_cols2,flow=it_flow)
+_ART={}
+def it_art(im,d,cx,it):
+    """生成イラストを、箱いっぱいに敷く（ゆっくり拡大・移動）。spec: dict(t='art',name='<images のキー>',box=[...],at=N,until=M,dim=0.7)"""
+    if not cx.vis(it):return
+    a=cx.a(it.get('at'),.8)
+    if a<=0:return
+    x0,y0,x1,y1=it['box'];w,h=x1-x0,y1-y0;name=it['name']
+    if name not in _ART:
+        src=Image.open(P(SPEC['images'][name]['file'])).convert('RGB');sc=max(w/src.width,h/src.height)*1.14
+        base=src.resize((int(src.width*sc)+1,int(src.height*sc)+1),Image.BILINEAR);_ART[name]=base
+    base=_ART[name];prog=min(1.0,max(0.0,cx.t/ max(8.0,it.get('drift',30.0))))
+    ox=int((base.width-w)*(0.15+0.7*prog)*it.get('dir',1)) if it.get('dir',1)>0 else int((base.width-w)*(0.85-0.7*prog))
+    oy=int((base.height-h)*0.5)
+    crop=base.crop((ox,oy,ox+w,oy+h)).convert('RGBA');dim=it.get('dim',0.7)
+    crop=Image.blend(crop,Image.new('RGBA',crop.size,(5,16,26,255)),1-dim)
+    mask=Image.new('L',(w,h),0);ImageDraw.Draw(mask).rounded_rectangle((0,0,w-1,h-1),18,fill=int(255*a))
+    layer=Image.new('RGBA',(w,h),(0,0,0,0));layer.paste(crop,(0,0),mask);im.alpha_composite(layer,(x0,y0))
+    if it.get('note'):
+        f=F[it.get('note_size',24)];tw_=int(d.textlength(it['note'],font=f));ln=ImageDraw.Draw(im,'RGBA');nx=x1-tw_-34;ny=y1-(36+it.get('note_size',24))
+        ln.rounded_rectangle((nx-12,ny-6,x1-14,ny+34),10,fill=(5,16,26,int(215*a)));ln.text((nx,ny),it['note'],font=f,fill=(215,224,226,int(255*a)))
+def it_shade(im,d,cx,it):
+    """暗い下地（文字を読みやすくする）。spec: dict(t='shade',box=[...],at=N,until=M,alpha=0.8)"""
+    if not cx.vis(it):return
+    a=cx.a(it.get('at'),.5)
+    if a<=0:return
+    x0,y0,x1,y1=it['box'];lay=Image.new('RGBA',(x1-x0,y1-y0),(0,0,0,0));ImageDraw.Draw(lay).rounded_rectangle((0,0,x1-x0-1,y1-y0-1),16,fill=(6,18,29,int(255*it.get('alpha',0.8)*a)));im.alpha_composite(lay,(x0,y0))
+_ANIM_BOUND=[False]
+def it_anim(im,d,cx,it):
+    """自作アニメーション部品（scripts/vp_anim.py）。spec: dict(t='anim',name='...',box=[...],at=N,until=M,...)"""
+    if not cx.vis(it):return
+    a=cx.a(it.get('at'))
+    if a<=0:return
+    import vp_anim
+    if not _ANIM_BOUND[0]:vp_anim.bind(globals());_ANIM_BOUND[0]=True
+    vp_anim.DRAW[it['name']](im,d,cx,it,a)
+ITEMS=dict(shade=it_shade,art=it_art,anim=it_anim,swirl=it_swirl,line=it_line,daybar=it_daybar,stack=it_stack,panel=it_panel,image=it_image,timeline=it_timeline,chips=it_chips,big=it_big,bars=it_bars,table=it_table,cols2=it_cols2,flow=it_flow)
 def opener(im,d,cx):
     ch=SPEC['chapters'][cx.ci];un=ch.get('opener_until',0)
     if cx.idx()>=un:return

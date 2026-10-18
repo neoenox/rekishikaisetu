@@ -19,21 +19,21 @@
   "via": "studio-manual"
  },
  "04_edo_ichikoku": {
-  "video_id": "dq-QD2ckfJc",
+  "video_id": "GOQpE40bCX8",
   "privacy": "private",
   "via": "api",
   "superseded": [],
   "deleted": [
-   "SBczPs3TERU"
+   "dq-QD2ckfJc"
   ]
  },
  "05_housework_gdp": {
-  "video_id": "4tG90zwk3Vs",
+  "video_id": "t8IPahK1aEY",
   "privacy": "private",
   "via": "api",
   "superseded": [],
   "deleted": [
-   "CDjYfkZBRIM"
+   "iWvfMyLww2w"
   ]
  },
  "06_drain_vortex": {
@@ -46,18 +46,22 @@
   ]
  },
  "07_scurvy_lind": {
-  "video_id": "CnK4vBPdszM",
+  "video_id": "G8jG18OwASs",
   "privacy": "private",
   "via": "api",
   "superseded": [],
   "deleted": [
-   "mUrSwlKRtF0"
+   "CnK4vBPdszM"
   ]
  },
  "08_zenzen_affirm": {
-  "video_id": "MtOTnnj5pF0",
+  "video_id": "VcEY8s2F8k8",
   "privacy": "private",
-  "via": "studio-manual"
+  "via": "api",
+  "superseded": [],
+  "deleted": [
+   "MtOTnnj5pF0"
+  ]
  },
  "short_drain": {
   "video_id": "60hEGrmryiY",
@@ -66,33 +70,48 @@
   "superseded": []
  },
  "09_calendar_meiji5": {
-  "video_id": "MKMDBO3gt0U",
+  "video_id": "CkWuWJwzAZs",
   "privacy": "private",
   "via": "api",
-  "superseded": []
+  "superseded": [],
+  "deleted": [
+   "879-I6mXM2I"
+  ]
  },
  "10_compass_north": {
-  "video_id": "tV9rPaFTBHo",
+  "video_id": "-JpdOfZhiQ4",
   "privacy": "private",
   "via": "api",
-  "superseded": []
+  "superseded": [],
+  "deleted": [
+   "tV9rPaFTBHo"
+  ]
  },
  "11_season_distance": {
-  "video_id": "ahq126mEISo",
+  "video_id": "qC_FcLXyocQ",
   "privacy": "private",
   "via": "api",
-  "superseded": []
+  "superseded": [],
+  "deleted": [
+   "il63fGG35AQ"
+  ]
  },
  "12_einstein_math": {
-  "video_id": "0NoLnSynTtY",
+  "video_id": "dfhgxg0nWQ8",
   "privacy": "private",
   "via": "api",
-  "superseded": []
+  "superseded": [],
+  "deleted": [
+   "0NoLnSynTtY"
+  ]
  },
  "13_vein_blue": {
-  "video_id": "JRe-jXiVCok",
+  "video_id": "DtKGVuB3RIo",
   "privacy": "private",
   "via": "api",
-  "superseded": []
+  "superseded": [],
+  "deleted": [
+   "uKnsRdJPnWU"
+  ]
  }
 }

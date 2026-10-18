@@ -4,6 +4,7 @@
   python scripts/yt_api.py auth                 # 初回のみ。ブラウザで寄り道ラボのアカウントを承認
   python scripts/yt_api.py whoami               # 認証中のチャンネルを表示
   python scripts/yt_api.py upload 03_ninja_myths [--dry] [--new-version]   # 動画・サムネ・字幕を非公開で登録（作り直したときは --new-version。旧IDは superseded に残す）
+  python scripts/yt_api.py schedule <動画ID> "2026-10-23 19:00"   # 公開予約（日本時間。許可を得てから）
   python scripts/yt_api.py delete-superseded    # 作り直しで不要になった旧版（非公開のものだけ）を削除
   python scripts/yt_api.py list                 # チャンネルの動画と公開状態
 
@@ -141,6 +142,20 @@ def cmd_delete_superseded():
     IDS.write_text(json.dumps(ids, ensure_ascii=False, indent=1), encoding='utf8')
 
 
+def cmd_schedule(video_id, when):
+    """公開予約（日本時間 'YYYY-MM-DD HH:MM'）。動画は private のまま、公開日時だけ設定する。ユーザーの許可を得てから使う。"""
+    import datetime
+    jst = datetime.datetime.strptime(when, '%Y-%m-%d %H:%M')
+    utc = jst - datetime.timedelta(hours=9)
+    yt = service()
+    cur = yt.videos().list(part='status', id=video_id).execute()['items'][0]['status']
+    body = dict(id=video_id, status=dict(privacyStatus='private', publishAt=utc.strftime('%Y-%m-%dT%H:%M:%S.000Z'),
+                                         selfDeclaredMadeForKids=cur.get('selfDeclaredMadeForKids', False), embeddable=cur.get('embeddable', True),
+                                         license=cur.get('license', 'youtube'), containsSyntheticMedia=cur.get('containsSyntheticMedia', False)))
+    r = yt.videos().update(part='status', body=body).execute()
+    print(video_id, r['status']['privacyStatus'], '公開予約(日本時間):', when, '->', r['status'].get('publishAt'))
+
+
 def cmd_list():
     yt = service()
     up = yt.channels().list(part='contentDetails', mine=True).execute()['items'][0]['contentDetails']['relatedPlaylists']['uploads']
@@ -153,4 +168,4 @@ if __name__ == '__main__':
     a = sys.argv[1:]
     if not a:
         sys.exit(__doc__)
-    {'auth': cmd_auth, 'whoami': cmd_whoami, 'list': cmd_list, 'delete-superseded': cmd_delete_superseded}.get(a[0], lambda: cmd_upload(a[1], '--dry' in a, '--new-version' in a) if a[0] == 'upload' else sys.exit(__doc__))()
+    {'auth': cmd_auth, 'whoami': cmd_whoami, 'list': cmd_list, 'delete-superseded': cmd_delete_superseded, 'schedule': lambda: cmd_schedule(a[1], a[2])}.get(a[0], lambda: cmd_upload(a[1], '--dry' in a, '--new-version' in a) if a[0] == 'upload' else sys.exit(__doc__))()

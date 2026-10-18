@@ -6,7 +6,7 @@ usage: python scripts/codex_kana.py <slug> [<theme_dir>]
   出力: <theme_dir>/16_codex_kana.md（theme_dir 省略時は out/<slug>_kana_review.md）
 Codexは音を聞けない。見つけた誤読は、読み辞書（data/<slug>_pronunciations.json）に足して作り直す前に、
 vp.py <slug> kana で実際の読みを確認する。VOICEVOXが 127.0.0.1:50021 で動いていること。"""
-import json, subprocess, sys
+import os, json, subprocess, sys
 from pathlib import Path
 import requests
 
@@ -44,6 +44,14 @@ def main():
     dic = ROOT / 'data' / f'{slug}_pronunciations.json'
     out = (ROOT / 'docs' / 'themes' / theme / '16_codex_kana.md') if theme else ROOT / 'out' / f'{slug}_kana_review.md'
     prompt = PROMPT.format(kana=kana.relative_to(ROOT).as_posix(), dic=dic.relative_to(ROOT).as_posix() if dic.exists() else '（なし）')
+    if os.environ.get('REVIEWER') == 'opencode':  # Codex が使えないときの代替
+        out = out.with_name(out.stem + os.environ.get('TAG', '_oc') + out.suffix)
+        r = subprocess.run(['opencode.cmd', 'run', '-m', os.environ.get('MODEL', 'opencode/deepseek-v4.1-flash-free'), '--auto', prompt], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=str(ROOT), timeout=1500)
+        txt = r.stdout.decode('utf8', 'replace')
+        if r.returncode == 0 and len(txt.strip()) > 100:
+            out.write_text(txt, encoding='utf8')
+        print(slug, len(rep), 'opencode exit', r.returncode, '->', out if out.exists() else txt[-200:])
+        return
     cmd = ['codex', 'exec', '-s', 'read-only', '--skip-git-repo-check', '-C', str(ROOT), '-o', str(out), '-']
     log = ROOT / 'out' / 'codex' / f'{slug}_kana.log'
     log.parent.mkdir(exist_ok=True, parents=True)

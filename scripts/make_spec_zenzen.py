@@ -1,5 +1,7 @@
 """Writes data/zenzen_spec.json."""
-import json
+import json,sys
+sys.path.insert(0,str(__import__('pathlib').Path(__file__).parent))
+from specart import inject
 from pathlib import Path
 R=Path(__file__).resolve().parents[1]
 spec=dict(slug='zenzen',theme_dir='20261017_zenzen',pack='08_zenzen_affirm',header_sub='「全然」の使われ方を確かめる',images={},
@@ -57,4 +59,5 @@ spec=dict(slug='zenzen',theme_dir='20261017_zenzen',pack='08_zenzen_affirm',head
   tags='全然, 日本語, 言葉, 国語, 夏目漱石, 芥川龍之介, 国立国語研究所, 青空文庫, 雑学, 検証, 日本語の歴史, 言葉の乱れ',
   checks=['国立国語研究所の記事が紹介する用例(『児童研究』『東京日日新聞』)の原典確認(任意。動画は記事の紹介として帰属)','『羅生門』初出(1915年)の本文との異同(任意)']),
  thumb=dict(bg='assets/zenzen/thumb_art.png',lines=[['全然',130,'gold'],['おいしい',90,'white'],['は間違い？',100,'white']],sub='昔の文章で確かめる',y0=14,bar_y=530,bar_w=620,sub_size=44,shade_x=700,shade_w=520))
+inject(spec,dict(a='cafe',b='dict',c='novel',d='press',e='edo',f='study',g='cafe'))
 (R/'data'/'zenzen_spec.json').write_text(json.dumps(spec,ensure_ascii=False,indent=1),encoding='utf8');print('spec written')

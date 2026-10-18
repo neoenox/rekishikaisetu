@@ -1,5 +1,7 @@
 """Writes data/gdp_spec.json."""
-import json
+import json,sys
+sys.path.insert(0,str(__import__('pathlib').Path(__file__).parent))
+from specart import inject
 from pathlib import Path
 R=Path(__file__).resolve().parents[1]
 SRC='内閣府『無償労働の貨幣評価』（令和5年7月）を基に作成'
@@ -53,7 +55,7 @@ spec=dict(slug='gdp',theme_dir='20261017_gdp',pack='05_housework_gdp',header_sub
       dict(at=6,text='家事の本当の価値は、一つの金額では決まらない'),dict(at=7,text='評価額は、賃金の取り方で変わる'),dict(at=8,text='外注で、国全体でいくら増えるかは、この比較だけでは決まらない')])),
    dict(t='panel',box=[60,640,930,790],title='有料の掃除（業者）',text='GDPの計算に入る',at=9,size=38,col='gold'),
    dict(t='panel',box=[990,640,1860,790],title='自分の家庭の無償の掃除',text='中心の勘定には入らない',at=10,size=38,col='gold'),
-   dict(t='panel',box=[60,800,1860,850],text='制度上の取り扱いの違い。価値の大小を決めるものではない',at=11,size=30,col='dim')])
+   dict(t='panel',box=[60,800,1860,850],text='制度上の取り扱いの違い。価値の大小を決めるものではない',at=10,size=30,col='gold')])
  ],
  desc=dict(title_main='家事を外注すると、GDPが増える、は本当か',title_no=1,
   titles=['家事を外注すると、GDPは増える？ 内閣府の資料で、数字を確かめる','同じ掃除でも、頼むとGDPに入る？ 無償労働の貨幣評価を読む','家事の値段は、GDPの何％？ 内閣府の推計と、その注意点'],
@@ -69,4 +71,5 @@ spec=dict(slug='gdp',theme_dir='20261017_gdp',pack='05_housework_gdp',header_sub
   tags='GDP, 家事, 無償労働, 国民経済計算, 内閣府, 経済, 統計, 家事代行, 家事の値段, 雑学, 検証',
   checks=['数値(図表2-1・2-2)の転記を、もう一度見る(`docs/themes/20261017_gdp/08_fact_check.md` G6・G7)']),
  thumb=dict(bg='assets/gdp/thumb_art.png',lines=[['家事を',80,'white'],['外注すると',110,'gold'],['GDPは',80,'white'],['増える？',130,'gold']],sub='内閣府の資料で確かめる',y0=12,bar_y=560,bar_w=560,sub_size=44,shade_x=700,shade_w=520))
+inject(spec,dict(intro='house',two='tools',why='ledger',calc='ledger',y2021='city',sat='office',end='house'))
 (R/'data'/'gdp_spec.json').write_text(json.dumps(spec,ensure_ascii=False,indent=1),encoding='utf8');print('spec written')
