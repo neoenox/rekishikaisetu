@@ -94,8 +94,18 @@ def cmd_upload(pack, dry=False, new_version=False):
     req = yt.videos().insert(part='snippet,status', body=body,
                              media_body=MediaFileUpload(str(d / 'video.mp4'), chunksize=8 * 1024 * 1024, resumable=True))
     resp = None
+    import time
+    fails = 0
     while resp is None:
-        st, resp = req.next_chunk()
+        try:
+            st, resp = req.next_chunk(num_retries=5)
+        except Exception as e:  # 回線の一時的な切れ（再開可能なアップロードなので、同じ位置から再試行）
+            fails += 1
+            print('  retry', fails, type(e).__name__, flush=True)
+            if fails > 30:
+                raise
+            time.sleep(min(60, 5 * fails))
+            continue
         if st:
             print(f'  upload {int(st.progress() * 100)}%', flush=True)
     vid = resp['id']

@@ -5,9 +5,13 @@
   "via": "studio-manual"
  },
  "02_honnoji_incident": {
-  "video_id": "CGDD1uyr9Y8",
+  "video_id": "V-6b8Y1a6xE",
   "privacy": "private",
-  "via": "studio-manual"
+  "via": "api",
+  "superseded": [],
+  "deleted": [
+   "ChNeRyMDK70"
+  ]
  },
  "03_ninja_myths": {
   "video_id": "FmJrf-t7ro8",

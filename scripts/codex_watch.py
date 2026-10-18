@@ -13,6 +13,10 @@ COLS, ROWS = 4, 4  # 1枚に16コマ（64秒分）
 W, H = 480, 270
 
 
+import os
+VIDEO=os.environ.get('VIDEO');SRTP=os.environ.get('SRT');WIN=[float(x) for x in os.environ['WIN'].split(',')] if os.environ.get('WIN') else None;TAG=os.environ.get('TAG','')
+
+
 def sh(cmd):
     return subprocess.run(cmd, capture_output=True, text=True, encoding='utf8', errors='replace')
 
@@ -33,7 +37,9 @@ def frames(video, out):
         f.unlink()
     a, b = sh(['ffprobe', '-v', 'error', '-select_streams', 'v', '-show_entries', 'stream=avg_frame_rate', '-of', 'csv=p=0', str(video)]).stdout.strip().split('/')
     n_step = round(float(a) / float(b) * STEP)  # fpsフィルタは時刻が約2秒ずれたので、フレーム番号で正確に選ぶ
-    sh(['ffmpeg', '-y', '-i', str(video), '-vf', f"select='not(mod(n,{n_step}))',scale={W}:{H}", '-fps_mode', 'vfr', '-q:v', '4', str(out / 'f_%04d.jpg')])
+    t0 = WIN[0] if WIN else 0.0
+    ss = ['-ss', str(t0), '-t', str(WIN[1] - WIN[0])] if WIN else []
+    sh(['ffmpeg', '-y'] + ss + ['-i', str(video), '-vf', f"select='not(mod(n,{n_step}))',scale={W}:{H}", '-fps_mode', 'vfr', '-q:v', '4', str(out / 'f_%04d.jpg')])
     fs = sorted(out.glob('f_*.jpg'))
     font = ImageFont.truetype('C:/Windows/Fonts/meiryo.ttc', 22)
     n = COLS * ROWS
@@ -44,7 +50,7 @@ def frames(video, out):
         for k, f in enumerate(fs[si:si + n]):
             x, y = (k % COLS) * W, (k // COLS) * H
             sheet.paste(Image.open(f), (x, y))
-            t = (si + k) * STEP
+            t = int(t0) + (si + k) * STEP
             d.rectangle([x, y, x + 92, y + 28], fill='black')
             d.text((x + 4, y + 1), f'{t // 60}:{t % 60:02d}', fill='yellow', font=font)
         p = out / f'watch_{si // n + 1:02d}.png'
@@ -59,15 +65,18 @@ def audio_report(video, srt, out):
     L = []
     dur = float(sh(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(video)]).stdout.strip())
     L.append(f'動画の長さ: {dur:.1f}秒')
-    r = sh(['ffmpeg', '-nostats', '-i', str(video), '-af', 'ebur128=peak=true', '-f', 'null', '-']).stderr
+    ss = ['-ss', str(WIN[0]), '-t', str(WIN[1] - WIN[0])] if WIN else []
+    r = sh(['ffmpeg', '-nostats'] + ss + ['-i', str(video), '-af', 'ebur128=peak=true', '-f', 'null', '-']).stderr
     m = r[r.rfind('Summary:'):]
     L.append('ラウドネス(EBU R128) 抜粋:\n' + '\n'.join(x for x in m.splitlines() if re.search(r'I:|LRA:|Peak:', x)))
-    r = sh(['ffmpeg', '-nostats', '-i', str(video), '-af', 'silencedetect=noise=-45dB:d=1.2', '-f', 'null', '-']).stderr
+    r = sh(['ffmpeg', '-nostats'] + ss + ['-i', str(video), '-af', 'silencedetect=noise=-45dB:d=1.2', '-f', 'null', '-']).stderr
     sil = re.findall(r'silence_start: ([\d.]+)|silence_end: ([\d.]+) \| silence_duration: ([\d.]+)', r)
     ss = [a for a, b, c in sil if a]
     es = [(b, c) for a, b, c in sil if b]
     L.append('1.2秒以上の無音(-45dB以下): ' + (', '.join(f'{float(s):.1f}s〜{float(e):.1f}s({float(d):.1f}s)' for s, (e, d) in zip(ss, es)) or 'なし'))
     cues = srt_cues(srt)
+    if WIN:
+        cues = [c for c in cues if WIN[0] <= c[0] < WIN[1]]
     L.append(f'字幕: {len(cues)}件、最後の字幕の終了 {cues[-1][1]:.1f}s')
     fast = [(a, len(t) / max(b - a, .1), t) for a, b, t in cues if len(t) / max(b - a, .1) > 9.5]
     L.append('読む速さが 9.5字/秒 を超える字幕: ' + ('; '.join(f'{a:.1f}s {v:.1f}字/秒「{t[:24]}」' for a, v, t in fast) or 'なし'))
@@ -104,23 +113,24 @@ PROMPT = """あなたは、解説動画（YouTubeチャンネル「寄り道ラ�
 def main():
     slug = sys.argv[1]
     theme = sys.argv[2] if len(sys.argv) > 2 else None
-    video = ROOT / 'out' / f'{slug}_video.mp4'
-    srt = ROOT / 'out' / f'{slug}_subtitles.srt'
-    work = ROOT / 'out' / f'{slug}_watch'
+    video = Path(VIDEO) if VIDEO else ROOT / 'out' / f'{slug}_video.mp4'
+    srt = Path(SRTP) if SRTP else ROOT / 'out' / f'{slug}_subtitles.srt'
+    work = ROOT / 'out' / f'{slug}{TAG}_watch'
     work.mkdir(parents=True, exist_ok=True)
     sheets = frames(video, work)
     audio_report(video, srt, work)
     script = '（台本ファイルなし。字幕を台本として扱う）'
     if theme and (ROOT / 'docs' / 'themes' / theme / '09_script_v2.md').exists():
         script = f'docs/themes/{theme}/09_script_v2.md（最終台本）と docs/themes/{theme}/08_fact_check.md（事実確認の記録）'
+    script += os.environ.get('EXTRA', '')
     prompt = PROMPT.format(step=STEP, srt=srt.relative_to(ROOT).as_posix(),
                            audio=(work / 'audio_report.txt').relative_to(ROOT).as_posix(), script=script)
-    out = (ROOT / 'docs' / 'themes' / theme / '14_codex_watch.md') if theme else work / 'codex_watch.md'
+    out = (ROOT / 'docs' / 'themes' / theme / f'14_codex_watch{TAG}.md') if theme else work / 'codex_watch.md'
     cmd = ['codex', 'exec', '-s', 'read-only', '--skip-git-repo-check', '-C', str(ROOT), '-o', str(out)]
     for s in sheets:
         cmd += ['-i', str(s)]
     cmd.append('-')
-    log = ROOT / 'out' / 'codex' / f'{slug}_watch.log'
+    log = ROOT / 'out' / 'codex' / f'{slug}{TAG}_watch.log'
     log.parent.mkdir(exist_ok=True, parents=True)
     with log.open('wb') as lf:
         r = subprocess.run(cmd, input=prompt.encode('utf8'), stdout=lf, stderr=subprocess.STDOUT, cwd=str(ROOT))
