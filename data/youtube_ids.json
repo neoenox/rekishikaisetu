@@ -64,5 +64,35 @@
   "privacy": "private",
   "via": "api",
   "superseded": []
+ },
+ "09_calendar_meiji5": {
+  "video_id": "MKMDBO3gt0U",
+  "privacy": "private",
+  "via": "api",
+  "superseded": []
+ },
+ "10_compass_north": {
+  "video_id": "tV9rPaFTBHo",
+  "privacy": "private",
+  "via": "api",
+  "superseded": []
+ },
+ "11_season_distance": {
+  "video_id": "ahq126mEISo",
+  "privacy": "private",
+  "via": "api",
+  "superseded": []
+ },
+ "12_einstein_math": {
+  "video_id": "0NoLnSynTtY",
+  "privacy": "private",
+  "via": "api",
+  "superseded": []
+ },
+ "13_vein_blue": {
+  "video_id": "JRe-jXiVCok",
+  "privacy": "private",
+  "via": "api",
+  "superseded": []
  }
 }
