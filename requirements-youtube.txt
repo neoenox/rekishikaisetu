@@ -1,0 +1,4 @@
+# Optional dependencies for scripts/yt_api.py; not installed by default.
+google-auth>=2,<3
+google-auth-oauthlib>=1,<2
+google-api-python-client>=2,<3
