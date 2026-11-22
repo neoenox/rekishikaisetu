@@ -1,3 +1,5 @@
+param([switch]$WithYouTubeApi)
+
 $ErrorActionPreference = 'Stop'
 Set-Location (Split-Path $PSScriptRoot -Parent)
 foreach ($dir in @('tools','cache','logs','out','data')) { New-Item -ItemType Directory -Force $dir | Out-Null }
@@ -5,6 +7,10 @@ uv venv --python 3.12 .venv
 if ($LASTEXITCODE -ne 0) { throw 'uv Python environment failed' }
 uv pip install --python .venv\Scripts\python.exe -r requirements-lock.txt
 if ($LASTEXITCODE -ne 0) { throw 'Python dependency installation failed' }
+if ($WithYouTubeApi) {
+    uv pip install --python .venv\Scripts\python.exe -r requirements-youtube.txt
+    if ($LASTEXITCODE -ne 0) { throw 'YouTube API dependency installation failed' }
+}
 foreach ($tool in @('blender','voicevox')) {
     & .venv\Scripts\python.exe scripts\download_tools.py $tool
     if ($LASTEXITCODE -ne 0) { throw "Download failed: $tool" }

@@ -70,6 +70,16 @@ pwsh -File scripts/run.ps1
 
 setupは公式Blender 4.5.3 LTS portable ZIP約400MBとVOICEVOX ENGINE 0.25.2 CPU版約1.8GBを `tools/` に取得し、作業フォルダー内に展開します。8本までのRange取得で再試行・分割キャッシュを使用します。通常の地形取得は16タイルのみです。Remotionは初回にChrome Headless Shellを取得します。バイナリ・依存パッケージ・中間描画はGit対象外です。新しいPCでは環境に合わせて7-Zipのパスを調整してください。
 
+## YouTube API操作用の任意依存関係
+
+通常のセットアップにはYouTube APIのPythonクライアントを含めません。YouTube APIの認証・アップロード機能を利用する場合だけ、次のオプションを指定します（このコマンド自体はアップロードや公開を行いません）。
+
+```powershell
+pwsh -File scripts/setup.ps1 -WithYouTubeApi
+```
+
+既存の仮想環境には `uv pip install --python .venv\Scripts\python.exe -r requirements-youtube.txt` でも追加できます。認証用JSONやトークンはGitにコミットしないでください。依存関係の導入とYouTubeへのアップロード・公開は別操作です。
+
 ## 工程を個別実行
 
 ```powershell
